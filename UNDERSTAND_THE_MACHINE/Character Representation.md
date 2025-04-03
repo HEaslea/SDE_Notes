@@ -342,9 +342,9 @@ There are a few advantages over other string formats:
 - Easily used in any language that has arrays and a 0, you just have to write that implementation. 
 
 There are the disadvantages: 
-
-
-
+- When needing to know the length of the string, the only way is linear. Not great with long strings. 
+- There is the reason why in C/C++ it's `\0` and `0`, can sometimes cause some confusion. 
+- The string won't tell you how long it can go after the `\0`, so overflow can be an issue.
 
 ##### C/C++ `std::string` and `char [];`
 Obviously in C, `char []` is a `string` (a string being this idea of a sequence of chars moreso than an abstraction). 
@@ -356,6 +356,3 @@ There is also a lack of built-in functionality of course (concatenating, searchi
 `.substr()` `.find()` `.replace()` were all added for convenience. 
 
 C-Style strings are very much needed to be understood and used possibly with lol-level and embedded systems. 
-
-
-
