@@ -1,0 +1,1 @@
+Class member that is a function. Ordinary member functions are bound to an object of the class type through the implicit `this` pointer. `static` member functions are not bound to an object and have no `this` pointer. They may be overloaded; when they are, the implicit `this` pointer participates in the function matching.

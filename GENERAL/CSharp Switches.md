@@ -1,0 +1,6 @@
+```
+result = valeuToEvaluate switch 
+{ 
+
+}
+```

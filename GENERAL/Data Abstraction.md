@@ -1,0 +1,1 @@
+Programming technique that focuses on the interface to a type. Allows programmers to ignore the details of how a type is represented and think instead about the operations that the type can perform.

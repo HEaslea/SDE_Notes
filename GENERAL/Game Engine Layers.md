@@ -1,0 +1,11 @@
+- EntryPoint
+- Application Layer
+- Window Layer - Input - Events
+- Renderer
+- Render API Abstraction
+- Debugging / Logging
+- "Scripting"
+- ECS
+- Physics
+- File i/o / VFS
+- 
