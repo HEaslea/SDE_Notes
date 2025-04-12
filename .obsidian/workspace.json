@@ -4,11 +4,11 @@
     "type": "split",
     "children": [
       {
-        "id": "4fd723a071b64449",
+        "id": "6068351d21969d84",
         "type": "tabs",
         "children": [
           {
-            "id": "2e19fb452ce18d39",
+            "id": "6d7f38220f16ba41",
             "type": "leaf",
             "state": {
               "type": "markdown",
@@ -20,8 +20,23 @@
               "icon": "lucide-file",
               "title": "Character Representation"
             }
+          },
+          {
+            "id": "49f52753df5510f1",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "Interview Prep Notes.md",
+                "mode": "source",
+                "source": false
+              },
+              "icon": "lucide-file",
+              "title": "Interview Prep Notes"
+            }
           }
-        ]
+        ],
+        "currentTab": 1
       }
     ],
     "direction": "vertical"
@@ -78,8 +93,7 @@
       }
     ],
     "direction": "horizontal",
-    "width": 238.5,
-    "collapsed": true
+    "width": 238.5
   },
   "right": {
     "id": "9a5bd91e964f5d11",
@@ -176,45 +190,44 @@
       "mermaid-tools:Open Mermaid Toolbar": false
     }
   },
-  "active": "2e19fb452ce18d39",
+  "active": "49f52753df5510f1",
   "lastOpenFiles": [
     "README.md",
+    "Arm Prep Interview Questions.md",
+    "Untitled.md",
+    "Pybind11.md",
+    "UNDERSTAND_THE_MACHINE/Memory Organization and Access.md",
+    "PNGS/Pasted image 20250412124655.png",
+    "PNGS/Pasted image 20250412120820 1.png",
+    "PNGS/Pasted image 20250412120820.png",
+    "PNGS/Pasted image 20250412120818.png",
+    "UNDERSTAND_THE_MACHINE/Character Representation.md",
+    "PNGS/Pasted image 20250412103342.png",
+    "PNGS/Pasted image 20250412102746.png",
+    "PNGS/Pasted image 20250412102457.png",
+    "Finished_Notes.md",
+    "ARM_INT_PREP.md",
+    "ARM_Finalised_Questions.md",
+    "ARM_FINAL.md",
+    "Interview Prep Notes.md",
+    "PNGS/Pasted image 20250409135344.png",
+    "PNGS/Pasted image 20250409120059.png",
+    "PNGS/Pasted image 20250409120051.png",
+    "Learning_Git/Branches in Git.md",
+    "Learning_Git/Basics Of Git.md",
+    "GENERAL/Mounting Storage.md",
     "SpecializedLibraryFacilities/RandomNumbers/Random Numbers Overview.md",
     "InterviewPrep/Sorting.md",
     "InterviewPrep/General Interview Prep.md",
     "InterviewPrep/Amazon Leadership Principles.md",
     "DS Made Fun/Variables.md",
-    "UNDERSTAND_THE_MACHINE/Character Representation.md",
-    "PNGS/Pasted image 20250403115620.png",
-    "PNGS/Pasted image 20250403115502.png",
-    "PNGS/Pasted image 20250402122543.png",
-    "PNGS/Pasted image 20250402120219.png",
-    "PNGS/Pasted image 20250402120046.png",
-    "PNGS/Pasted image 20250402115521.png",
-    "PNGS/Pasted image 20250402115135.png",
-    "PNGS/Pasted image 20250402114631.png",
-    "PNGS/Pasted image 20250402001059.png",
-    "PNGS/Pasted image 20250402000110.png",
     "GENERAL/Why Lose Const and Reference.md",
     "GENERAL/Allocators in C++.md",
     "Untitled 4.md",
     "G.md",
     "Untitled 8.md",
     "Untitled 9.md",
-    "Untitled 12.md",
-    "Learning_Git/Basics Of Git.md",
-    "Untitled 13.md",
-    "PythonCookBook/Return Values.md",
-    "GENERAL/C++ Iteration.md",
-    "PythonCookBook/None Keyword.md",
-    "PythonCookBook/Parameters in Python.md",
-    "PythonCookBook/Python Iterables.md",
-    "UNDERSTAND_THE_MACHINE/Floating Point Representation_I.md",
-    "UNDERSTAND_THE_MACHINE/Binary Arithmetic and Bit Operations.md",
-    "PythonCookBook/Itertools.md",
     "Learning_Git",
-    "Vim/Running Vim From Command Line.md",
-    "CMAKE/Build Systems and Toolchains.md",
     "Vim",
     "UNDERSTAND_THE_MACHINE",
     "ARMJOB",

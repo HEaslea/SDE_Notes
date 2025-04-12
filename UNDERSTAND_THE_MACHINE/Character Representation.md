@@ -330,7 +330,6 @@ Some using less memory -> faster processing, more convenient -> more functionali
 
 #### Zero-Terminated Strings
 Most common -> native string format for C, C++, and others (some ASM). 
-
 0 > more 8 bit char codes, ending with a byte containing 0 (would also be true to 16 bit codes as well right). 
 
 In C/C++: ASCII `"abc"` requires 4 bytes: 1 for each of the chars, then the 0 byte at the end. 
@@ -356,3 +355,390 @@ There is also a lack of built-in functionality of course (concatenating, searchi
 `.substr()` `.find()` `.replace()` were all added for convenience. 
 
 C-Style strings are very much needed to be understood and used possibly with lol-level and embedded systems. 
+
+### Length-Prefixed Strings
+A byte containing the length of the string. `"abc"` -> 4 bytes -> The length byte `$03`, then followed by `abc` . 
+The only thing to remember is that the first char will be at index 1 : 0 index will be the length. 
+This can be much more convenient then having a NUL termination : Having the length up-front. 
+
+Obviously the only issue here is the length of the length byte, so can only be 255 without moving on to having two bytes of length. The overhead increases when we go over 255. 
+
+### Seven-Bit Strings 
+Great for 7 bit encodings like ASCII. 
+The HO bit is normally unused. 
+Then we use the HO bit to indicate the end of the string. 
+All but the last char, the HO bit is clear - the last char, the HO bit is set. 
+
+There are quite a few disadvantages: 
+- Have to scan the whole string in order to determine the length of the string. 
+- No zero length strings - which sounds weird, but obviously very important. 
+- Few languages provide literal string constants for 7-bit strings. 
+- Maximum of 128 char codes, find when using ASCII, but not that great for anythign else. 
+
+Advantage is that there are no need for bytes to encode the length. 
+ASM -> probably the best language to use 7 bit strings with. 
+ASM programmers -> tend to be the ones that worry about compactness the most. 
+HLA macro that converts a literal string to a 7-bit string: 
+```
+#macro sbs(s);
+
+	// grab all but the last char of the string: 
+	(@substr( s, 0, @lenghts(s) - 1) + 
+		// Concatenate the last character with its HO bit set: 
+		char(uns8( char( @substr(s, @length(s) - 1, 1))) | & 80) )
+#endmacro
+... 
+
+byte sbs("Hello World");
+```
+
+### HLA Strings
+A few extra bytes of overhead per string, create a string format that combines the advantages of both length-prefixed and zero-terminated strings without their respective disadvantages. 
+The High-Level Assembly language, does this with their native string format. 
+
+A lot of overhead per string. 
+Memory constraints here -> something we have to think about. 
+HLA uses 4-byte length prefix, allowing char strings to be just over four billion chars long (far more than what is feasible). 
+Then it will append a 0 byte to the char string data. 
+Then at the front, 4 bytes for the maximum legal length for that string. 
+Immediately checking for string overflow. 
+![[Pasted image 20250404213408.png]]
+
+HLA string vars are pointer that contain the byte address of the first char in the string. 
+To get the length fields, you load the value of the string pointer into the 32-bit register, then get the `Length` with the offset of -4, then `MaxLength` is -8. 
+
+```
+static 
+	s :string := "Hello World";
+	... 
+	mov( s, esi ); // Move the adress of 'H' in "Hello World"
+					// into esi
+	mov ( [esi-4], ecx ); // Puts the length of the string (11 for "Hello World")
+						// int ecx
+	... 
+	mov( s, esi);
+	cmp( eax, [esi - 8] ) // see if value in EAX exceeds the maximum 
+	ja StringOverflow;
+```
+
+##### Descriptor-Based Strings
+All so far have attribute information (that is, the lengths and terminating bytes) : 
+Keeping the information in a record structure, *descriptor*, containing a pointer to the character Data (starting to sound an awful lot like a `string`)
+Pascal/Delphi data structure: 
+```
+type 
+	dString :record 
+		curLength :integer;
+		strDatas  :^char;
+	end;
+```
+Note that this data structure does not hold the actual char data. 
+Contains address of the first char of the string - can lazy evaluate, somewhat like a Proxy Design. 
+
+```
+struct StringDescriptor
+{ 
+	char* data;
+	size_t length;
+	size_t capacity; 
+};
+```
+
+Here we are interacting with an *interface*/*handle* for the `string`. 
+
+This means that the char array can be bare bones - no length bytes or terminating bytes at all. 
+
+This means that we can get "overlapping strings", same char array just different descriptors. 
+
+![[Pasted image 20250407182650.png]]
+There are as many substrings as there are: 
+This means that we just point to the part of the char array that we want. 
+This means something like `substring()` is super efficient, just different pointers. 
+
+Just make sure that you don't write over anything without all the other descriptors knowing, if that's what you want, perhaps they have to make a new `string` when one is written over and the other uses that part of the written over string. 
+
+### Java Strings
+Java uses this descriptor-based string form. In Java they are opaque, meaning that you aren't supposed to know about or mess with it. 
+Don't manipulate them other than the String API. 
+A pointer to an array of 16-bit (original) Unicode characters (no extension beyond 16 bits), a count field, an offset field, and a hash code field.
+
+### C# Strings
+UTF-16 encoding for characters in its strings. 
+C#'s `string` -> opaque as well. 
+
+### Python Strings
+Support for UTF-16 and 32 encodings. 
+Nowadays, Python does something special with string formats that tracks the characters in strings and stores them in ASCII, UTF-8, 16, 32, etc. based on the most compact representation. 
+
+
+### Static / Pseudo-Dynamic / Dynamic
+##### Static Strings
+Maximum size, programmer chooses when writing the program. 
+Arrays of chars in C/C++, with Null Terminated, fall into this category. 
+
+```
+// const
+char cString[256]; // Constant Expression
+```
+
+Run-time, now way to increase the maximum sizes of the static strings. 
+Nor is there a way to reduce the storage they will use; these string objects. 
+The compiler can determine their maximum length at compile time and implicitly pass this information to a string function so it can test for bounds violations at runtime. 
+
+##### Pseudo-Dynamic Strings
+Length at run time, by calling some memory management function like `malloc()` : Once this is allocated, the maximum length of that string is fixed. 
+HLA strings generally fall into this category. 
+HLA programmers typically calls the `stralloc()` function to allocate storage for a string variable, now that length cannot change. 
+
+##### Dynamic Strings
+Typically using a descriptor-based format, automatically allocating sufficient storage for a string object whenever you create a new string or otherwise do something that affects an existing string. 
+If we just use the Descriptor, then a lot of these functions are super fast. 
+Copy-On-Write -> COW -> memory optimization technique used for things like strings where multiple instances can share the same data until one them tires to modify it. 
+
+Instead of copying a string's data every time you assign or pass a string : 
+- Multiple strings point to the same underlying character buffer.
+- When one string is modified, a real copy of the data is made - so the original shared data isn't affected. 
+
+```
+struct CowString
+{ 
+	char* data;
+	int* refCount;
+
+	vod write(char newChar, int pos)
+	{ 
+		if(*refcount > 1) // there is some change, therefore we need a deep copy
+		{ 
+			char *newData = copy(data);
+			--(*refCount);
+			data = newData; 
+			refcount = new int(1);
+		}
+		data[pos] = newChar;
+	}
+};
+```
+
+Was actually removed from `std::string` in C++11 due to multithreading issues. 
+Studies show that there are more functions for `substr()` than there are for actually changing chars - therefore, using this COW technique - Lazy deep copy is the only way. 
+
+The only downside is that we have the issue of floating string data in heap data -> just need to make sure that we don't have any memory leaks. 
+There should be some form of *garbage collection* -> scanning the string heap area looking for `stale` character data in order to recover that memory for other purposes. 
+Garbage collection can be quite slow. 
+
+#### Reference Counting for Strings 
+Like a `std::shared_ptr<char>`. 
+Handling all of this through a function -> everything has to go through a function here
+
+- **Utility function** – a common term for reusable, generic helpers.
+    
+- **Private function** – when it's used internally within a class/module.
+    
+- **Support function** – sometimes used to mean the same as helper.
+    
+- **Subroutine** – more old-school or in some languages.
+    
+- **Callback** – if it’s passed into another function to be called later (context-specific).
+
+`std::string` in C++ and `std::string` in Rust, just a wrapper around heap-allocated character buffer that resizes when needed. 
+
+```
+struct DynamicString
+{ 
+	char* data; //pointer to heap memory
+	size_t size; // number of chars used 
+	size_t capacity; // total allocated space
+};
+
+if (size + new_data > capacity); // reallocation
+
+May use SSO (Short String Optimization)
+```
+In Rust
+```
+let mut s = String::from("hello");
+s.push_str(" world");
+```
+
+In python 
+```
+s = "hello"
+s += " world"
+// strings are immutable, so the += creates a new string each time
+```
+
+## Character Set Data Types
+Mathematical set of characters. 
+![[Pasted image 20250409113230.png]]
+
+Data types that store characters, often with specific encoding or language support. 
+Pops up a lot of databases, programming languages, and character encodings. 
+
+##### Powerset Representation of Character Sets
+Boolean vectors - value for whether the corresponding character is true or fals. 
+1 bit per character. 
+This is known as a `powerset`. 
+![[Pasted image 20250409113808.png]]Bit 0, the most LO bit, is ASCII 0 (the NUL char), if this is 1, then this character set does contain the NUL char. 
+
+This is true to competitive programming as well, when we have numbers that are represented in a set, then we can use bitwise operators to simulate functions on those sets. 
+
+Bit Vectors very easy to perform set operations, union, intersection, difference comparison, and membership tests. 
+
+##### Like Representation of Character Sets
+Could just use character string to represent a list of characters. 
+If a set is small enough, then linear search will be fine to go through it all. 
+Powerset of a huge amount of chars (could be sparse) meaning that we have a lot of empty spaces, so we aren't using memory efficiently there.
+For those sparse sets, we just put in the characters that are present into the set. 
+
+
+### Designing Own Character Set
+ASCII and EBCDIC are antiquated.
+Easy to translate between char sets using a lookup table. 
+Loss of efficiency in I/O, is fine if efficiency of using other parts is better for us.
+How many chars - 256 say, some power of 2, easier to represent bytes. 
+Think about transmitting this as well. 
+
+### Designing an Efficient Character Set
+Think about how we are implementing over our strings, say with 0/null terminated, then we have to have that char included in the set. 
+Take note that most functions that work on strings will not work with our representation. 
+We will have to write a lot of those functions ourselves. 
+![[Pasted image 20250409120051.png]]![[Pasted image 20250409120059.png]]
+```
+Think about this:  in python
+
+nChar = "." # any char 
+
+if nChar in [".", ",", "/", "[", ...]  # etc. etc. 
+	# do something if in
+# super costly right
+# however, if our implementation was just looking at the range that "punctuation" lands in
+
+# So given
+Punc_Range = (32, 64) # just an example 
+if nChar >= 32 and nChar <= 64: # see inclusivity
+	# do something if in
+```
+
+
+### Grouping Alphabetic Characters
+ASCII char set, just not well designed for alphabetic character tests and operations. 
+Here are some problems with ASCII that we could solve with HyCode: 
+- Alphabetic chars lie in two disjoint ranges. Therefore these tests require 4 comparisons. 
+- Not super intuitive - meaning that lower case letters should be lower in numbers. 
+- `a` > `B`
+![[Pasted image 20250412102457.png]]
+
+In ASM: 
+```
+cmp ( al, 76 ); 
+jnae NotAlphabetic;
+// Execute these statements if it's alphabetic
+
+NotAlphabetic: 
+```
+
+Say that we interleave the lower and upper. 
+![[Pasted image 20250412102746.png]]
+Notice that all the Uppercase is an odd number. 
+
+Still less work in ACSII. 
+```
+if(( c >= 76 ) && ( c & 1 ))
+{ 
+	// char is uppercase
+}
+
+if(( c >= 76 ) && !(c & 1))
+{ 
+	// if lowercase
+}
+```
+This in 80x86 ASM: 
+```
+// Note ROR(a, AL) maps lowercase to the range $26 .. $3F (38 to 63)
+// Uppercase to $A6 ... $BF (166 ... 191) 
+
+ror( 1, al );
+cmp( al, $26 );
+jnae NotLower; // Note : must be an unsigned branch
+
+	// Code that deals with a lowercase character
+	
+NotLower: 
+// For Uppercase, note that ROR creates code in the range $A8 ... $BF
+// negative (8-bit) values. 
+
+ror( 1, al );
+cmp( al, $a6 );
+jge NotUpper; // Must be a signed branch
+
+// Code that deals with an uppercase character
+
+NotUpper:
+```
+
+### Comparing Alphabetic Characters
+
+![[Pasted image 20250412103342.png]]
+This is what we want in a lexicographical ordering, also the most intuitive. 
+Thinking about case-insensitive comparison, mask out the LO bits (or force them both to 1), as the difference between upper and lower is just a difference in 1 (odd and even). 
+
+```
+if(toupper(c) == toupper(d))
+{ 
+	// do code that handles c==d using a case-insensitive comparison
+}
+```
+`#define toupper(ch) ( (ch >= 'a' && ch <= 'z' ) ? ch & 0x5f : ch)`
+
+This expands to: 
+```
+if (
+	( ( c >= 'a' && c <= 'z') ? c & 0x5F : c)
+	== ( ( d >= 'a' && d <= 'z') ? d & 0x5F : d)
+)
+{ 
+	// do code that handles c  == d using a case-insensitive comparison
+}
+```
+There's some 80x86 code expansion here: 
+```
+// assume c is in cl and d is in dl
+cmp( cl, 'a'); // see if C is in the range 'a'..'z'
+jb NotLower; 
+cmp( cl, 'z'); // 
+ja NotLower; 
+and( $5F, cl); // convert lowercase char in cl to uppercase
+
+NotLower: 
+cmp( dl, 'a'); // see if d is in the range 'a'..'z'
+jb NotLower2;
+cmp( dl, 'z'); 
+ja NotLower2;
+and( $5F, dl); // convert lowercase char in dl to uppercase
+
+NotLower2:
+cmp( cl, dl); // Compare the (now uppercase if alphabetic chars
+jne NotEqual; // Skip the code that handles c == d if they're not equal
+```
+In HyCode ( our char ) the comparisons are much simpler: 
+```
+// check to see if CL is alphabetic.
+cmp(cl , 76); // If CL < 76 ('a'), then not alphabetic, now way that two chars are equal
+jb TestEqual; 
+
+or( 1, cl); // CL is alpha, force it to uppercase
+or( 1, dl); // DL may or may not be alpha, force to uppercase if it is
+
+TestEqual: 
+cmp( cl, dl ); // Compare the uppercase versions
+jne NotEqual;  // bail out if they're equal
+
+TheyreEqual: 
+// do the code that handles C==d using case-insensitive comparison
+
+NotEqual:
+```
+
+Then there's the idea that we group certain types of chars together - meaning that we just have to look at the range. 
+
