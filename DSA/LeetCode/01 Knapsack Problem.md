@@ -49,3 +49,70 @@ Here's the weird part that we need to get our heads around, we also move the var
 
 We have to iterate there. 
 
+##### Base Cases
+Think about the base cases here: where we have 2 dimensions: for `dp[0][j]` - think about what the `0` means : that we have 0 items : therefore the value for every `j` here is going to be 0 (as there are 0 items). 
+
+Then for `dp[i][0]` - this means there are `i` items and the maximum value is `0` for all items
+
+
+### Recurrence Relation
+$$F_n = F_{n - 1} + F_{n - 2}$$
+Being a linear recurrence, the $n^{\text{th}}$ term is equated to a linear function of the `k` previous terms. 
+The example above is the Fibonacci sequence. 
+Where the order `k` is two and the linear function merely adds the two previous terms. 
+There are constant coefficients (1 and 1) that do not depend on $n$. 
+One can express the general term of the sequence as **closed-form expression** of $n$. 
+Linear recurrences with polynomial coefficients depending on $n$ re also important, many common elementary functions and special functions have a Taylor series, whose coefficients satisfy such a recurrent relation. 
+
+This concept can be extended to multidimensional arrays, that is, indexed families that are indexed by tuples of natural numbers (basic arrays that we see commonly in Computer Science).
+
+**Recurrence Relation** : is an equation that expresses each element of a sequence as a function of the preceding ones. 
+
+With an example where only the immediate preceding element is involved, this might have the form. 
+![[Pasted image 20250413182440.png]]
+
+This is very important for out DP (iterative) as we are using the past elements in order to build to a new sequence. 
+
+This is why we always need a base case, same with recursion (where we "fall" onto the base case). 
+But **we need the base case sooner in iterative DP** . 
+
+Remembering that `dp[i][j] = z` - where `z` is the maximum value achievable with the first `i` items considering a knapsack capacity of `j`. 
+
+Where `i` and `j` are going to be the variables of the questions: 
+
+The idea being that we loop over each item `i` from 1 to `n` and each capacity `j` from 1 to `w`. 
+For each cell `dp[i][j]`, consider two possibilities: 
+It's easier for me to think about it recursively (what to do at each item)
+1. Do not include the current item: 
+	- The maximum value remains as `dp[i - 1][j]` (the same as when there is 1 less item).
+	
+2. Include the current Item (only if it fits, `w[i - 1] <= j` (we stay within capacity)): 
+	- The value will become the value of the current item `v[i - 1]` plus the maximum value achievable with the remaining capacity: ie. `dp[i-1][j - w[i - 1]]`, when you "sound it out" - take the maximum value achieved when we have one less item, with the capacity that is `j` , minus the the current item's weight. 
+
+![[Pasted image 20250413185928.png]]
+It can be represented with this recurrence relationship. 
+
+### The Code
+**Python**: 
+```
+def knapsack(values, weights, w): 
+	n = len(values)
+
+	# Create a DP table with (n + 1) rows and (W + 1) columns, init'd to 0
+	dp = [[0 for _ in range(W + 1)] for _ in range(n + 1)]
+
+	# Build the table row by row
+
+	for i in range(1, n + 1): 
+		for j in range(1, W + 1)
+			if weights[i - 1] > j: 
+				# Current Item I cannot be included because it's too heavy
+				# Therefore we just take dp[i - 1][j]
+				dp[i][j] = dp[i - 1][j]
+			else: 
+				# consider adding or not adding depending on the max
+				dp[i][j] = max(dp[i - 1][j], values[i - 1] + dp[i-1][j - weight[i - 1]])
+				
+	# The max value achievable with capacity W is in dp[n][W].
+	return dp[n][w]
+```
