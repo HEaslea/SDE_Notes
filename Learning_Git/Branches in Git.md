@@ -18,4 +18,80 @@ They are incorporated back in to the primary branch and then deleted.
 
 The dir `heads` will hold a file for reach local branch in the local repo - `refs` stands for references.
 There would only be `main` at that moment. 
-pg48
+
+`main/master` - **just a pointer to a commit**. 
+
+A branch - like `main` - is a named pointer that moves forward as you make new commits. 
+When we have a new pointer to a commit - that's just it - having all these trees is great, however, visually they are a lot to handle. 
+The general idea is this, there are snapshots of the project. Having a new pointer just means that that commit is with that pointer, if you do something and save it to commit with this pointer (pointing to a certain snapshot of the project), then it will look like a branch from main. 
+The way I like to think about it is this - it just saves the snapshot of the project under that pointer, that's it, nothing crazy complicated with the branches etc. 
+A commit is just a snapshot (saved) of a project at that time. Instead of saving the whole file, we just need to save the delta of it.
+### Modified and Unmodified Files
+Unmodified - not been changed since last commit. 
+Modified - changed since last commit. 
+For git to know this, the file must have been saved in the text editor. 
+
+`git status` - shows a list of all the modified - and whether they have been added or not - files. 
+
+**![[Pasted image 20250414192859.png]]**
+
+Then we need to add this to the staging area: 
+`git add rainbowcolors.txt` 
+`git status` 
+
+### Making Commits on a Branch
+`git commit -m "Orange"`
+
+`git log` - use Enter or the down arrow, then `q` to exit. 
+
+`HEAD` - is your current position, pointing to a branch. It's another pointer really - meaning where we are (which branch we are on). 
+Then the `main` branch just points to a commit. 
+
+```
+HEAD -> main  // where you are
+main -> abc123 (commit hash) // what commit main is pointing to
+```
+
+Think about the idea of having parent commits (every one has one bar the first commit). 
+
+Everything will point to the parent. 
+
+**Checking which commit is the parent of a given commit** : `git cat-file` command with the `-p`: 
+`git cat-file -p <commit_hash>`
+
+### Creating a Branch
+At the beginning there is `main`. 
+To list the branches - `git branch` - that just lists them out. 
+
+Then creating a new branch is : `git branch <new_branch_name>` - providing a name will create a new branch. 
+
+Keep the names descriptive: 
+
+```
+HEAD → branch (like main)
+branch → commit (like abc123)
+```
+
+```
+git branch
+
+git branch feature // makes a new branch
+
+git branch  // will show *main and feature (* - denoting which branch we are on) 
+
+git log // important bit is (HEAD->main, feature) - showing what we are currently on
+```
+
+When we make a new branch, it has to point to the commit that we are currently on : seems obvious, but think about the trouble if the branch started at another commit : say if we go back to an older commit, then we make a new branch, then we would have to move that branch pointer back to that commit etc. 
+It is made to whatever commit that `HEAD` resolves to. 
+`git checkout <commit>` - will move this pointer to a commit given - note that this will create a detached head. 
+
+
+## What is `HEAD`
+At any given point - think about this - you are looking at a particular version of the project. 
+`HEAD` simply a pointer that tells you which branch you are on. 
+
+There are times that we have a HEAD that is not pointing to a branch - but rather just straight to a commit. 
+
+![[Pasted image 20250414195015.png]]
+pg 57 (top of page)
