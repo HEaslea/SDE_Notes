@@ -214,3 +214,48 @@ These terms come from Jonathan Swift’s Gulliver’s Travels; the Lilliputians 
 Wanting to run on other processors - we have to value the idea that this is very important. 
 
 ![[Pasted image 20250414163250.png]]
+
+The implications are obvious - that there needs to be some conversion. 
+
+The idea of a canonical format - transmitting data across networks - the canonical form is usually big-endian because TCP/IP and some other network protocols use big-endian format. 
+USB - transmitting data here - the canonical form is little-endian. 
+
+To convert between the two - you just need to do a *mirror-image swap* of the bytes in the object : first swap the bytes at the opposite ends, the the ones in the middle swapping pairs of bytes as we go. 
+![[Pasted image 20250414185151.png]]
+
+Given that we are changing bytes and not bits. 
+
+For word length - just swap HO and LO bytes to change the endianness. 
+Take quad-word and their values, you need to swap 0 and 7, 1 and 6 etc. eventually 3 and 4. 
+
+Endian conversion is *reflexive*: same algorithm converts big-endian to to little-endian also converts little to big. 
+Running the alg twice, we will end up in the original format. 
+
+This might come up when we build larger objects from smaller. 
+**Building larger objects from discrete bytes**: assembling a 32-bit object from 4 individual bytes. 
+The most common way to do this is to create a **discriminant union** structure that contains a 32-bit object and a 4-byte array. 
+
+Unions are similar to records or structs, except the compiler allocates the storage for each filed of the union at the same address in memory. 
+Consider: 
+```
+struct
+{ 
+	short unsigned i;  // Assuming shorts require 16-bits
+	short unsigned u;
+	long unsigned r; // Assume longs are 32-bits
+} RECORDvar;
+
+union
+{ 
+	short unsigned i;
+	short unsigned u;
+	long unsigned r;
+} UNIONvar;
+```
+
+![[Pasted image 20250414191104.png]]
+
+A great visualization of it: 
+`union` having a complete overlaying of all the fields in the union. 
+There is "continuous overwriting" of the value in that var. 
+
