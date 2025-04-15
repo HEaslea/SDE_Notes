@@ -73,7 +73,7 @@ branch → commit (like abc123)
 ```
 
 ```
-git branch
+git branch // will list the branches that we have
 
 git branch feature // makes a new branch
 
@@ -94,4 +94,47 @@ At any given point - think about this - you are looking at a particular version 
 There are times that we have a HEAD that is not pointing to a branch - but rather just straight to a commit. 
 
 ![[Pasted image 20250414195015.png]]
-pg 57 (top of page)
+
+`git switch <branch_name>` - switch branches
+`git checkout <branch_name>` - also switch branches
+
+`git switch` - is literally just two switch
+
+However `git checkout` - does a few more things (see page 80 or / Checking Out Commits). 
+
+When we are `switch` branches : three things happen: 
+1. Changes `HEAD` pointer to point to the branch that you are switching onto (makes total sense)
+2. Populates the staging area with a snapshot of the commit you are switching onto (so changes the staging area to what we are moving to)
+3. Copies the contents of the staging area into the working directory
+
+**Working Directory - folder on local machine, contains files that you're actively working on, synced with the git repo. A local copy of the project that contains the files you're currently editing, the space where we make changes to files (coding/writing ) before we commit them - The actual files that we are working on - separate from the repo and the staging area**
+
+Changing the working directory does mean - it will update the editor to reflect the files from the branch you're switching to. 
+
+Changing branches - changing the commit that we are looking at. 
+
+```
+git branch // will list the branches
+
+git switch feature // duh
+
+git branch // list but now *feature, main will be shown
+
+git log // HEAD->feature, main will be shown
+```
+![[Pasted image 20250415223329.png]]
+
+![[Pasted image 20250415223616.png]]
+
+#### Working on a Separate Branch
+Say that we add to this book's text file now : "Yellow is the third colour of the rainbow" then save. 
+`git add rainbowcolours.txt`
+`git commit -m "yellow"`
+`git log // will show just HEAD->feature`  (no main will be included here). 
+
+Meaning - very simply that `feature` points to `yellow` and `main` still points to `orange`. 
+
+![[Pasted image 20250415230623.png]]
+
+
+
