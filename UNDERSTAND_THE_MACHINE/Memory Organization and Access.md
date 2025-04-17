@@ -259,3 +259,141 @@ A great visualization of it:
 `union` having a complete overlaying of all the fields in the union. 
 There is "continuous overwriting" of the value in that var. 
 
+In C, you can access the individual bytes of a 32-bit object.
+Consider: 
+```
+union 
+{ 
+	unsigned long bits32; // This assumes that C uses 32 bits for unsigned long
+	usngied char bytes[4];
+} theValue;
+```
+![[Pasted image 20250417171202.png]]
+
+This means that we can assemble using the array of bytes. 
+And then bring it all together as the `unsigned long`. 
+
+```
+theValue.bytes[0] = byte0;
+theValue.bytes[1] = byte1;
+theValue.bytes[2] = byte2;
+theValue.bytes[3] = byte3;
+```
+
+C allocates the first byte of an array, **at the lowest memory address**, corresponding to little-endianness. 
+This means LO byte at the lower address, and HO byte at the higher address. 
+Obviously on big-endian, this is not going to work: therefore we need something that looks like this: 
+```
+theValue.bytes[0] = byte3;
+theValue.bytes[1] = byte2;
+theValue.bytes[2] = byte1;
+theValue.bytes[3] = byte0;
+```
+Clear and Obvious stuff. 
+
+How do we determine if your code is running on a little-endian or big-endian? 
+
+```
+theValue.bytes[0] = 0;
+theValue.bytes[1] = 1;
+theValue.bytes[2] = 0;
+theValue.bytes[3] = 0;
+
+isLittleEndian = theValue.bits32 == 256; 
+```
+On big-endian, this is the number 16 (0010) - little endian, of course 256. 
+
+## The System Clock
+Fast and getting faster. 
+Require time to accomplish even the smallest of tasks. 
+VNM/VNS (Von Neumann model/system) -> most operations are **serialized**, executing commands in a prescribed order. 
+Executing in proper order, processor relies on the **system clock**. 
+Timing standard within the system. 
+System clock -> electrical signal on the control bus that alternates between 0 and 1 periodically. 
+All activity synchronized with the edges (rising / falling) of this clock signal. 
+
+![[Pasted image 20250417174514.png]]
+
+**System Clock Frequency** -> rate at which clock alternates between 0 and 1. 
+**Clock Period/Cycle** -> time it takes for the system clock to switch from 0 to 1 and back to 0 (same point on the wave).
+Most modern systems - exceeding several billion cycles per second. 
+**Hertz (Hz)** - unit corresponding to one cycle per second. 
+Imagine 3,000 million hertz (megahertz). 
+GHz - gigahertz - billion cycles per second. 
+
+Typical range for 80x86 is 5MHz -> to >7GHz and beyond. 
+
+The clock period is just the reciprocal, imagine 1 MHz (MHz or one million cycles per second 1e-6) -> this is 1e6 /s, then the clock period is 1e-6 (1/1000000) which is 1 microsecond. 
+
+Then when we have 1GHz, that is 1e9 /s, then the clock period is 1e-9 clearly, that is 1 nanosecond, one billionth of a second. 
+
+To ensure some form of synchronization - either on the falling edge (when the clock goes from 1 to 0) or the rising edge (from 0 to 1). 
+
+**Falling edge** - from 1 to 0
+**Rising edge** - from 0 to 1
+
+Time spent between the rising and falling - but that rising and falling itself is very quick, very very quick. 
+That's why a clock edge is the perfect synchronization point. 
+
+We cannot perform any tasks faster than the clock runs. 
+Many operations take multiple lock cycles to complete, so the CPU often performs operations at a significantly lower rate. 
+
+#### Memory Access and the System Clock
+Mem access is synchronized with the system clock; 
+memory access occurs no more than once every clock cycle. 
+
+Memory access time - number of clock cycles between a memory request (read or write) and when the memory operation completes. 
+
+This is an important value, because longer memory access times result in lower performance, pretty obvious but crucial to think about. 
+
+Modern CPUs are much faster than memory devices, (even NVME's). 
+
+There is therefore often a second clock - the **bus clock** - some fraction of the CPU speed. 
+CPUs generally have a range of frequencies that it can use. 
+
+When reading, mem access time is the time between when the CPU places an address on the address bus and the time when the CPU takes the data off the data bus. 
+
+![[Pasted image 20250417182642.png]]
+
+
+**Reading** - The CPU (may) have to wait for the data to come in, access speed is the bottleneck (and size of data bus, if we need multiple accesses). 
+**Writing** - The CPU doesn't have to wait after it's dispatched that data, bandwidth is the bottle neck (how much data we can throw out, if it's larger than the data bus, then we will have to wait).
+
+
+### ✅ **Reading (from memory or device)**:
+
+- **Yes**, the CPU _may_ have to **wait** for the data to be fetched.
+    
+- The bottlenecks:
+    
+    - **Access latency** (especially if it's coming from RAM, SSD, or something even slower).
+        
+    - **Cache misses** slow this down a lot — if data isn’t in L1/L2/L3 cache, it has to go out to main memory.
+        
+    - **Data bus width** matters if you’re reading large amounts of data — the CPU may need **multiple memory cycles** to fetch it all.
+        
+
+> So: **Access latency + bus size = bottlenecks when reading**.
+
+### ✅ **Writing (to memory or device)**:
+
+- Also correct — the CPU **can dispatch a write and move on**, especially if write buffering is in place.
+    
+- But now the bottleneck is:
+    
+    - **Write bandwidth** — how much data we can push per unit time.
+        
+    - **If the data bus is small**, we can’t write big chunks all at once.
+        
+    - Writes can still **stall** the CPU if the write buffer is full or if it's a device write (like to disk or IO port).
+        
+
+> So: **Write bandwidth + buffer size + bus width = bottlenecks when writing**.
+
+- **Reads** are _blocking_ — CPU often needs that data to continue, so it waits.
+    
+- **Writes** are _non-blocking_ (usually) — CPU can **defer** the actual memory update with a write buffer or cache.
+
+Not sure when this will be useful, but it feels like a great insight. 
+
+pg150 top of
