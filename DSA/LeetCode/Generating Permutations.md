@@ -66,6 +66,10 @@ And we keep a `bit vector` (boolean array) to make sure that the element is in t
 `bool chosen[n + 1]`
 The idea being that we can process the permutation when it is the right size: 
 ```
+int n;                            // total number of elements
+vector<int> permutation;         // current permutation being built
+vector<bool> chosen(n + 1, false); // tracks which elements are already used
+
 void permute()
 { 
 	if(permutation.size() == n)
@@ -86,4 +90,9 @@ void permute()
 }
 ```
 
-
+What I like to think about with recursion - what happens in a for loop the first time that we go into it. 
+Here we are going through all the elements of `permutation`. 
+Then it's clear that we are skipping that number if it's already true in `chosen[i]`. 
+`if(chosen[i]) continue;`  If it's already chosen -> move to the next. 
+Then we set `chosen[i] = true` saying that we are taking it forward with us. 
+This is important as all in `chosen` are `false` to begin with. Therefore, it's clear that all are going to be added. 
