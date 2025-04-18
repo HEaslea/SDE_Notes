@@ -50,6 +50,34 @@
             }
           },
           {
+            "id": "4b800444a8533c22",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "PythonCookBook/Mutable Lists.md",
+                "mode": "source",
+                "source": false
+              },
+              "icon": "lucide-file",
+              "title": "Mutable Lists"
+            }
+          },
+          {
+            "id": "e92cbcfebf64540b",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "Generate Combinations.md",
+                "mode": "source",
+                "source": false
+              },
+              "icon": "lucide-file",
+              "title": "Generate Combinations"
+            }
+          },
+          {
             "id": "70eb98cfc81692ad",
             "type": "leaf",
             "state": {
@@ -63,7 +91,8 @@
               "title": "Basics Of Git"
             }
           }
-        ]
+        ],
+        "currentTab": 4
       }
     ],
     "direction": "vertical"
@@ -120,8 +149,7 @@
       }
     ],
     "direction": "horizontal",
-    "width": 238.5,
-    "collapsed": true
+    "width": 238.5
   },
   "right": {
     "id": "9a5bd91e964f5d11",
@@ -218,14 +246,17 @@
       "mermaid-tools:Open Mermaid Toolbar": false
     }
   },
-  "active": "49f52753df5510f1",
+  "active": "e92cbcfebf64540b",
   "lastOpenFiles": [
+    "Untitled.md",
+    "Generate Combinations.md",
+    "PythonCookBook/Mutable Lists.md",
+    "DSA/LeetCode/Generating Permutations.md",
+    "UNDERSTAND_THE_MACHINE/Memory Organization and Access.md",
     "PNGS/Pasted image 20250417182642.png",
     "PNGS/Pasted image 20250417174514.png",
     "PNGS/Pasted image 20250417171202.png",
     "Learning_Git/Branches in Git.md",
-    "UNDERSTAND_THE_MACHINE/Memory Organization and Access.md",
-    "DSA/LeetCode/Generating Permutations.md",
     "DSA/LeetCode/Generating Parentheses.md",
     "Learning_Git/Merging in Git.md",
     "README.md",
@@ -239,7 +270,6 @@
     "gits",
     "PNGS/Pasted image 20250415230624.png",
     "PNGS/Pasted image 20250415230623.png",
-    "PNGS/Pasted image 20250415223616.png",
     "Learning_Git/Basics Of Git.md",
     "Interview Prep/Untitled 2.md",
     "PythonCookBook/map(), zip(), filter().md",
@@ -256,8 +286,6 @@
     "Arm Prep Interview Questions.md",
     "Finished_Notes.md",
     "ARM_INT_PREP.md",
-    "ARM_Finalised_Questions.md",
-    "ARM_FINAL.md",
     "Learning_Git",
     "Vim",
     "UNDERSTAND_THE_MACHINE",
