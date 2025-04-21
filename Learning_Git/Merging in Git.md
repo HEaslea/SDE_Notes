@@ -270,3 +270,35 @@ This is **Detached HEAD State**: Allowing us to look at any commit at any point.
 Try not to make changes to a repo while in this detached `HEAD` state. 
 Again this will change what is in the working directory. 
 
+We can copy the commit hash from`git log` 
+
+![[Pasted image 20250421102933.png]]![[Pasted image 20250421102941.png]]
+
+![[Pasted image 20250421103019.png]]
+
+It seems a little odd that our working directory changes every time we switch branches or check out a commit directly - however, we have not lost a thing - commits store the changes safely - we can always (always, which is nice) switch back to where we were. 
+
+To "exit" the detached `HEAD` state -> we just go back to `main`. 
+
+`git switch main` -> will tell us what `HEAD` was on. 
+
+`git log` - > will be back to `(HEAD -> main, feature)`. 
+
+### Creating a Branch and Switching onto It in One Go
+`git branch` -> then we usually `git switch` or `git checkout` onto it. 
+
+This is that `git switch` or `git checkout` -> to make a branch as well. 
+
+`git switch -c`  - `c` for create
+
+OR
+
+`git checkout -b` - `b` for branch
+
+```
+git switch -c <new_branch_name>
+
+git checkout -b <new_branch_name>
+```
+
+
