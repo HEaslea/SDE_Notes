@@ -247,4 +247,26 @@ Now a merge commit is normal - but it does have two parent pointers.
 
 Merging does not delete. 
 
-pg 80 -> Checking out commits next
+### Checking Out Commits
+`git checkout` may be used to switch branches - and other things too. 
+Also used to `checkout` commits. 
+
+At the moment we are on `main` and we want to go further back to an older version of the project. 
+
+Want to see what it was like on orange commit?
+
+There is no branch on that commit - `git checkout` - passing the commit hash of that orange commit. 
+
+`git checkout <commit_hash>`
+
+This will carry out three actions that are similar to the ones earlier: 
+1. Moving the `HEAD` pointer to point to the commit we gave. 
+2. Populates the staging area with all the files and dirs that are part of the commit that we are switching to. 
+3. It copies the contents of the staging area into the working dir. 
+
+The main difference being that the `HEAD` pointer will point directly to the commit and not to a branch now. 
+This is **Detached HEAD State**: Allowing us to look at any commit at any point. 
+
+Try not to make changes to a repo while in this detached `HEAD` state. 
+Again this will change what is in the working directory. 
+
