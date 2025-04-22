@@ -396,4 +396,84 @@ When reading, mem access time is the time between when the CPU places an address
 
 Not sure when this will be useful, but it feels like a great insight. 
 
-pg150 top of
+Memory devices have various ratings, two major ones being the capacity and the speed. 
+
+RAM - random access memory, usually have some power of 2 capacity. 
+And rough speeds of up to 0.1 and 100ns. 
+
+A typical 4GHz Intel System uses 1600 MHz (1.6GHz, or 0.625 ns) memory devices. 
+That just seems so fast. 
+
+At 4GHz the clock speed is 1/4billion , that is 0.25 ns. 
+How can a system designer get away with using 0.625 ns memory. 
+
+The answer being **wait states**. 
+
+### Wait States
+Extra clock cycle that gives a device additional time to respond to the CPU. 
+100MHz Pentium System has 10ns, clock period, implying that you need 10ns memory. 
+
+There's some decoding and buffering logic between the CPU and memory, which has its own delays. 
+
+![[Pasted image 20250421110423.png]]
+
+If you have 100MHz processor with a memory cycle time of 10 ns and you lose 2ns to buffering and decoding, you'll need 8 ns. 
+If the system can only support 20 ns memory, we use the wait state to extend the memory cycle to 20 ns. 
+
+Almost every general-purpose CPU provides a pin (whose signals appear on the control bus). 
+Allows us to insert wait states. 
+
+Modern processors often run at hundreds or thousands of MHz, whereas DRAM or peripheral buses may only be tens or hundreds of MHz. 
+Each cycle where the CPU is not doing something and is waiting on memory -> that is a wait state. 
+
+If there are other master (DMA engines, other cores, video controllers) they may have to wait to share the bus. 
+The CPU might have to wait its turn, inserting wait states until the bus is free. 
+
+Slower peripherals (floppy drives, old EEPROMS, some ADCs) -> or even with the new speed of CPUS and anything that isn't an NVME 2.0. 
+
+```
+Cycle:     1    2    3    4    5    6  
+Action:  Read ──> WS ──> WS ──> WS ──> WS ──> Data Ready  
+```
+
+As long as the CPU is waiting for something from memory, obviously it has to wait. 
+
+If we had to wait for every single access, the we are essentially cutting time in half. 
+
+### Cache Memory
+A program tends to access the same location a bunch of times - **Temporal Locality of Reference** - just accessing the same variable in the same memory address a bunch of times. 
+And we also tend to access a bunch of memory around that variable that we just used - **Spacial Locality of Reference**. 
+
+Both forms occur in this idea here: 
+```
+for i := o to 10 do 
+	A [i] := 0;
+```
+Referencing the variable `i` several times. That is **temporal locality of reference**. 
+
+We have location A -> then we move through the locations that we do have. 
+As these elements, in Pascal, are all consecutively accessed, there is spacial locality as well. 
+
+Remember that machine instructions also reside in memory, and the CPU fetches these instructions sequentially from memory and executes them repeatedly. 
+
+Cache is like very fast and small RAM that can be written over. 
+
+Bytes within a cache do not have fixed addresses. 
+
+Cache can dynamically reassign addresses, allowing the system to keep recently accessed values in teh cache. 
+
+Addresses that the CPU hasn't accesses, or hasn't accessed in some time, remain in main (slow) memory. 
+
+A **Cache Hit** - whenever the CPU accesses me and finds the data in the cache. 
+The CPU can usually access data with zero wait states. 
+In this case, zero wait states. 
+
+A **Cache Miss** - data not found in the cache. 
+CPU has to read the data from main memory - this is a performance loss. 
+
+To take advantage of temporal locality of reference, the CPU copies data into the cache whenever it accesses an address that's not present in the cache. 
+As we are likely to access that area some time soon as well, might as well just keep it in there. 
+
+This does not eliminate the need for wait states - eventually we will wander to an address that needs to be first time accessed. 
+
+When a cache miss occurs, most caching systems will read several consecutive bytes of main memory - Known as a **Cache Line** - 
