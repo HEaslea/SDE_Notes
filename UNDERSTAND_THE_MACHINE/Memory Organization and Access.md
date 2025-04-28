@@ -476,4 +476,155 @@ As we are likely to access that area some time soon as well, might as well just 
 
 This does not eliminate the need for wait states - eventually we will wander to an address that needs to be first time accessed. 
 
-When a cache miss occurs, most caching systems will read several consecutive bytes of main memory - Known as a **Cache Line** - 
+When a cache miss occurs, most caching systems will read several consecutive bytes of main memory - Known as a **Cache Line** - eg. 80x86 CPUs read between 16 and 64 bytes upon a cache miss. 
+
+Most mem chips have special modes that let you quickly access several consecutive mem locations on the chip. 
+
+Cache exploits this capability to reduce the average number of wait states needed to access sequential memory locations. 
+Reading 16 bytes on each cache miss is expensive, if you access only a few bytes in the corresponding cache line, cache mem systems work quite well in the average case. 
+
+Imagine the ratio of `cache hit : cache miss` this is gonna increase with size (in bytes) of the cache memory subsystem. 
+
+On the 80486 CPU, 8,912 bytes on-chip cache. 
+80 to 95% hit rate apparently from Intel - this sounds super sick, however, suppose that we pick the 80%. 
+This means that one in every five memory accesses, on average, will not be in the cache. 
+
+If you have a 50 MHz Process (20 ns period) and a 90ns memory access time, four out of the five memory accesses require only 20 ns (one clock cycle) as they are in the cache. 
+The fifth will require about four wait states (20 ns for a normal memory access plus the 80 ns, or four wait, to get at least 90 ns). 
+
+Say that the cache always read 16 consecutive bytes (4 double words) from memory. 
+Most 80486, requiring six additional clock cycles to read the remaining 3 double words, for a total of 220ns.
+Overall, around 11 clock cycles.
+
+When we try and access memory and it's not in the cache (a cache miss), CPU will fetch the entire cache line from main memory - not just what we asked for. 
+
+Typically 64 bytes on modern systems (this can vary). 
+
+Contiguous blocks of memory. 
+
+When asking for `a[1000]`, CPU might pull in `a[1000]` through to `a[1000 + 15]` for `int` of 4 bytes. 
+
+Mem is slow compared to CPU. 
+
+This gets worse and worse as processors get faster and faster compared to memory access. 
+
+We could add more cache memory. 
+
+Another way to improve this is to build a *two-level* (L2) caching system. 
+
+This will generally appear in the same packaging as the first (L1). 
+
+![[Pasted image 20250424154719.png]]
+This will contain a lot more memory. 
+
+This is not as fast as on-chip primary cache - there will be a couple of wait states in order to get mem from L2. 
+
+L3 is larger - slower - usually several megabytes. 
+
+### CPU Memory Access
+Memory Addressing Modes - Direct, Indirect, Indexed.
+
+There are some additional ones that can be supported - *scaled-index* - while some RISC CPUs support only indirect addressing. 
+
+Sometimes addressing modes will allow us to access data in a complex data structure with a single instruction. 
+
+There are pros and cons for every addressing mode it seems. 
+
+Remember, always that access to memory is very slow, usually requiring waiting states. 
+
+#### The Direct Memory Addressing Mode
+Encodes variable's memory address as part of the actual machine instruction that accesses the variable. 
+On the 80x86, direct addresses are 32-bit values appended to the instructions encoding. 
+Essentially giving the memory address directly - obviously. 
+
+```
+// In HLA
+static
+	i:dword;
+	... 
+	mov( eax, i ); // Store EAX's value into the i variable. 
+```
+
+When accessing variables whose memory address is known prior to the program's execution, this is ideal. 
+On those CPUs that don't support a direct addressing mode, may need the extra instruction to load the register with the variable's memory address prior to accessing that variable. 
+
+#### The Indirect Addressing Mode
+Typically uses a register to hold a mem address (there are a few CPUs that use memory locations to hold the indirect address, this is more rare in modern CPUs). 
+
+There are a couple of advantages to this, which seems odd. As this memory address is saved, we can modify it at run time. 
+Encoding register specifies the indirect address takes far fewer bits than encoding a 32-bit (64-bit) direct address, so the instructions are smaller. 
+
+The downside is that we might have to have more than on instruction in order to get the memory address ready to use. 
+
+```
+static
+	byteArray: byte[16];
+	... 
+	lea( ebx, byteArray ); // loads EBX register with the addres of byteArray
+	mov( [ebx], al ); // loads byteArray[0] into AL
+	inc( ebx ); // Point EBX at the next byte in memory (byteArray[1])
+	mov( [ebx], ah ); // Loads byteArray[1] into AH. 
+```
+Where `[A]` is accessing that actual space, not the memory address - "go to the memory location who address is inside A, and store x there"
+
+The idea being that we are not actually seeing the memory address for that area. 
+We are just looking at the memory address, that holds the next memory address. 
+
+#### The Indexed Addressing Mode
+This is sort of like a combination of the other two, direct and indirect. 
+Machine instructions using this addressing mode encode both an offset (direct address) and a register in the bits that make up the instruction. 
+At run time, the CPU will compute the sum of these two address components to create an **effective address**. 
+
+Great for accessing array elements and indirect access to structs and records. 
+
+The idea being, that we use a **base address** and an **index** that we add to the base in order to get to the actual address. 
+
+```
+mov eax, [ebx + ecx]
+```
+
+Is the general idea. 
+
+![[Pasted image 20250428011832.png]]
+The issue with direct is obviously that that memory address has to hold the right data every single time. 
+
+**This and Processes**: The idea when we use **direct addresses** within a process - we should immediately think about **virtual addresses** - not physical memory itself. 
+Then the virtual address is going to get translated by the CPU and the OS to a **physical address**. 
+
+`mov eax, [1234h]`
+Look up the virtual address `1234h`. 
+Then the CPU and OS use a page table to figure out **where in physical RAM** that really points to. 
+The CPU reads from the correct physical address. 
+
+Remembering that processes get their own virtual/private memory space. 
+Even if two processes use the same virtual address (like both using `[1234h]`), they are actually talking to **different real places** in physical memory. 
+The VA (virtual address) -> PA (physical address) -> MMU (Memory Management Unit) -> always working with virtual addresses when we think about processes. 
+
+**Back to indexed addressing**: 
+```
+static
+	byteArray: byte[16];
+	...
+	mov( 0, ebx ); // Initialize an index into the array
+	while( ebx < 16 ) do
+		mov( 0, byteArray[ebx] ); // Zeros out byteArray[ebx]
+		inc( ebx ); // EBX := EBX + 1, move on to the next array element
+	endwhile;
+```
+
+There is another way: in HLA
+```
+lea( ebx, byteArray ); // Loads the address of byteArray into EBX
+... 
+mov( al, [ebx+2] ); // Stores al into byteArray[2]
+```
+#### Scaled-Index Addressing Modes#
+- The ability to use two registers (plus an offset) to compute the effective address
+- The ability to multiple on of those register's values by a constant (typically some power of two) prior to computing the effective address. 
+```
+mov( [ebx + ecx * 1], al ); // EBX is base address, ecx is index
+mov( wordArray[ecx*2], ax ); // wordArray is base address, ecx is index
+mov( dwordArray[ebx+ecx*4], eax ); // Effective Address is combination of offset (dwordArray)+ebx+(ecx*4)
+```
+
+
