@@ -13,12 +13,26 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "UNDERSTAND_THE_MACHINE/Memory Organization and Access.md",
+                "file": "Learning_Git/Creating and Pushing to a Remote Repo.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "Memory Organization and Access"
+              "title": "Creating and Pushing to a Remote Repo"
+            }
+          },
+          {
+            "id": "302cd850a8efada1",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "DSA/LeetCode/Removing Nth Node from Back of List.md",
+                "mode": "source",
+                "source": false
+              },
+              "icon": "lucide-file",
+              "title": "Removing Nth Node from Back of List"
             }
           },
           {
@@ -49,7 +63,8 @@
               "title": "Internets Intranets and Extranet"
             }
           }
-        ]
+        ],
+        "currentTab": 1
       }
     ],
     "direction": "vertical"
@@ -204,35 +219,35 @@
       "mermaid-tools:Open Mermaid Toolbar": false
     }
   },
-  "active": "2a666c4fa05d4989",
+  "active": "302cd850a8efada1",
   "lastOpenFiles": [
+    "Learning_Git/Creating and Pushing to a Remote Repo.md",
+    "DSA/LeetCode/Removing Nth Node from Back of List.md",
+    "PNGS/Pasted image 20250428134749.png",
+    "PNGS/Pasted image 20250428134747.png",
+    "PNGS/Pasted image 20250428125512.png",
+    "PNGS/Pasted image 20250428125434.png",
+    "PNGS/Pasted image 20250428112546.png",
+    "PNGS/Pasted image 20250428112445.png",
+    "PNGS/Pasted image 20250428111630.png",
+    "PNGS/Pasted image 20250428014413.png",
+    "PNGS/Pasted image 20250428014206.png",
+    "UNDERSTAND_THE_MACHINE/Memory Organization and Access.md",
     "PNGS/Pasted image 20250428011832.png",
     "Learning_Git/Merging in Git.md",
     "Learning_Git/Hosting Services and Authentication.md",
     "NETWORKING/NETWORK_INFRASTRUCTURE/Internets Intranets and Extranet.md",
-    "PNGS/Pasted image 20250426173520.png",
     "NETWORKING/Network Infrastructure.md",
     "NETWORKING/NETWORK_INFRASTRUCTURE",
     "NETWORKING/NETWORK_INFRASTRUCTURE",
     "NETWORKING",
     "GENERAL/Value Initialization.md",
     "DSA/LeetCode/Level Order Traversal of Binary Tree.md",
-    "Learning_Git/Creating and Pushing to a Remote Repo.md",
-    "PNGS/Pasted image 20250425210101.png",
-    "UNDERSTAND_THE_MACHINE/Memory Organization and Access.md",
-    "PNGS/Pasted image 20250424154719.png",
     "PythonCookBook/Comprehension in Python.md",
-    "PNGS/Pasted image 20250423184422.png",
-    "PNGS/Pasted image 20250423184419.png",
-    "PNGS/Pasted image 20250421110423.png",
     "GENERAL/Memory Alignment.md",
     "Learning_Git/Basics Of Git.md",
     "DSA/Demonstrating Recursion.md",
     "N-Ary Tree.md",
-    "PNGS/Pasted image 20250421103019.png",
-    "PNGS/Pasted image 20250421102941.png",
-    "PNGS/Pasted image 20250421102933.png",
-    "PNGS/Pasted image 20250418214138.png",
     "DSA/LeetCode/Generating Permutations.md",
     "Generate Combinations.md",
     "PythonCookBook/Mutable Lists.md",
