@@ -131,6 +131,41 @@ Now the `git bracnh --all` will track all the remote-tracking branches in your l
 
 Let's say that we do this: 
 `git push origin main` - that will do a whole bunch of things, adding all the stuff to the remote branch. 
-
+![[Pasted image 20250501183254.png]]
 Then view this : 
 ![[Pasted image 20250428134749.png]]
+
+In step 2 : `git push` - command indicates that you have pushed your branch to the remote repository. 
+`push` - data from **local to remote**. 
+`origin` - **remote name**, the **shortname**. Remember that this comes from the name given from `git remote add origin <url>`. 
+`main` - the specific local branch that we will be adding - git will try and add it to the branch named `main` or `origin`. 
+
+Quick reminder about the **upstream branch** - This is the remote branch that our local branch is tracking. 
+Defines where your local branch **pulls from and pushes to by default**. 
+When this is set, we can just do the `git pull` or `git push` and it will know which branch to do that from. 
+This is done when we push for the first time: 
+`git push -u origin main`
+
+In step 3: looking at the `refs` folder - we will see `remotes`. `origin`, inside this, is a file called `main`. 
+This represents the new `origin/main` remote-tracking branch. 
+![[Pasted image 20250501185304.png]]
+
+
+You can see that all the commits have been added up there. 
+
+Take note that the `feature` branch is not on there as well. 
+
+ If we did want to push the `feature` branch to the remote: 
+ ```
+ git switch feawture
+ git push origin feature
+ git branch --all
+ *feature
+ main
+ remotes/origin/feature
+ remotes/origin/main
+ git log // (HEAD -> feature, origin/main, origin/feature, main)
+```
+You can now see, that the two **remote-tracking** branches, `origin/main origin/feature`.
+
+![[Pasted image 20250501185943.png]]C
