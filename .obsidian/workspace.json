@@ -8,48 +8,6 @@
         "type": "tabs",
         "children": [
           {
-            "id": "302cd850a8efada1",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "DSA/LeetCode/Removing Nth Node from Back of List.md",
-                "mode": "source",
-                "source": false
-              },
-              "icon": "lucide-file",
-              "title": "Removing Nth Node from Back of List"
-            }
-          },
-          {
-            "id": "9e5196f5d871189b",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "NETWORKING/NETWORK_INFRASTRUCTURE/Internets Intranets and Extranet.md",
-                "mode": "source",
-                "source": false
-              },
-              "icon": "lucide-file",
-              "title": "Internets Intranets and Extranet"
-            }
-          },
-          {
-            "id": "da9f44b64cabfbfe",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "DSA/LeetCode/Converting Sorted Linked List to BST.md",
-                "mode": "source",
-                "source": false
-              },
-              "icon": "lucide-file",
-              "title": "Converting Sorted Linked List to BST"
-            }
-          },
-          {
             "id": "b07b98adb2fcbe08",
             "type": "leaf",
             "state": {
@@ -62,9 +20,65 @@
               "icon": "lucide-file",
               "title": "Topic 1"
             }
+          },
+          {
+            "id": "83325137d99b27a4",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "ChemRevision/Topic 3 Redox 1.md",
+                "mode": "source",
+                "source": false
+              },
+              "icon": "lucide-file",
+              "title": "Topic 3 Redox 1"
+            }
+          },
+          {
+            "id": "daa6dd4b94b96800",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "ChemRevision/Topic 4 Inorg Chem and Periodic Table.md",
+                "mode": "source",
+                "source": false
+              },
+              "icon": "lucide-file",
+              "title": "Topic 4 Inorg Chem and Periodic Table"
+            }
+          },
+          {
+            "id": "6043cb08bdb6b218",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "Topic 6 Transition Metals.md",
+                "mode": "source",
+                "source": false
+              },
+              "icon": "lucide-file",
+              "title": "Topic 6 Transition Metals"
+            }
+          },
+          {
+            "id": "2344b4fdd4bada09",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "Organic Reactions.md",
+                "mode": "source",
+                "source": false
+              },
+              "icon": "lucide-file",
+              "title": "Organic Reactions"
+            }
           }
         ],
-        "currentTab": 3
+        "currentTab": 4
       }
     ],
     "direction": "vertical"
@@ -121,7 +135,8 @@
       }
     ],
     "direction": "horizontal",
-    "width": 238.5
+    "width": 238.5,
+    "collapsed": true
   },
   "right": {
     "id": "9a5bd91e964f5d11",
@@ -218,25 +233,29 @@
       "mermaid-tools:Open Mermaid Toolbar": false
     }
   },
-  "active": "e5853c07c97fabb9",
+  "active": "2344b4fdd4bada09",
   "lastOpenFiles": [
-    "q",
-    "ChemRevision",
-    "PNGS/Pasted image 20250506235201.png",
-    "PNGS/Pasted image 20250506232633.png",
-    "PNGS/Pasted image 20250506232601.png",
-    "PNGS/Pasted image 20250506232345.png",
-    "PNGS/Pasted image 20250506225806.png",
-    "PNGS/Pasted image 20250506190122.png",
-    "PNGS/Pasted image 20250506185841.png",
-    "PNGS/Pasted image 20250506185609.png",
-    "PNGS/Pasted image 20250506183447.png",
-    "PNGS/Pasted image 20250506183352.png",
-    "Chemistry",
-    "DSA/LeetCode/Converting Sorted Linked List to BST.md",
+    "Topic 6 Transition Metals.md",
+    "Organic Reactions.md",
+    "PNGS/Pasted image 20250510183516.png",
+    "PNGS/Pasted image 20250510183508.png",
+    "PNGS/Pasted image 20250510182736.png",
+    "PNGS/Pasted image 20250510182708.png",
+    "PNGS/Pasted image 20250510175459.png",
+    "PNGS/Pasted image 20250510174556.png",
+    "PNGS/Pasted image 20250510174550.png",
+    "PNGS/Pasted image 20250509145324.png",
+    "PNGS/Pasted image 20250509145130.png",
+    "PNGS/Pasted image 20250509145116.png",
+    "ChemRevision/Topic 4 Inorg Chem and Periodic Table.md",
+    "ChemRevision/Topic 3 Redox 1.md",
     "ChemRevision/Topic 1.md",
+    "DSA/LeetCode/Converting Sorted Linked List to BST.md",
     "NETWORKING/NETWORK_INFRASTRUCTURE/Internets Intranets and Extranet.md",
     "DSA/LeetCode/Removing Nth Node from Back of List.md",
+    "q",
+    "ChemRevision",
+    "Chemistry",
     "Learning_Git/Creating and Pushing to a Remote Repo.md",
     "Learning_Git/Cloning and Fetching.md",
     "Learning_Git/Hosting Services and Authentication.md",
@@ -258,14 +277,10 @@
     "PythonCookBook/Mutable Lists.md",
     "Learning_Git/Branches in Git.md",
     "DSA/LeetCode/Generating Parentheses.md",
-    "README.md",
-    "Pybind11.md",
-    "Interview Prep Notes.md",
     "gits",
     "DSA/LeetCode",
     "Learning_Git",
     "Vim",
-    "UNDERSTAND_THE_MACHINE",
     "Untitled.canvas"
   ]
 }
