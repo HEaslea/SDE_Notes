@@ -69,12 +69,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "Organic Reactions.md",
+                "file": "Learning_Git/Creating and Pushing to a Remote Repo.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "Organic Reactions"
+              "title": "Creating and Pushing to a Remote Repo"
             }
           }
         ],
@@ -97,7 +97,7 @@
             "state": {
               "type": "file-explorer",
               "state": {
-                "sortOrder": "alphabetical",
+                "sortOrder": "byModifiedTime",
                 "autoReveal": false
               },
               "icon": "lucide-folder-closed",
@@ -235,8 +235,10 @@
   },
   "active": "2344b4fdd4bada09",
   "lastOpenFiles": [
-    "Topic 6 Transition Metals.md",
+    "Learning_Git/Cloning and Fetching.md",
+    "Learning_Git/Merging in Git.md",
     "Organic Reactions.md",
+    "Topic 6 Transition Metals.md",
     "PNGS/Pasted image 20250510183516.png",
     "PNGS/Pasted image 20250510183508.png",
     "PNGS/Pasted image 20250510182736.png",
@@ -257,10 +259,8 @@
     "ChemRevision",
     "Chemistry",
     "Learning_Git/Creating and Pushing to a Remote Repo.md",
-    "Learning_Git/Cloning and Fetching.md",
     "Learning_Git/Hosting Services and Authentication.md",
     "UNDERSTAND_THE_MACHINE/Memory Organization and Access.md",
-    "Learning_Git/Merging in Git.md",
     "NETWORKING/Network Infrastructure.md",
     "NETWORKING/NETWORK_INFRASTRUCTURE",
     "NETWORKING/NETWORK_INFRASTRUCTURE",

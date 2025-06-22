@@ -168,4 +168,143 @@ Take note that the `feature` branch is not on there as well.
 ```
 You can now see, that the two **remote-tracking** branches, `origin/main origin/feature`.
 
-![[Pasted image 20250501185943.png]]C
+![[Pasted image 20250501185943.png]]
+
+##### What is `origin`: 
+When we do `git add remote origin <url>`, what exactly is origin. 
+`origin` is a reference name for a remote repo. 
+In reality, it is quite clear that `origin` will be a nickname for a full URL like this: 
+Again, in reality, this just means that we don't have to type the URL in order to access that remote repo. 
+
+`origin`, or whatever name that you are using, can be considered the local alias for the remote repo. 
+
+`origin/main` - `origin/feature` they are **remote-tracking branches**. 
+Like `origin` - this is a reference to a remote branch - obviously `origin/main` on the `origin` remote. 
+Git updates it when you `fetch` from remote. 
+
+It's read only - as in, you will not commit directly to `origin/main`. 
+
+> Essentially, these **remote-tracking branches** are snapshots of what the branch looked like on the remote the last time you synced.
+
+
+When we do something like `git fetch origin`. 
+`origin/main` - latest state of `main` on remote will update accordingly.
+`origin/feature` - latest state of `feature` will be updated accordingly. 
+HOWEVER, the local branches, actual `main` or `feature` **won't change** unless there is a `merge`, `rebase`, or `pull`. 
+
+Imagine that we have: 
+
+```
+main           <-- local branch 
+origin/main    <-- snapshot of main on GitHub
+```
+
+When someone else pushes a commit GitHub. 
+
+You won't see it in `main` yet. 
+
+After we `git fetch`, `origin/main` updates. 
+
+Then, it's possible to `git merge origin/main`,  or `git rebase origin main` to update your local `main`. 
+
+Remember that when we `merge` we have to be on the **target** branch. 
+
+`git merge <source>` is the way that we should be doing it. 
+
+```
+git checkout main // put us onto main
+git merge feature // merge feature into main
+```
+
+That's a simple way of merging. 
+
+Imagine that we have an older commit. And a branch on that commit. 
+Then we want to catch-up that commit. Therefore, as per above, we `checkout` the branch where we want the older commit to catch up to. 
+`git checkout newPointer`
+`git checkout oldPointer`
+
+**The Three-Way Merge**: 
+```
+      A---B---C   (main)
+     /
+D---E             (merge base)
+     \
+      F---G       (feature)
+```
+
+There needs to be a common ancestor between the two, in this case, that would be E. 
+That is the last time the two branches were the same. 
+
+The `HEAD` commit. 
+
+Here, Git will look at the changes between E -> C and E -> G. 
+
+We will obviously need to make a new merge, we can't just catchup in this case. 
+
+The outcome will be that Git makes a new commit. `main` will point to that. 
+
+Remembering, that `feature` will continue pointing to that branch, that is on a separate line. 
+      A---B---C--------M        (main)
+     /                          /       
+D---E-------------F---G---H     (feature)
+
+
+The angle is pretty confusing, however, picture that E is the common ancestor. 
+`feature` will remain on G, then there is another commit - H - and you can see how that continues. 
+
+This is the most likely type of merging when there is. 
+
+`main` pointer will move forward to the new merge commit - from C to M. 
+
+`feature` pointer will not move until we create a new commit. 
+
+**When we push to `origin`**: 
+
+When we do `git push origin main` : we push to `origin main`. 
+
+So outlining the idea of creating a new branch, switching to it, committing to it, then adding that new branch to the remote. 
+
+`git checkout -b feature-xyz` 
+Creating a new `feature-xyz`
+And will switch to it as well. 
+
+In order to make a new branch without switching to it: 
+`git branch feature-xyz`
+This will create without switching to it. 
+
+Then we can switch to it. 
+`git checkout feature-xyz`
+
+Then stage: `git add .`
+Then `git commit -m "New Feature"`
+
+Push the new branch to the remote. 
+`git push -u origin feature-xyz`
+The `-u` will make sure that future `git push/ git pull` words without arguments. 
+
+`git branch -vv` 
+Shows what each local branch is tracking. 
+
+The `-u` is `--set-upstream` tells Git: 
+**Link my local `feature-xyz` to `origin/feature-xyz`**. 
+
+Then in the future we can just put `git push` or `git pull` in order to push t the same branch, without having to do `git push origin feature-xyz`. 
+
+`origin` is just a name for the remote repo (the whole repo hosted, not the branch). 
+Then when we have `origin/main` , that is the URL for the branch specifically. 
+
+An **upstream** branch is the remote branch that your local branch is connected to for: 
+`git push` (sending changes)
+`git pull` (getting updates)
+
+The **upstream** branch will "remember" which one, when we have set up an upstream branch. 
+
+When we say `git push -u origin feature-xyz`. 
+
+Here's an odd thing to think about, that should realistically not happen, but might actually be pretty helpful. 
+
+If we are on `main`, and we do `git push -u origin feature-xyz`. 
+This will not set up a `main` to `origin/feature-xyz` upstream. It will, however, set up an upstream for `feature-xyz`, if it does exist locally. 
+
+We should, in theory and in practice, we pushing branches to remote branches that have similar names. 
+
