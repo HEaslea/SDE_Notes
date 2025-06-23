@@ -4,81 +4,39 @@
     "type": "split",
     "children": [
       {
-        "id": "bd64c53bb2f23afd",
+        "id": "9a582286f05d6e71",
         "type": "tabs",
         "children": [
           {
-            "id": "b07b98adb2fcbe08",
+            "id": "a88e1c8e7c469863",
             "type": "leaf",
             "state": {
               "type": "markdown",
               "state": {
-                "file": "ChemRevision/Topic 1.md",
+                "file": "PythonCookBook/References and Copies.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "Topic 1"
+              "title": "References and Copies"
             }
           },
           {
-            "id": "83325137d99b27a4",
+            "id": "bd06ac4e37b288c7",
             "type": "leaf",
             "state": {
               "type": "markdown",
               "state": {
-                "file": "ChemRevision/Topic 3 Redox 1.md",
+                "file": "PythonCookBook/Immutable and Mutable Objects.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "Topic 3 Redox 1"
-            }
-          },
-          {
-            "id": "daa6dd4b94b96800",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "ChemRevision/Topic 4 Inorg Chem and Periodic Table.md",
-                "mode": "source",
-                "source": false
-              },
-              "icon": "lucide-file",
-              "title": "Topic 4 Inorg Chem and Periodic Table"
-            }
-          },
-          {
-            "id": "6043cb08bdb6b218",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "Topic 6 Transition Metals.md",
-                "mode": "source",
-                "source": false
-              },
-              "icon": "lucide-file",
-              "title": "Topic 6 Transition Metals"
-            }
-          },
-          {
-            "id": "2344b4fdd4bada09",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "Learning_Git/Creating and Pushing to a Remote Repo.md",
-                "mode": "source",
-                "source": false
-              },
-              "icon": "lucide-file",
-              "title": "Creating and Pushing to a Remote Repo"
+              "title": "Immutable and Mutable Objects"
             }
           }
         ],
-        "currentTab": 4
+        "currentTab": 1
       }
     ],
     "direction": "vertical"
@@ -233,12 +191,17 @@
       "mermaid-tools:Open Mermaid Toolbar": false
     }
   },
-  "active": "2344b4fdd4bada09",
+  "active": "bd06ac4e37b288c7",
   "lastOpenFiles": [
+    "PythonCookBook/Immutable and Mutable Objects.md",
+    "PythonCookBook/References and Copies.md",
+    "Topic 6 Transition Metals.md",
+    "PythonCookBook/Great Python Books.md",
+    "PythonCookBook/The ... Operator.md",
+    "Learning_Git/Creating and Pushing to a Remote Repo.md",
     "Learning_Git/Cloning and Fetching.md",
     "Learning_Git/Merging in Git.md",
     "Organic Reactions.md",
-    "Topic 6 Transition Metals.md",
     "PNGS/Pasted image 20250510183516.png",
     "PNGS/Pasted image 20250510183508.png",
     "PNGS/Pasted image 20250510182736.png",
@@ -258,7 +221,6 @@
     "q",
     "ChemRevision",
     "Chemistry",
-    "Learning_Git/Creating and Pushing to a Remote Repo.md",
     "Learning_Git/Hosting Services and Authentication.md",
     "UNDERSTAND_THE_MACHINE/Memory Organization and Access.md",
     "NETWORKING/Network Infrastructure.md",
@@ -273,10 +235,6 @@
     "DSA/Demonstrating Recursion.md",
     "N-Ary Tree.md",
     "DSA/LeetCode/Generating Permutations.md",
-    "Generate Combinations.md",
-    "PythonCookBook/Mutable Lists.md",
-    "Learning_Git/Branches in Git.md",
-    "DSA/LeetCode/Generating Parentheses.md",
     "gits",
     "DSA/LeetCode",
     "Learning_Git",
