@@ -13,12 +13,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "PythonCookBook/References and Copies.md",
+                "file": "Learning_Git/Creating and Pushing to a Remote Repo.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "References and Copies"
+              "title": "Creating and Pushing to a Remote Repo"
             }
           },
           {
@@ -34,9 +34,22 @@
               "icon": "lucide-file",
               "title": "Immutable and Mutable Objects"
             }
+          },
+          {
+            "id": "9ac89b3a3fcc5f0c",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "GENERAL/Const, Constexpr, Consteval Refresh.md",
+                "mode": "source",
+                "source": false
+              },
+              "icon": "lucide-file",
+              "title": "Const, Constexpr, Consteval Refresh"
+            }
           }
-        ],
-        "currentTab": 1
+        ]
       }
     ],
     "direction": "vertical"
@@ -191,10 +204,17 @@
       "mermaid-tools:Open Mermaid Toolbar": false
     }
   },
-  "active": "bd06ac4e37b288c7",
+  "active": "a88e1c8e7c469863",
   "lastOpenFiles": [
-    "PythonCookBook/Immutable and Mutable Objects.md",
+    "PNGS/Pasted image 20250624132427.png",
+    "PNGS/Pasted image 20250624124537.png",
+    "PNGS/Pasted image 20250624124027.png",
+    "PNGS/Pasted image 20250624122409.png",
+    "PNGS/Pasted image 20250624121424.png",
+    "PNGS/Pasted image 20250624121420.png",
     "PythonCookBook/References and Copies.md",
+    "PythonCookBook/Immutable and Mutable Objects.md",
+    "GENERAL/Const, Constexpr, Consteval Refresh.md",
     "Topic 6 Transition Metals.md",
     "PythonCookBook/Great Python Books.md",
     "PythonCookBook/The ... Operator.md",
@@ -207,11 +227,6 @@
     "PNGS/Pasted image 20250510182736.png",
     "PNGS/Pasted image 20250510182708.png",
     "PNGS/Pasted image 20250510175459.png",
-    "PNGS/Pasted image 20250510174556.png",
-    "PNGS/Pasted image 20250510174550.png",
-    "PNGS/Pasted image 20250509145324.png",
-    "PNGS/Pasted image 20250509145130.png",
-    "PNGS/Pasted image 20250509145116.png",
     "ChemRevision/Topic 4 Inorg Chem and Periodic Table.md",
     "ChemRevision/Topic 3 Redox 1.md",
     "ChemRevision/Topic 1.md",
@@ -233,8 +248,6 @@
     "GENERAL/Memory Alignment.md",
     "Learning_Git/Basics Of Git.md",
     "DSA/Demonstrating Recursion.md",
-    "N-Ary Tree.md",
-    "DSA/LeetCode/Generating Permutations.md",
     "gits",
     "DSA/LeetCode",
     "Learning_Git",
