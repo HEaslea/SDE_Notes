@@ -413,3 +413,61 @@ Git will contact the remote repo, downloads new commits and branches, and tags.
 **Updates the remote tracking branches** eg. `origin/main`. 
 Does not touch the working files or local branches. 
 
+#### Incorporating Changes from the Remote Repo
+The reason that `origin/main` is still pointing to an "older" commit, compared to the remote repo : local repos don't auto-update with new data from remote repos. 
+Think about the white board again, we need to explicitly take a look at it. 
+We need to explicitly update the local, just as we need to for updating the remote. 
+
+First we need to fetch the changes from the remote repo, then integrate those changes into the local branch in the local repo. 
+
+##### Fetching Changes from the Remote Repo
+`git fetch` in order to download data from a remote repo to a local repo. 
+Downloads all the necessary commits to update all the remote tracking branches, in the local repo to reflect the state of the remote branches in the remote repo. 
+
+When no remote repo shortname is provided as an argument, the `git fetch` command, by default will use `origin`. 
+
+```
+git fetch <shortname>
+
+git fetch # will default to origin
+```
+
+REMEMBER : `fetch` DOES NOT ALTER ANY DATA IN OUR LOCAL COMMITS. 
+It only fetches (downloads) data; it doesn't actually integrate the data into any local branches. 
+Nothing in your working directory will actually change when you `fetch`. 
+
+![[Pasted image 20250625150428.png]]
+
+Notice the difference between the two `git log --all`  ( remember that `--` is for written word and not short name ) : the first shows all our branches and remote tracking branches are pointing to the same commit : the `yellow` one. 
+
+After we have `fetch`'d - the `origin/main` remote tracking branch has been updated to pointing to the green commit that we have in the remote repo, that we added from the other local repo `friend-rainbow`. 
+
+Now we need to incorporate. 
+
+##### Integrating Changes into the Local Branch
+Now our remote tracking branches - we are ready to update the local branch. 
+
+There are two ways to integrate : **merging** and **rebasing**. 
+
+Remember that there are two types of merging: fast-forward (linear) merging, and three-way merges (awkwardly the most common type of merging, given a feature being added). 
+
+To distinguish between this chapter and the earlier one : the earlier chapter was only for local branches, however, this chapter is taking the local remote-tracking branch and merging it with a local branch. 
+
+Remember that we merge into the branch that we are currently on, so we have to give the argument of the source, provided that we are on the branch that is the target, or we have to move beforehand. 
+
+To merge the commits that were on the `main` branch in the remote repo, into the local `main` branch, you will just use the `git merge` command, given that we are on the `main` branch. 
+
+`git switch main` -> switching onto `main`. 
+
+`git merge origin/main` -> we give the source that we are merging into the branch that we are currently on. 
+
+![[Pasted image 20250625152201.png]]![[Pasted image 20250625152216.png]]
+
+In order to delete remote-tracking branches - to delete a remote branch we pushed a delete command to it `git push <shortname> -d <branch_name>` - > here we use the `git fetch -p` (p for "prune"). 
+
+This will delete any remote tracking branches that correspond to remote branches that have been deleted in the remote repo. 
+
+![[Pasted image 20250625153019.png]]
+
+The next chapter is looking at **Three-Way Merges** in more detail. 
+
