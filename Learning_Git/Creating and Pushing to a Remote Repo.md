@@ -308,3 +308,108 @@ This will not set up a `main` to `origin/feature-xyz` upstream. It will, however
 
 We should, in theory and in practice, we pushing branches to remote branches that have similar names. 
 
+### Cloning a Remote Repository
+**Cloning/Clone** referring to the process of copying a remote repo, onto a computer to create a local repo and the command we use to do this - `git clone`. 
+
+`git clone <URL> <directory_name>`. 
+
+This will : 
+- create a project dir inside the current dir. 
+- Create and init the local repo. 
+- Download all the data from the remote repo
+- Add a connection to the remote repo that was cloned, by default it will have the shortname `origin` in the new local repo. 
+
+`git remote -v` 
+Will visualize and show the URLs for the remote repo linked to your local Git repo. 
+Might show something like this: 
+![[Pasted image 20250624121424.png]]
+
+Again - `origin` - which is automated after cloning repo, just a nickname/alias for the remote URL. 
+
+Instead of writing: `git fetch <URL>` 
+We just write `git fetch origin`. 
+
+The idea being here that when we use either `fetch` or `push` with `origin` we will be using it with that URL. 
+
+Assigning any name to a remote - 
+`git remove add <new-name> <URL>`
+You can do this even fi you are using the same remote repo. 
+
+![[Pasted image 20250624122409.png]]
+
+Something to note here : there is no local `feature` branch here, in the new clone. 
+
+Here's the full cheese: 
+Git uses `pointers` (refs/branches) to track commits. 
+When someone pushes to remote : they are moving branch pointers on the remote repo, to point to the new commits and changes. 
+The commit history on the remote grows (usually linearly) and the branch reference updates to point to the latest commit. 
+When someone pulls, fetches or clones: They are copying remote's commits and pointers into their local repo. 
+Git creates or updates `origin/main` for isntance. 
+Local branches don't move unless you tell them, that's why we might get merge issues and differences. 
+
+When you clone a repo, the `git clone` command will create remote-tracking branches for all the branches currently present in the remote repo that is being clones, but the only local branch that is created is the branch that `origin/HEAD` points to. 
+
+In order to work on it, we have to switch onto it, as a local, to create the local `feature` branch. 
+
+`git switch feature` -  will also set up to track. 
+
+![[Pasted image 20250624124027.png]]
+
+Whenever you see the `remotes/origin/branch` whatever `branch` will be - that is a remote-tracking branch. They are read only pointers, in the local repo, that track the state of the branches on the remote, the last time you fetched. 
+
+`remotes/origin/main` - The last known position of the main branch on the `origin` remote. 
+
+![[Pasted image 20250624124537.png]]
+
+These remote tracking branches -  **do not move on their own** - your must `fetch` to update them: 
+They somewhat say - this is what I last saw, I haven't checked again yet. 
+They are literally just the local record of what the remote looked like the last time you checked. 
+
+So our local branch - is what we have on that branch - the remote tracking - is a snapshot of what the remote repo looks like - which could theoretically be someone else's branch that they just pushed. 
+
+This can see whether we are **ahead** or **behind** the remote. 
+
+`git fetch` - Updates the remote tracking branch - no change to the local branch
+`git pull` - Updates the remote tracking branch - AND merges into local
+`git diff origin/main` - compares the latest remote state
+
+#### Deleting Branches
+To unclutter the project and keep everything organized. 
+Make sure, that before deleting, that there is a merging, of you're absolutely sure that you don't need the work that was in that branch. 
+
+Remember that you aren't deleting the commits as such, you are deleting the branches. 
+
+To fully delete a branch - delete the remote branch, the remote tracking branch, and the local branch. 
+
+To delete the remote branch and a remote tracking branch, you use `git push <shortname> -d <branch_name>`. 
+Essentially, we are uploading a delete to the remote repo. Or you could just do it on GitHub itself. 
+
+If we did: `git push origin -d feature` we are deleting the feature branch on the remote repo. 
+
+However, we will still have that branch in our local repo: therefore we need to `git branch -d feature`. 
+
+This however, does mean that other locals there will still be that `feature` branch and the remote tracking branch for feature. 
+
+#### Branches in Teams and Conflict Avoidance
+When merge two commits, that have changes to the same place, there will be some conflicts. This is a sign that we have created branches and worked on places that we really shouldn't have : there should be rules to eliminate conflicts as we go. 
+We do this by having clear rules of when we make a branch, when we commit etc., that will be cleared out when you join a team. 
+
+Consider, where added a new commit to the `friend-rainbow`. 
+
+![[Pasted image 20250624132427.png]]
+
+Obviously the remote has had nothing to update it yet. 
+
+##### Pushing to the Remote Repository
+If we have an upstream branch - meaning that we don't have to say which branch we are uploading to - then we can just use `git push`. 
+
+If we did not have an upstream branch - then we have to specify which remote branch to push to when you enter the `git push` command. 
+
+In order to see any upstream branches - `git branch -vv` (very verbose). 
+
+`git fetch` updates the views of the remote repo - doesn't change your local branches, just updates. 
+Imagine that you are looking at a shared whiteboard - you haven't looked at it in a while - therefore we use `git fetch` in order to have a peek at it, there is no copying of it into our own works yet, however, we see the updates and we are aware of those updates. 
+Git will contact the remote repo, downloads new commits and branches, and tags. 
+**Updates the remote tracking branches** eg. `origin/main`. 
+Does not touch the working files or local branches. 
+

@@ -22,6 +22,34 @@
             }
           },
           {
+            "id": "0bb827fc864fe05f",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "GENERLA/Decltype Auto.md",
+                "mode": "source",
+                "source": false
+              },
+              "icon": "lucide-file",
+              "title": "Decltype Auto"
+            }
+          },
+          {
+            "id": "65c0d2786f310d59",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "PythonCookBook/Python References.md",
+                "mode": "source",
+                "source": false
+              },
+              "icon": "lucide-file",
+              "title": "Python References"
+            }
+          },
+          {
             "id": "bd06ac4e37b288c7",
             "type": "leaf",
             "state": {
@@ -206,6 +234,10 @@
   },
   "active": "a88e1c8e7c469863",
   "lastOpenFiles": [
+    "PythonCookBook/Python References.md",
+    "GENERLA/Decltype Auto.md",
+    "GENERLA",
+    "Learning_Git/Creating and Pushing to a Remote Repo.md",
     "PNGS/Pasted image 20250624132427.png",
     "PNGS/Pasted image 20250624124537.png",
     "PNGS/Pasted image 20250624124027.png",
@@ -218,7 +250,6 @@
     "Topic 6 Transition Metals.md",
     "PythonCookBook/Great Python Books.md",
     "PythonCookBook/The ... Operator.md",
-    "Learning_Git/Creating and Pushing to a Remote Repo.md",
     "Learning_Git/Cloning and Fetching.md",
     "Learning_Git/Merging in Git.md",
     "Organic Reactions.md",
@@ -226,7 +257,6 @@
     "PNGS/Pasted image 20250510183508.png",
     "PNGS/Pasted image 20250510182736.png",
     "PNGS/Pasted image 20250510182708.png",
-    "PNGS/Pasted image 20250510175459.png",
     "ChemRevision/Topic 4 Inorg Chem and Periodic Table.md",
     "ChemRevision/Topic 3 Redox 1.md",
     "ChemRevision/Topic 1.md",
@@ -247,11 +277,9 @@
     "PythonCookBook/Comprehension in Python.md",
     "GENERAL/Memory Alignment.md",
     "Learning_Git/Basics Of Git.md",
-    "DSA/Demonstrating Recursion.md",
     "gits",
     "DSA/LeetCode",
     "Learning_Git",
-    "Vim",
     "Untitled.canvas"
   ]
 }
