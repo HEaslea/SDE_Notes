@@ -6,9 +6,6 @@ squared = map(lambda x : x**2, nums)
 print(list(squared)) # 1 4 9
 ```
 
-
-
-
 ### `zip()`
 pairing elements from multiple iterables by **index**
 ```
@@ -77,11 +74,10 @@ Therefore `lambda *a : a` will return a tuple -> `def some_func(*a): a` will pac
 
 Given this: 
 ```
-tupler = lambda *a : a
+tupler = lambda *a : a # now it's clear that this is just packing in and returning the list
 
 print(type(tupler(1, 2, 3))) # will print 
 ```
-
 
 Knowing all of this, given args and kwargs: 
 **`args`**: packing of positional arguments into `tuple` 

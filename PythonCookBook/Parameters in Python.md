@@ -68,7 +68,7 @@ greet("Alice", 25) # Error, must use keywords
 `*` Anything **AFTER** must be keyword. 
 `/` Anything **BEFORE** must be keyword. 
 
-
+Anything **BETWEEN** them can be either, as in below, `pos_or_kw`. 
 ### Combining Them All
 ```
 def complex_function(pos1, pos2, /, pos_or_kew, *, kw_only1, kw_only2="default"): 
@@ -89,8 +89,10 @@ dicta = {
 	"i":10, 
 	"j":20
 }
-test_func(dicta) # This WON'T WORK
+test_func(dicta) # This WON'T WORK, can't pack an already packed dict
 test_func(**dicta) # unpacking to repack would work
+# the second form of this seems like an edge case, however, the idea stands
+# you will have to punpack a dictionary in order to 
 ```
 
 Which is equivalent to: 
