@@ -27,12 +27,26 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "DSU Decorate Sort Undecorate.md",
+                "file": "PythonCookBook/Comprehension in Python.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "DSU Decorate Sort Undecorate"
+              "title": "Comprehension in Python"
+            }
+          },
+          {
+            "id": "dc8c6215aa1721f0",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "Generator Expressions and Generator Functions.md",
+                "mode": "source",
+                "source": false
+              },
+              "icon": "lucide-file",
+              "title": "Generator Expressions and Generator Functions"
             }
           },
           {
@@ -41,16 +55,30 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "PythonCookBook/Parameters in Python.md",
+                "file": "UNDERSTAND_THE_MACHINE/Memory Organization and Access.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "Parameters in Python"
+              "title": "Memory Organization and Access"
+            }
+          },
+          {
+            "id": "9546755e25270500",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "Composite Data Types and Memory Objects.md",
+                "mode": "source",
+                "source": false
+              },
+              "icon": "lucide-file",
+              "title": "Composite Data Types and Memory Objects"
             }
           }
         ],
-        "currentTab": 1
+        "currentTab": 2
       }
     ],
     "direction": "vertical"
@@ -205,11 +233,24 @@
       "command-palette:Open command palette": false
     }
   },
-  "active": "f65c400f8371f186",
+  "active": "dc8c6215aa1721f0",
   "lastOpenFiles": [
-    "PythonCookBook/map(), zip(), filter().md",
-    "DSU Decorate Sort Undecorate.md",
+    "PNGS/Pasted image 20250628122315.png",
+    "PythonCookBook/Comprehension in Python.md",
+    "Generator Expressions and Generator Functions.md",
+    "PythonCookBook/DSU Decorate Sort Undecorate.md",
+    "Nested Comprehensions.md",
+    "Composite Data Types and Memory Objects.md",
+    "PNGS/Pasted image 20250627160654.png",
+    "PNGS/Pasted image 20250627122028.png",
+    "PNGS/Pasted image 20250627122014.png",
+    "PNGS/Pasted image 20250627120952.png",
+    "PNGS/Pasted image 20250627120951.png",
+    "UNDERSTAND_THE_MACHINE/Memory Organization and Access.md",
+    "UNDERSTAND_THE_MACHINE/Numeric Representation.md",
     "PythonCookBook/Parameters in Python.md",
+    "Untitled 2.md",
+    "PythonCookBook/map(), zip(), filter().md",
     "Python Arguments Refresher.md",
     "PythonCookBook/Python Iterables.md",
     "PythonCookBook/Python References.md",
@@ -222,28 +263,15 @@
     "PNGS/Pasted image 20250625152216.png",
     "PNGS/Pasted image 20250625152201.png",
     "PNGS/Pasted image 20250625150428.png",
-    "GENERLA/Decltype Auto.md",
+    "GENERAL/Decltype Auto.md",
     "GENERLA",
     "PNGS/Pasted image 20250624132427.png",
-    "PNGS/Pasted image 20250624124537.png",
-    "PNGS/Pasted image 20250624124027.png",
-    "PNGS/Pasted image 20250624122409.png",
-    "PNGS/Pasted image 20250624121424.png",
-    "PNGS/Pasted image 20250624121420.png",
     "PythonCookBook/References and Copies.md",
     "PythonCookBook/Immutable and Mutable Objects.md",
     "GENERAL/Const, Constexpr, Consteval Refresh.md",
     "Topic 6 Transition Metals.md",
     "PythonCookBook/Great Python Books.md",
     "PythonCookBook/The ... Operator.md",
-    "Learning_Git/Cloning and Fetching.md",
-    "Learning_Git/Merging in Git.md",
-    "Organic Reactions.md",
-    "ChemRevision/Topic 4 Inorg Chem and Periodic Table.md",
-    "ChemRevision/Topic 3 Redox 1.md",
-    "ChemRevision/Topic 1.md",
-    "DSA/LeetCode/Converting Sorted Linked List to BST.md",
-    "NETWORKING/NETWORK_INFRASTRUCTURE/Internets Intranets and Extranet.md",
     "q",
     "ChemRevision",
     "Chemistry",
