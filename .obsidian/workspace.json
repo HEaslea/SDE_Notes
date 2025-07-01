@@ -78,7 +78,7 @@
             }
           }
         ],
-        "currentTab": 2
+        "currentTab": 3
       }
     ],
     "direction": "vertical"
@@ -233,11 +233,15 @@
       "command-palette:Open command palette": false
     }
   },
-  "active": "dc8c6215aa1721f0",
+  "active": "a26f1005564f314d",
   "lastOpenFiles": [
+    "PNGS/Pasted image 20250629130519.png",
+    "Untitled 3.md",
+    "Untitled.md",
+    "UNDERSTAND_THE_MACHINE/Memory Organization and Access.md",
+    "Generator Expressions and Generator Functions.md",
     "PNGS/Pasted image 20250628122315.png",
     "PythonCookBook/Comprehension in Python.md",
-    "Generator Expressions and Generator Functions.md",
     "PythonCookBook/DSU Decorate Sort Undecorate.md",
     "Nested Comprehensions.md",
     "Composite Data Types and Memory Objects.md",
@@ -246,7 +250,6 @@
     "PNGS/Pasted image 20250627122014.png",
     "PNGS/Pasted image 20250627120952.png",
     "PNGS/Pasted image 20250627120951.png",
-    "UNDERSTAND_THE_MACHINE/Memory Organization and Access.md",
     "UNDERSTAND_THE_MACHINE/Numeric Representation.md",
     "PythonCookBook/Parameters in Python.md",
     "Untitled 2.md",
@@ -254,7 +257,6 @@
     "Python Arguments Refresher.md",
     "PythonCookBook/Python Iterables.md",
     "PythonCookBook/Python References.md",
-    "Untitled.md",
     "Bottom Level Const Propagation.md",
     "Untitled 1.md",
     "UNDERSTAND_THE_MACHINE/Composite Data Types and Memory Objects.md",
@@ -265,13 +267,11 @@
     "PNGS/Pasted image 20250625150428.png",
     "GENERAL/Decltype Auto.md",
     "GENERLA",
-    "PNGS/Pasted image 20250624132427.png",
     "PythonCookBook/References and Copies.md",
     "PythonCookBook/Immutable and Mutable Objects.md",
     "GENERAL/Const, Constexpr, Consteval Refresh.md",
     "Topic 6 Transition Metals.md",
     "PythonCookBook/Great Python Books.md",
-    "PythonCookBook/The ... Operator.md",
     "q",
     "ChemRevision",
     "Chemistry",

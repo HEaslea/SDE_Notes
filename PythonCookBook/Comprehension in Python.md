@@ -11,11 +11,13 @@
 ###### Double Comprehension
 ```
 matrix = [[1, 2, 3], [4, 5, 6]]
-flattened = [num for row in matrix for num in row]
+flattened = [num for row in matrix for num in row] # confusing at first
 #[1, 2, 3, 4, 5, 6]
 ```
 The best way to think about these is to expand them in your head. 
 The first bit is the outside bit.
+
+Also,  `[<what we are taking in the list> for something in something for <thing> in thing]`
 
 **THE FIRST BIT WILL BE NESTED INSIDE**
 ```
@@ -136,5 +138,39 @@ tDict =
 }
 ```
 
+### Nested Dict Comprehension
+This is blowing my mind a little bit: 
 
+We might have this idea : which is evident in the book as well. 
+
+```
+students = ['Alice', 'Bob', 'Charlie']
+subjects = ['Math', 'English', 'History']
+
+grades = {student: {subject: None for subject in subjects} for student in students}
+
+# so a nested dict that looks something like this
+```
+```
+{
+  'Alice':   {'Math': None, 'English': None, 'History': None},
+  'Bob':     {'Math': None, 'English': None, 'History': None},
+  'Charlie': {'Math': None, 'English': None, 'History': None}
+}
+```
+
+We can see the `None` in there. 
+Then this is very easy to update: 
+`grades['Alice']['Math'] = 95`
+So `<name of outer dict>[<key of outer dict>][<key of inner dict>]`
+
+The expanded version: 
+```
+grades = {}
+
+for name in students: 
+	grades[name] = {}
+	for subject in subjects: 
+		grades[name][subject] = None
+```
 
