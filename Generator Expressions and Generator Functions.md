@@ -371,3 +371,44 @@ s3 = sum(n**2 for n in range(10**6))
 They all produce the same results. 
 `s2` and `s3` are equivalent, they are both generator expressions passed to the `sum()` function. `s2` has some redundant `()`. 
 
+#### Readability and Performance
+We can use any combination of `map()` `zip()` or `filter()`, or choose to go with comprehension or a generator. 
+
+Remember that generators will save a lot of space. 
+
+If we need to go over elements a few times, then generators are not the one, as we can only go over them once, before they are exhausted. 
+
+`for` loops are regarded as consistently slower. 
+The book is maintaining that `map()` and comprehensions run at C language speed within the interpreter, while a Python `for` loop is run as Python bytecode, within the Python VM, often much slower. 
+
+### The Zen of Python
+There is a charm about python. 
+Go into any python environment and do `import this` and then run, it will print out the Zen of Python, the ideals that. 
+```
+The Zen of Python, by Tim Peters
+
+Beautiful is better than ugly.
+Explicit is better than implicit.
+Simple is better than complex.
+Complex is better than complicated.
+Flat is better than nested.
+Sparse is better than dense.
+Readability counts.
+Special cases aren't special enough to break the rules.
+Although practicality beats purity.
+Errors should never pass silently.
+Unless explicitly silenced.
+In the face of ambiguity, refuse the temptation to guess.
+There should be one-- and preferably only one --obvious way to do it.
+Although that way may not be obvious at first unless you're Dutch.
+Now is better than never.
+Although never is often better than *right* now.
+If the implementation is hard to explain, it's a bad idea.
+If the implementation is easy to explain, it may be a good idea.
+Namespaces are one honking great idea -- let's do more of those!
+```
+
+Comprehensions and Generators are more implicit and explicit, can be quite difficult to read, and understand at a glance. 
+
+Sometimes you have to break them apart inside out in order to understand fully. 
+
