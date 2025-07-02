@@ -628,3 +628,53 @@ mov( dwordArray[ebx+ecx*4], eax ); // Effective Address is combination of offset
 ```
 
 
+Remembering that arrays in C++ are static, they cannot grow or shrink. 
+
+In HLA : 
+`array_name : data_type [ number_of_elements ];`
+
+```
+static
+	CharArray : char[128]; // char array with elements 0 .. 127
+
+	IntArray : integer[8]; // with elements 0..7
+
+	ByteArray : byte[10];  // Byte array with elements 0..9
+	
+	PtrArray : dword[4];   // Double Word array with elements 0..3
+```
+
+We could also just do something like this and initialize the elements manually: 
+`RealArray : real32[8] := [0.0, 1.0, 2.0, 3.0 .. 7.0];`
+
+Of course these numbers can be anything. 
+
+## Array Representation in Memory
+Using indexing to access - therefore, we have an offset of `sizeof(<type in array>)` in order to access an element. 
+
+Many languages also add a few bytes of padding at the end of the array so that the total length of the array is an even multiple of a nice value like 4 or 8 (on a 32 or 64 bit machine, appending bytes to the array to extend its length so that it's the length of some multiple of the machine's word size). 
+Some compilers add this padding, some do not. 
+
+![[Pasted image 20250629130519.png]]
+
+Remembering that a **word** : is the natural size that a CPU handles in one operation. 
+
+#### Accessing Elements of an Array
+For 1D arrays this is pretty simple. 
+
+`Element_address = Base_address + index * Element_Size`
+
+Given: 
+`var SixteenInts : array[0..15] of integer;`
+Given an `int` has a byte size of 4, therefore, the offset for each element is just going to be the 4 bytes. 
+Remembering that in C++ - the array will do this automatically. 
+`Element_Address = AddressOf( SixteenInts ) + index * 4`
+
+In ASM - we have to do this manually rather than letting the compiler do it for us. 
+
+```
+mov( index, ebx ); 
+mov( SixteenInts[ ebx * 4 ], eax);
+```
+
+## Multidimensional Arrays

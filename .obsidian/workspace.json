@@ -13,12 +13,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "PythonCookBook/map(), zip(), filter().md",
+                "file": "PythonCookBook/Comprehension in Python.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "map(), zip(), filter()"
+              "title": "Comprehension in Python"
             }
           },
           {
@@ -55,12 +55,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "UNDERSTAND_THE_MACHINE/Memory Organization and Access.md",
+                "file": "GENERAL/Types of Expression Rvalues Lvalues.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "Memory Organization and Access"
+              "title": "Types of Expression Rvalues Lvalues"
             }
           },
           {
@@ -69,16 +69,30 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "Composite Data Types and Memory Objects.md",
+                "file": "Generator Expressions and Generator Functions.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "Composite Data Types and Memory Objects"
+              "title": "Generator Expressions and Generator Functions"
+            }
+          },
+          {
+            "id": "883b9a3076721240",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "Generator Expressions and Generator Functions.md",
+                "mode": "source",
+                "source": false
+              },
+              "icon": "lucide-file",
+              "title": "Generator Expressions and Generator Functions"
             }
           }
         ],
-        "currentTab": 3
+        "currentTab": 5
       }
     ],
     "direction": "vertical"
@@ -233,18 +247,21 @@
       "command-palette:Open command palette": false
     }
   },
-  "active": "a26f1005564f314d",
+  "active": "883b9a3076721240",
   "lastOpenFiles": [
+    "Python Print.md",
+    "Generator Expressions and Generator Functions.md",
+    "PythonCookBook/Comprehension in Python.md",
+    "Composite Data Types and Memory Objects.md",
+    "PythonCookBook/map(), zip(), filter().md",
+    "GENERAL/Types of Expression Rvalues Lvalues.md",
+    "GENERAL/Lvalues and Rvalues.md",
+    "UNDERSTAND_THE_MACHINE/Memory Organization and Access.md",
     "PNGS/Pasted image 20250629130519.png",
     "Untitled 3.md",
-    "Untitled.md",
-    "UNDERSTAND_THE_MACHINE/Memory Organization and Access.md",
-    "Generator Expressions and Generator Functions.md",
     "PNGS/Pasted image 20250628122315.png",
-    "PythonCookBook/Comprehension in Python.md",
     "PythonCookBook/DSU Decorate Sort Undecorate.md",
     "Nested Comprehensions.md",
-    "Composite Data Types and Memory Objects.md",
     "PNGS/Pasted image 20250627160654.png",
     "PNGS/Pasted image 20250627122028.png",
     "PNGS/Pasted image 20250627122014.png",
@@ -253,7 +270,6 @@
     "UNDERSTAND_THE_MACHINE/Numeric Representation.md",
     "PythonCookBook/Parameters in Python.md",
     "Untitled 2.md",
-    "PythonCookBook/map(), zip(), filter().md",
     "Python Arguments Refresher.md",
     "PythonCookBook/Python Iterables.md",
     "PythonCookBook/Python References.md",
@@ -264,14 +280,12 @@
     "PNGS/Pasted image 20250625153019.png",
     "PNGS/Pasted image 20250625152216.png",
     "PNGS/Pasted image 20250625152201.png",
-    "PNGS/Pasted image 20250625150428.png",
     "GENERAL/Decltype Auto.md",
     "GENERLA",
     "PythonCookBook/References and Copies.md",
     "PythonCookBook/Immutable and Mutable Objects.md",
     "GENERAL/Const, Constexpr, Consteval Refresh.md",
     "Topic 6 Transition Metals.md",
-    "PythonCookBook/Great Python Books.md",
     "q",
     "ChemRevision",
     "Chemistry",
