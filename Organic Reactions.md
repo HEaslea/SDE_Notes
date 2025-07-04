@@ -61,7 +61,13 @@ This summary lists key reactions involving advanced organic functional groups as
     
     - **Conditions:** Hot ethanolic KOH; E2 mechanism
         
-
+5. **Rate of Hydrolysis**
+	Ag+ + X- ->AgX 
+	Dependent on the bond strength of the halogen (Iodo being the weakest, therfore the fastest to react). 
+	
+	We need HNO3 to get rid of impurities before hand, then we need AgNO3, this is non-polar 
+    - **Conditions:** Remember that Haloalkanes all have a polar bond and therefore react in water - however, don't want hydrolysis like that here - otherwise we don't get the Test. There
+	
 ---
 
 ### 3. Alkenes

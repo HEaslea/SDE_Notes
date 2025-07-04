@@ -76,3 +76,45 @@ Notice here the no local `feature` branch on the `git branch --all`
 
 Then when we do `git switch feawture` 
 branch `feature` set up to track `origin/feature`
+
+![[Pasted image 20250704214704.png]]
+
+### Git Collaboration and Branches
+Teams will have varying rules about how to manage branches. 
+Here are some conventions: 
+- Which branches are allowed to be merged into one another. 
+- When branches need to be created. 
+- What the review process for work on a branch should be. 
+
+An idea is that someone should be working on their own topic branches and avoid working on other people's topic branches. This will avoid merge conflicts. 
+
+### Making a Commit in the Local Repository
+![[Pasted image 20250704223718.png]]
+
+![[Pasted image 20250704223747.png]]
+
+Notice that `origin/main` is pointing to yellow, is because it is a remote tracking branch to the remote repo. It's showing you the state of the remote repo, which is pointing to yellow. 
+
+##### Pushing to the Remote Repo
+If there is an upstream branch, we just `git push` with no further arguments. 
+Remember that we can use `git branch -vv` for `very verbose` in order to see every single branch. 
+
+Say that we have `git branch -vv` 
+
+```
+* main      abc1234 [origin/main] Some commit message
+  feature   def5678 [origin/feature] Another message
+  temp      ghi9101 Some local commit
+```
+
+And this the output: 
+Here `main` has an upstream of `[origin/main]`
+`feature` has an upstream of `[origin/feature]`
+`temp` does not have an upstream. This means that we have to give arguments. 
+
+If our local branch is ahead, as it is here, then we might see something like this: (the book will also make it clear too). 
+`* main      abc1234 [origin/main: ahead 1] Committed something`
+
+![[Pasted image 20250704225312.png]]
+Here we see that our local repo is one ahead of the remote repo. 
+

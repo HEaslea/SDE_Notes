@@ -412,3 +412,87 @@ Comprehensions and Generators are more implicit and explicit, can be quite diffi
 
 Sometimes you have to break them apart inside out in order to understand fully. 
 
+### Name Localization
+Using names in comprehensions, the variable names in there, are local to that, they are not overriding the global variables. 
+
+![[Pasted image 20250702025303.png]]
+
+The weird thing is that after a `for` loop, if the variable was not defined before that, then it will be defined after it. 
+
+```
+s = 0 
+for A in range(5): 
+	s += A
+print(A)
+print(globals())
+```
+![[Pasted image 20250702025417.png]]
+
+## Generation Behaviour in Built-ins
+In Python 2, functions such as `map()`, `zip()` and `filter()`, returned `list`s  and not the iterable objects that they return now. 
+
+The idea being that if we need a list here, we just use `list(<object>)`. 
+
+As we have: 
+```
+r = range(5)
+print(type(r)) # <class 'range'>
+print(r) # range(0, 5) I believe this is the __str__()
+print(list(r)) # [0, 1, 2, 3, 4], note the non-inclusive
+```
+
+Iterable returns are quite common, even with `open()`. 
+
+Also true of `enumerate()`, dictionary `keys()`, `values()`, and `items()` methods. 
+
+That's why you can do, `for k, c in items(<dictionary>):`. 
+
+Python wants to reduce the memory footprint by avoiding wasting space wherever possible, as these functions and methods are used all the time, therefore, let's save a bunch of time by doing it this way. 
+
+## One Last Example
+From the book exclusively. 
+
+Fibonacci : a great way of testing recursion, memoization techniques, and, in this case, whether they know about **generators** or not. 
+Very rudimentary version of this.
+```
+def fibonacci(N): 
+	"""Return all fibonacci numbers up to N"""
+	result = [0]
+	next_n = 1
+	while next_n <= N: 
+		result.append(next_n)
+		next_n = sum(result[-2:])
+	return result
+```
+Pretty basic, pretty easy to understand. 
+
+Then we might say, that we just want to iterate over those numbers: 
+```
+def fibonacci(N): 
+	"""Return all fibonacci numbers up to N"""
+	yield 0 # that's the first
+	if N == 0
+		return # finish off here if N = 0
+	a = 0
+	b = 1
+	while b <= N: 
+		yield b
+		a, b = b, a + b
+```
+
+Just quickly, the line `a, b = b, a + b`, **Python will always evaluate the right side, before the left side**. This means that the values are taken as before any assignments, therefore, the expression `a + b` will be evaluated with the values going into the expression, rather than than `a = b` which is first. 
+**Right side evaluates first**. 
+
+Due to `yield` this is now a generator function. 
+
+In order to exhaust it, we have to use `list(fibonacci(n))`. 
+
+Apparently we can make it even more elegant: 
+```
+def fibonacci(N): 
+	a, b = 0, 1
+	whie a <= N: 
+		yield a
+		a, b = b, a + b
+```
+
