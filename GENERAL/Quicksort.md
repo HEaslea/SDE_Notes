@@ -81,3 +81,5 @@ This is after the first partition I believe.
 We take the pivot to be the middle, we shuffle everything around so that the numbers that are less than are on the left, and greater than are on the right. Then we have to sort those subarrays as well. The same thing happens. 
 
 We go straight to partition, where we have the whole array on the first pass
+
+[[Introsort]]

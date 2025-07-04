@@ -91,7 +91,7 @@ ForwardIt max_element(ForwardIt first, ForwardIt last)
 
 ### Inserting From Book: 
 ```
-void max_heap_insert(heap_element heapp[], int *num_heap, int receipt_index, int cost)
+void max_heap_insert(heap_element heap[], int *num_heap, int receipt_index, int cost)
 { 
 	int i; 
 	heap_element temp;
@@ -261,6 +261,7 @@ Each node will represent a segment, a range of the array.
 The root node represents the entire array. 
 Internal nodes represents a subrange of the array. 
 The leaves will represent a single element in the array. 
+This one shows the sum of these.
 ![[Pasted image 20241206122003.png]]
 
 - Good for finding range sum queries

@@ -4,95 +4,24 @@
     "type": "split",
     "children": [
       {
-        "id": "9a582286f05d6e71",
+        "id": "d2bfe0a71644dd8f",
         "type": "tabs",
         "children": [
           {
-            "id": "0f2c951805a13eeb",
+            "id": "11d646d3a1d2caff",
             "type": "leaf",
             "state": {
               "type": "markdown",
               "state": {
-                "file": "PythonCookBook/Comprehension in Python.md",
+                "file": "Learning_Git/Cloning and Fetching.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "Comprehension in Python"
-            }
-          },
-          {
-            "id": "f65c400f8371f186",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "PythonCookBook/Comprehension in Python.md",
-                "mode": "source",
-                "source": false
-              },
-              "icon": "lucide-file",
-              "title": "Comprehension in Python"
-            }
-          },
-          {
-            "id": "dc8c6215aa1721f0",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "Generator Expressions and Generator Functions.md",
-                "mode": "source",
-                "source": false
-              },
-              "icon": "lucide-file",
-              "title": "Generator Expressions and Generator Functions"
-            }
-          },
-          {
-            "id": "a26f1005564f314d",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "GENERAL/Types of Expression Rvalues Lvalues.md",
-                "mode": "source",
-                "source": false
-              },
-              "icon": "lucide-file",
-              "title": "Types of Expression Rvalues Lvalues"
-            }
-          },
-          {
-            "id": "9546755e25270500",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "Generator Expressions and Generator Functions.md",
-                "mode": "source",
-                "source": false
-              },
-              "icon": "lucide-file",
-              "title": "Generator Expressions and Generator Functions"
-            }
-          },
-          {
-            "id": "883b9a3076721240",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "Generator Expressions and Generator Functions.md",
-                "mode": "source",
-                "source": false
-              },
-              "icon": "lucide-file",
-              "title": "Generator Expressions and Generator Functions"
+              "title": "Cloning and Fetching"
             }
           }
-        ],
-        "currentTab": 5
+        ]
       }
     ],
     "direction": "vertical"
@@ -247,14 +176,35 @@
       "command-palette:Open command palette": false
     }
   },
-  "active": "883b9a3076721240",
+  "active": "11d646d3a1d2caff",
   "lastOpenFiles": [
-    "Python Print.md",
+    "PNGS/Pasted image 20250704225312.png",
+    "PNGS/Pasted image 20250704223747.png",
+    "PNGS/Pasted image 20250704223718.png",
+    "PNGS/Pasted image 20250704214704.png",
+    "Learning_Git/Creating and Pushing to a Remote Repo.md",
+    "PythonCookBook/OOP, Decorators, and Iterators.md",
+    "GENERAL/Similarities of Lambda and Classes.md",
+    "Untitled 1.md",
+    "GENERAL/Quicksort.md",
+    "GENERAL/Heaps and Segment Trees.md",
+    "DSA/MinHeap and MaxHeap.md",
+    "GENERAL/Heapsort.md",
+    "GENERAL/Introsort.md",
+    "PythonML/Vectors, Matrices, Arrays in NumPy.md",
+    "C++ Vector Algorithms.md",
+    "Custom Allocator.md",
+    "All To Do With Move Semantics.md",
     "Generator Expressions and Generator Functions.md",
+    "GENERAL/Types of Expression Rvalues Lvalues.md",
     "PythonCookBook/Comprehension in Python.md",
+    "PythonML",
+    "PNGS/Pasted image 20250702025417.png",
+    "PNGS/Pasted image 20250702025303.png",
+    "PNGS/Pasted image 20250702025301.png",
+    "Python Print.md",
     "Composite Data Types and Memory Objects.md",
     "PythonCookBook/map(), zip(), filter().md",
-    "GENERAL/Types of Expression Rvalues Lvalues.md",
     "GENERAL/Lvalues and Rvalues.md",
     "UNDERSTAND_THE_MACHINE/Memory Organization and Access.md",
     "PNGS/Pasted image 20250629130519.png",
@@ -264,28 +214,8 @@
     "Nested Comprehensions.md",
     "PNGS/Pasted image 20250627160654.png",
     "PNGS/Pasted image 20250627122028.png",
-    "PNGS/Pasted image 20250627122014.png",
-    "PNGS/Pasted image 20250627120952.png",
-    "PNGS/Pasted image 20250627120951.png",
     "UNDERSTAND_THE_MACHINE/Numeric Representation.md",
-    "PythonCookBook/Parameters in Python.md",
-    "Untitled 2.md",
-    "Python Arguments Refresher.md",
-    "PythonCookBook/Python Iterables.md",
-    "PythonCookBook/Python References.md",
-    "Bottom Level Const Propagation.md",
-    "Untitled 1.md",
-    "UNDERSTAND_THE_MACHINE/Composite Data Types and Memory Objects.md",
-    "Learning_Git/Creating and Pushing to a Remote Repo.md",
-    "PNGS/Pasted image 20250625153019.png",
-    "PNGS/Pasted image 20250625152216.png",
-    "PNGS/Pasted image 20250625152201.png",
-    "GENERAL/Decltype Auto.md",
     "GENERLA",
-    "PythonCookBook/References and Copies.md",
-    "PythonCookBook/Immutable and Mutable Objects.md",
-    "GENERAL/Const, Constexpr, Consteval Refresh.md",
-    "Topic 6 Transition Metals.md",
     "q",
     "ChemRevision",
     "Chemistry",
@@ -294,7 +224,6 @@
     "NETWORKING",
     "gits",
     "DSA/LeetCode",
-    "Learning_Git",
     "Untitled.canvas"
   ]
 }
