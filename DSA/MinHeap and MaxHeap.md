@@ -8,3 +8,5 @@ You can see here, that 19 is actually greater than 15, however, it was the order
 ![[Pasted image 20240527034512.png]]
 ![[Pasted image 20240527034922.png]]
 From the visualization, you just add a new node to the available space, and check to see if you need to swap them around after that. 
+
+[[Heaps and Segment Trees]]
