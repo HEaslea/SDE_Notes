@@ -553,5 +553,740 @@ Class attributes are shared among all instances, while instance attributes are n
 Class attributes to provide the states and behaviours to be shared by all instances, and use instance attributes for data that will be specific to each individual object. 
 
 ### Attribute Shadowing
+When you search for an attribute on an object and cannot find it, python will extend the search the attributes on the object's class, will keep searching until the attribute is either found or the end of the inheritance chain is reached. 
+
+```
+class Point:
+	x = 10
+	y = 7
+
+p = Point()
+
+print(p.x) # 10 (from class attribute)
+print(p.y) # 7  (from class attribute)
+
+p.x = 12        # p gets its own 'x' attribute
+print(p.x)      # 12 (now found on the instance)
+print(Point.x)  # 10 (class attribute is still the same)
+
+del p.x    # we delete the instance attribute
+print(p.x) # 10 (now search has to go to find the class attr)
+
+p.z = 3    # now a make-shift 3D point
+print(p.z) # 3
+
+print(Point.z) # AttributeError : type object 'Point' has no attribute 'z'
+```
+
+Away from the book a little bit, so that I stick the landing here. 
+
+Class attributes, belong to the class, the whole class, it is shared across all instances, **unless shadowed**. 
+
+```
+class Dog: 
+	species = "Canine"
+
+a = Dog()
+b = Dog()
+
+print(a.species) # Canine
+print(b.species) # Canine
+
+Dog.species = "Wolf"
+
+print(a.species) # Wolf
+print(b.species) # Wolf
+```
+
+Instance attributes, they belong to a specific instance/object. 
+They are stored in the `obj.__dict__`: 
+```
+a.name = "Rex"
+
+print(a.name)   # rex
+#print(b.name)  # AttributeError : 'Dog' object has attribute 'name'
+```
+
+Python will look for the attributes in the following order: 
+1. Instance's `__dict__`
+2. Class's `__dict__`
+3. Base Classes (in MRO order)
+
+```
+a = Dog()
+a.species = "Wolf"
+
+print(a.species)   # Wolf (instance attribute)
+print(Dog.species) # Cnanine (class attribute still exists)
+```
+
+And we can dynamically add attribute: 
+```
+Dog.legs = 4      # class attribute, shared
+a.tail = True     # Instance attribute, only on 'a'
+```
+
+Other instances will not see `a.tail` yet they will say `Dog.legs`
+```
+b = Dog()
+print(b.legs)                 # 4
+print(hasattr(b, 'tail'))     # False
+```
+
+We can inspect the internals: 
+```
+print(a.__dict__)    # {'species': 'Wolf', 'tail': True, 'legs': 3}
+print(Dog.__dict__)  # contains 'species', 'legs', etc.
+```
+
+#### The `self` Argument
+In a class method, we can refer to an instance by means of a special argument, `self`. 
+`self` is always the first attribute of an instance method. 
+
+Sharing methods will all instances: 
+```
+class Square: 
+	side = 8
+	
+	def area(self): # self is a reference to the instance that called it
+		return self.side**2 # this means it doesn't have to be 8. 
+
+sq = Square()
+print(sq.area())       # 64 (side is found on the class)
+print(Square.area(sq)) # 64 (equavalent to sq.area)
+
+sq.side = 10
+print(sq.area()) # 100 (side is found on the instance)
+```
+
+The two calls, `Square.area(sq)` and `sq.area()` are equivalent. 
+
+They give us an idea of how this works. 
+
+You can do `Square.area(sq)` or `sq.area()`, and python will translate that for you behind the scenes. 
+
+```
+class Price: 
+	def final_price(self, vat, discount = 0): 
+		"""Returns the price applying vat and fixed discout."""
+		return (self.net_price * (100 + vat) / 100) - discount
+p1 = Price()
+
+p1.net_price = 100
+
+print(Price.final_price(p1, 20, 10)) # 110 (100 * 1.2 - 10)
+
+print(p1.final_price(20, 10)) # equivalent
+```
+
+The first argument, despite any other arguments, will always be `self`. 
+
+The idea is that we don't have to call it `self`, the idea is the same, that the first will always be the the object, due to the way that Python translates what we have written.
+
+### Initializing an Instance
+There are constructors in C++, in Python there are initializers. 
+This is because it works on already created instance, it is called `__init__()`. 
+A **magic method**, right after the object is created. 
+
+Python objects have a `__new__()` method, which is the actual constructor. 
+`__new__()` allocates and return a new instance. 
+`__init__()` initializes the instance (after it's created). 
+
+Apparently `__new__()` is a static method on the metaclass, I'm hoping this will become more apparent.
+
+`__new__()` is responsible for creating the object. 
+**Must return the instance of the class**. 
+This is where we customize or control object creation. 
+
+```
+class A: 
+	def __new__(cls, *args, **kwargs): 
+		print("A.__new__ called")
+		instance = super().__new__(cls) # yeah, no idea right now
+		return instance
+
+	def __init__(self, x): 
+		print("A.__init__ called")
+		self.x = x
+		
+a = A(10)
+```
+
+`__init__`, is an instance method, that is called after the object is created. 
+
+This is used for setting up attributes, validation, etc. 
+I'm sure this will become more apparent as we come up with more interesting objects. 
+
+There are a few times when you use `__new__` and that is: 
+- subclassing immutable types like `int, str, tuple`
+- implementing a singleton, or cache instances
+- change the instance's class ore turn a different object
+
+```
+class MyInt(int): 
+	def __new__(cls, value): 
+		print("MyInt.__new__")
+		return super().__new__(cls, value)
+
+	def __init__(self, value): 
+		print("MyInt.__init__")
+		self.info = "custom int"
+
+i = MyInt(5)
+print(i)  # 5
+print(i.info)
+```
+
+Remember that `__new__()` will get `cls` as the instance does not exist yet, in order to do `self`
+
+```
+class Rectangle: 
+	def __init__(self, side_a, side_b): 
+		self.side_a = side_a
+		self.side_b = side_b
+
+	def area(self): 
+		return self.side_a * self.side_b
 
 
+r1 = Rectangle(10, 4)
+print(r1.side_a, r1.side_b) # 10 4
+print(r1.area()) # 40
+
+r2 = Rectange(7, 3)
+print(r2.area()) # 21
+```
+
+### OOP is about Code Reuse
+##### Inheritance and Composition
+We know this, from pattern designs, this is a core detail: 
+**Inheritance**: this is a **Is-A** relationship. 
+**Composition**: this is a **Has-A** relationship. 
+
+Looking at inheritance first: 
+```
+class Engine: 
+	def start(self): 
+		pass 
+
+	def stop(self): 
+		pass
+
+class ElectricEngine(Engine): # Is-A Engine
+	pass
+
+class V8Engine(Engine): # Is-A Engine
+	pass
+```
+
+Then cars will **Have-A** Engine: 
+```
+class Car: 
+	engine_cls = Engine # Has-A engine
+
+	def __init__(self): 
+		self.engine = self.engine_cls() # Has-A Engine
+
+	def start(self): 
+		print(
+			f"Starting {self.engine.__class__.__name__} for "
+			f"{self.__class__.__name__}... Wroom, wroom!"
+		)
+		self.engine.start()
+		
+	def stop(self):
+		self.engine.stop()
+
+
+class RaceCar(Car): # Inheritance, Is-A Car
+	engine_clas = V8Engine
+
+class CityCar(Car): # Inheritance, Is-A Car
+	engine_cls = ElectricEngine
+
+class F1Car(RaceCar): # Inheritance, Is-A RaceCar and also Is-A Car
+
+car = Car()
+raceCar = RaceCar()
+
+cityCar = CityCar()
+
+f1Car = F1Car()
+
+cars = [car, racecar, cityCar, f1Car]
+
+
+for car in cars: 
+	car.start()
+```
+
+There is inheriting attributes and methods alike. 
+`ElectricEngine`, `V8Engine` - where `Engine` here is the **base class** or the **parent class**. 
+
+`Car` is a **base class**. 
+`RaceCar` is also the **base class** of `F1Car`. 
+
+There is a chain of inheriting here. 
+`class A(B):` we say that `A` is a child of `B` and `B` is the parent of `A`. 
+
+**Parent and Base are synonyms**, **Child of and derived from** are therefore the same as well. 
+
+Something interesting here is that a **class is a subclass of itself**. 
+A class is considered its own subclass. 
+![[Pasted image 20250706230532.png]]
+
+
+### Accessing a Base Class
+When we do not specify a base class, the built-in **object** class is default the base class. 
+
+Given this : `class A, class A(), and class A(object):` are all the same. 
+
+How do we get to the base class from within. 
+
+The `object` class hosts the methods that are common to all Python classes, does not allow you to sets any attributes on it. 
+
+```
+class Book: 
+	def __init__(self, title, publichser, pages): 
+		self.title = title
+		self.publisher = publisher
+		self.pages = pages
+
+class Ebook(Book): 
+	def __init__(self, title, publisher, pages, format): 
+		self.title = title
+		self.publisher = publisher
+		self.pages = pages
+		self.format = format
+```
+
+When writing this, you notice that 3/4 of the `__init__` of the subclass, is the same as the base class. 
+
+Therefore, in order to reuse code: 
+```
+class Ebook(Book):
+	def __init__(self, title, publisher, pages, format): 
+		Book.__init__(self, title, publisher, pages)
+		self.format = format
+```
+Take close look at the fact that we use `self` in pushing to the parent class. 
+
+The issue with this, that you spotted is that we have hardcoded the name `Book` in `Ebook`, which means we will run into issues if we were to ever change `Book` into something like `Libre`. 
+
+The better, more safe way of doing it is. 
+
+```
+class Ebook(Book): 
+	def __init__(self, title, publisher, pages, format): 
+		super().__init__(title, publisher, pages)
+		# or we could do: 
+		# super(Ebook, self).__init__(title, publisher, pages)
+		self.format = format
+```
+
+Two classes are siblings if they share the same parent./ 
+
+`super()` will return a proxy object that delegates method calls to a parent or sibling class, essentially just returns an object of the parent class. 
+
+MRO - Method Resolution Order - The order in which classes are searched when executing a method or looking up an attribute, especially with multiple inheritance. 
+
+Method Resolution Order:
+It can actually be viewed: 
+```
+ClassName.__mro__ # or
+ClassName.mro()
+```
+
+If we were given: 
+```
+class A: 
+	def greet(self): 
+		print("A")
+		
+class B(A): 
+	def greet(self): 
+		print("B")
+
+class C(A): 
+	def greet(self): 
+		print("C")
+
+class D(B, C): 
+	pass
+
+print(D.__mro__)
+
+# (<class '__main__.D'>, <class '__main__.B'>, <class '__main__.C'>, <class '__main__.A'>, <class 'object'>)
+```
+
+### Multiple Inheritance
+When a class has more than one base class, attribute searching can follow more than one path. 
+
+![[Pasted image 20250706233101.png]]
+
+The deadly diamond, I've read it's not a great shape to code from and in. 
+
+If a class doesn't have `__init__` defined in it, then it will just inherit from the base class, if no inheriting, then Python will create one for us. 
+
+
+### Method Resolution Order
+From the boo. 
+
+We know that when we ask for `someObject.attribute` and `attribute` is not found on that object, Python will start searching in the class that `someObject` was created. 
+
+With single inheritance, the MRO is just going all the way up to the `object` class. 
+
+This can be an issue when we have multiple inheritance. 
+
+It uses a C3 Linearization Algorithm - the lookup is deterministic and consistent, you know, that due to the consistency, which attribute will be found first. 
+
+Python will look left to right in the inheritance list `D(B, C)`, so it will find the attribute in `B` first. 
+
+### Class and Static Methods
+#### Static Methods
+When we create an object, Python assigns a name to it. 
+That acts as a namespace, then it makes sense to group functionalities under it. 
+Static methods, do not need to be called with an instance attached to it. 
+
+Remember in C++: 
+```
+class MyClass{ 
+public: 
+	static void sayHello()
+	{ 
+		... 
+	}
+};
+
+
+MyClass::sayHello(); // no object needed
+```
+It's roughly the same in Python: 
+
+```
+class StringUtil: 
+	@staticmethod
+	def is_plaindrome(s, case_insensitive=True): 
+		# we allow only letters and numbers
+		s = "".join(c for c in s if c.isalnum()) 
+		# join exhausts generation expression here
+		if case_insensitive: 
+			s = s.lower()
+		for c in range(len(s) // 2): 
+			if s[c] != s[-c - 1]: 
+				return False
+		return True
+
+
+	@staticmethod
+	def get_unique_words(sentence): 
+		return set(sentence.split()) # i really like this
+```
+
+Then we call using: 
+```
+print(
+	StringUtil.is_palindrome("Radar", case_insensitive=False)
+)
+```
+
+### Class Methods
+These accept, as the first argument, the class object itself, rather than the instance. 
+
+The main reason for this is for factory capabilities. 
+
+```
+class Point: 
+	def __init__(self, x, y): 
+		self.x = x
+		self.y = y
+
+	@classmethod
+	def from_tuple(cls, coord): # cls is Point, which is teh class itself
+		return cls(*coord)
+
+	@classmethod
+	def from_point(cls, point): # cls is Point
+		return cls(point.x, point.y)
+```
+Here we have a little factor for the `Point` class. 
+
+`cls` refers to the `Point` class, and this is something that most professionals use and would not change `cls`. 
+
+`staticmethods` take no special first arguments (`self` or `cls`). 
+These cannot access or modify class or instance state: logically related to the class, don't need access to the instance or class. 
+
+```
+class Math: 
+	@staticmethod
+	def add(a, b): 
+		return a + b
+		
+print(Math.add(2, 3)) # 5
+```
+
+`classmethods` do have access to class state. 
+These seem to be used when we are designing alternative constructors. 
+
+```
+class Person: 
+	def __init__(self, name, age): 
+		self.name = name 
+		self.age = age 
+
+	@classmethod
+	def from_birth_year(cls, name, birth_year): 
+		from datetime import date
+		return cls(name, date.today().year - birth_year)
+
+p = Person.from_birth_year("Alice", 2000)
+```
+
+```
+class Demo: 
+	def regular(self): print(f"regular: {self}")
+
+	@classmethod
+	def class_m(cls) print(f"classmethod: {cls}")
+
+	@staticmethod
+	def static_m(): print("staticmethod: no self or cls")
+
+
+d = Demo()
+
+d.regular() # instance
+
+d.class_m() # class
+
+d.static_m() # nothing passed implicitly
+```
+
+`cls` is used instead of hardcoding the class. 
+
+`@classmethod` -  bound to the class, not an instance. 
+
+They receive the actual class (`cls`) as their first argument and they have access to the class state. 
+
+```
+class Animal: 
+	@classmethod 
+	def make(cls): 
+		return cls()
+
+class Dog(Animal): pass 
+
+a = Animal.make() # cls is Animal -> returns Animal()
+d = Dog.make()    # cls is Dog    -> returns Dog()
+```
+If we had hardcoded `Animal()` instead of `cls`, then we would always return `Animal`, even if called from `Dog`. 
+
+That's why it's so good when used in factories. 
+
+Remember that class methods respect polymorphism. 
+They dynamically receive the class that was used to call them, even if the method is defined higher in the inheritance tree. 
+This is very similar to dynamic dispatch in C++. 
+
+```
+class Animal: 
+	@classmethod: 
+	def who_am_i(cls): # remember this for class methods
+		print(f"I am {cls.__name__}")
+
+class Dog(Animal): pass
+class Cat(Animal): pass
+
+
+Dog.who_am_i() # I am Dog
+Cat.who_am_i() # I am Cat
+```
+
+They are like if there was a **virtual static function**, although this doesn't exist. 
+
+That's the thing to remember is that we are passing in the class that called it, not an instance. 
+
+Statics, don't pass either. 
+
+
+```
+class StringUtil: 
+	@classmethod
+	def is_palindrome(cls, s, case_sensitive=True): 
+		s = cls._strip_string(s)
+		# for case insensitive comparison, we loser-case s
+		if case_insensitive: 
+			s = s.lower()
+		return cls._is_palindrome(s)
+
+	@staticmethod
+	def _strip_string(s): 
+		return "".join(c for c in s if c.isalnum())
+
+	@staticmethod
+	def _is_plaindrome(s): 
+		for c in range(len(s) // 2): 
+			if s[c] != s[-c - 1];
+				return False
+		return True
+
+	@staticmethod
+	def get_unique_words(sentence): 
+		return set(sentence.split())
+```
+
+```
+print(StringUtil.is_palindrome("radar"))
+print(StringUtil.is_palindrome("not a palindrome"))
+```
+
+Note that we are calling `is_palindrome` that same way that we did before. 
+We have made it a `@classmethod` so that we can call using `cls._strip_string(s)`. Otherwise we have to hard code that class that we want to call from. 
+This means that we have to change that code every time we change something, that is what we have to code against every step of the way. 
+
+### Private Methods and Name Mangling
+C++, obviously we have a `private` idea. 
+
+In Python, there is no such thing. Everything is public. 
+We rely on conventions, for privacy, on a mechanism called **name mangling**. 
+
+The convention is as follows, and this was something that was really really confusing when we did our exams. 
+
+**When the name has one leading underscore, the attribute is considered private**, meaning that it was intended to be used privately. 
+
+This is common in private helper methods, that are used in public ones. 
+
+There is an idea of call chains here. 
+
+Remember, that Python has no concept of `const`, which seems really odd. 
+
+This comes down discipline more than anything else. 
+The book is saying that barely ever, do people run into bugs due to not having private attributes. 
+
+This is funny because, then, why such a thing in C++. It makes total sense, would it just rely on discipline? 
+
+There is a lot of freedom given to us in Python : apparently it is known as **the language for adults**. 
+
+There are pros and cons to every design choice. 
+
+Some people prefer languages that allow more power and might require a bit more responsibility, others prefer those that are more restrictive. 
+
+```
+class A: 
+	def __init__(self, factor): 
+		self._factor = factor # I believe this means it's private
+
+	def op1(self): 
+		print("Op1 with factor {} ... ".format(self._factor))
+
+
+class B(A): 
+	def op2(self, factor): 
+		self._factor = factor
+		print("Op2 with factor {}...".format(self._factor))
+
+obj = B(100)
+obj.op1()      # Op1 with factor 100...
+obj.op2(42)    # Op2 with factor 42...
+obj.op1()      # Op1 with factor 42... <- THIS IS BAD
+```
+
+Let's say that we want to keep this constant, we don't want it to change with `obj.op2(42)`
+Fixing it with adding another leading underscore.
+
+```
+class A: 
+	def __init__(self, factor): 
+		self.__factor = factor
+
+	def op1(self): 
+		print("Op1 with factor {}...".format(self.__factor))
+
+class B(A): 
+	def o2(self, factor): 
+		self.__factor = factor
+		print("Op2 with factor {}...".foatmr(self.__factor))
+
+obj = B(100)
+obj.op1()    # Op1 with factor 100...
+obj.op2(42)  # Op2 with factor 42... 
+obj.op1()    # Op1 with factor 100... <- Now it's good
+```
+
+The **name mangling** mechanism is kicking in here. 
+
+The idea is that if we have 2 leading underscores, and at most one trailing underscore, such as `__my_attr` is replaced with a name that includes an underscore and the class name before the actual name, such as `_ClassName__my_attr`. 
+
+This means that when we inherit from a class, the mangling mechanism gives your private attribute two different names, in the base class and the child classes so that name collisions is avoided. 
+
+We should be able to see this in action using the idea of `obj.__dict__`. 
+`print(obj.__dict__.keys()) # get the attributes/and methods I think from this obj's class`. 
+`# dict_keys(['_factor'])`
+This is from the problematic version. 
+
+```
+print(obj.__dict__.keys())
+# dict_keys(['_A__factor', "_B__factor'])
+```
+You can see how the two names are different per class.
+
+So the `__`, 2 underscores, means that attribute will be given a name that is characteristic to the class 
+
+They are two different attributes when we have the 2 underscores. 
+
+The overall thing to take away : 
+`_ClassName__attributeName` - that is what is created from `__attributeName` with the 2 underscores before it. 
+
+```
+class Test: 
+	def __init__(self): 
+		self.__secret = 42
+
+	def reveal(self): 
+		return self.__secret
+
+Internally __secret becomes: 
+self._Test__secret
+```
+
+This will prevent name classes between base and subclasses.
+```
+class Base: 
+	def __init__(self): 
+		self.__value = 10
+
+class Sub(Base): 
+	def __init__(self): 
+		super().__init__()
+		self.__value = 99 # this becomes _Sub__value, doesn't override the base
+```
+
+
+My own example: 
+```
+class Base:
+    def __init__(self):
+        self.__type = "Base"
+    def printOut(self):
+        print(f"My Type is {self.__type}")
+
+class Sub(Base):
+    def __init__(self):
+        self.__type = "Sub"
+
+    def printOut(self):
+        print(f"My Type is {self.__type}")
+
+b = Base()
+s = Sub()
+
+b.printOut()
+s.printOut()
+```
+
+`__name` means that we don't want this to be inherited or clashed with in subclasses. 
+`__type` This should be local to the class - don't let subclasses touch it. 
+
+If we are going to be using classes that are mean to be used and extended by other developers, you will need to keep this in mind in order to avoid the unintentional overriding of your attributes. 
+
+### The Property Decorator
+pg 239

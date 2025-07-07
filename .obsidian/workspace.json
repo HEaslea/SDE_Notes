@@ -27,16 +27,30 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "PythonCookBook/Python Print.md",
+                "file": "GENERAL/Similarities of Lambda and Classes.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "Python Print"
+              "title": "Similarities of Lambda and Classes"
+            }
+          },
+          {
+            "id": "89e513b29bdb199c",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "PythonCookBook/OOP, Decorators, and Iterators.md",
+                "mode": "source",
+                "source": false
+              },
+              "icon": "lucide-file",
+              "title": "OOP, Decorators, and Iterators"
             }
           }
         ],
-        "currentTab": 1
+        "currentTab": 2
       }
     ],
     "direction": "vertical"
@@ -191,18 +205,30 @@
       "command-palette:Open command palette": false
     }
   },
-  "active": "dec0088a8a7d5fc4",
+  "active": "89e513b29bdb199c",
   "lastOpenFiles": [
-    "Untitled.md",
+    "GENERAL/Loops that Change Containers.md",
+    "PythonCookBook/OOP, Decorators, and Iterators.md",
+    "PNGS/Pasted image 20250706233101.png",
+    "PNGS/Pasted image 20250706230532.png",
+    "OOP/OOP Overview.md",
+    "GENERAL/Similarities of Lambda and Classes.md",
+    "GENERAL/Lambda Expressions.md",
+    "Pybind11.md",
     "Learning_Git/Cloning and Fetching.md",
+    "PNGS/Pasted image 20250704235713.png",
+    "PNGS/Pasted image 20250704235543.png",
+    "PNGS/Pasted image 20250704232759.png",
+    "PythonCookBook/Python Print.md",
+    "Untitled 1.md",
+    "Nested Comprehensions.md",
+    "Untitled 3.md",
+    "Untitled.md",
     "PNGS/Pasted image 20250704225312.png",
     "PNGS/Pasted image 20250704223747.png",
     "PNGS/Pasted image 20250704223718.png",
     "PNGS/Pasted image 20250704214704.png",
     "Learning_Git/Creating and Pushing to a Remote Repo.md",
-    "PythonCookBook/OOP, Decorators, and Iterators.md",
-    "GENERAL/Similarities of Lambda and Classes.md",
-    "Untitled 1.md",
     "GENERAL/Quicksort.md",
     "GENERAL/Heaps and Segment Trees.md",
     "DSA/MinHeap and MaxHeap.md",
@@ -217,19 +243,7 @@
     "PythonCookBook/Comprehension in Python.md",
     "PythonML",
     "PNGS/Pasted image 20250702025417.png",
-    "PNGS/Pasted image 20250702025303.png",
-    "PNGS/Pasted image 20250702025301.png",
-    "PythonCookBook/Python Print.md",
     "Composite Data Types and Memory Objects.md",
-    "PythonCookBook/map(), zip(), filter().md",
-    "GENERAL/Lvalues and Rvalues.md",
-    "UNDERSTAND_THE_MACHINE/Memory Organization and Access.md",
-    "PNGS/Pasted image 20250629130519.png",
-    "Untitled 3.md",
-    "PNGS/Pasted image 20250628122315.png",
-    "PythonCookBook/DSU Decorate Sort Undecorate.md",
-    "Nested Comprehensions.md",
-    "PNGS/Pasted image 20250627160654.png",
     "GENERLA",
     "q",
     "ChemRevision",
