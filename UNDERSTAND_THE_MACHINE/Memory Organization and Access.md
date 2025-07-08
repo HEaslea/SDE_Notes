@@ -678,3 +678,163 @@ mov( SixteenInts[ ebx * 4 ], eax);
 ```
 
 ## Multidimensional Arrays
+Implementing them in memory : one dimensional are very easy, as they map very easily into memory. 
+
+Say if we have : `A:array[0..3,0..3] of char;` 
+This is going to be 16 bytes, as we have 4 rows of 4 chars, which are 1 byte each. 
+
+The actual mapping in memory really is not that important, as long as: 
+- No two entries in the array can occupy the same memory location(s).
+- Each element in the array must always map to the same memory location. 
+
+We need two input parameters to get a value, one for the row and one for the column. 
+
+There are two ways to think about it : **row-major ordering** and **column-major ordering**. 
+
+##### Row-Major Ordering
+![[Pasted image 20250707200928.png]]![[Pasted image 20250707200950.png]]
+
+This might not seem that important, but when it comes to matrices, that are the basics of AI and game engines, going through an array in the right orientation, is very very important. 
+
+Think about it rationally: in order to get through one row here, we need 4 bytes.
+Or generically we need `row_size * element_size` if there are 5 `ints` then there will be 20 bytes in the to get through one row. 
+In order to go one column down, we go one full row, that means that we have to go through what we have just written above. 
+
+`A[colindex][rowindex]`
+
+The `colindex` is what we were talking about above. 
+
+If you were to go through a row, the idea would be to take the `base_address + (element_size * row_index)`, this is just for the row, so that we get to the right column. 
+
+In my head here in order to get to the write column and the right place in that row. 
+To get to the right row, we have to go through with the `row_size * colindex`. 
+
+Here's the idea. 
+
+Correct Row (think going down): `(row_size * element_size) * colindex `Inside bracket represents the size of the row in bytes (aka `number_of_elements * byte_per_element`). 
+
+Then to get to the right point in the row : the correct column (think about going right (across)): `row_index * element_size`
+
+Overall we get this lovely idea: 
+`Element_Address = Base_Address + (colindex * row_size + rowindex) * Element_size`. 
+
+![[Pasted image 20250707210249.png]]
+This is the idea put into more numbers. 
+
+```
+for(int col = 0; col < 4; ++col)     // going through the outer "vectors"
+{ 
+	for(int row = 0; row < 4; ++row) // going through the inner "vectors"
+	{ 
+		... 
+	}
+}
+```
+Then for three dimensional, the formula is not that much more difficult. 
+`someType A[depth_size][col_size][row_size]`. 
+
+The calculation is quite simple as we just have to integrate this new dimension. 
+`Address = Base + ((depth_index * col_size + col_index) * row_size + row_index) * Element_size`. 
+
+In C++, it's as follows: 
+`dataType A[bn-1][bn-2]...[b0]`. 
+
+#### Column-Major Ordering
+Basically the same thing, just that `A[0][0]` and `A[1][0]` are next to each other now. 
+
+![[Pasted image 20250707211037.png]]
+The calculation is really just reversed in a sense, as the row and col indexes have switched their meanings, as in, the one that mean just a whole row before (in terms of space) now means just increment one address space in size. They have essentially just swapped meaning. 
+
+`Address = Base + (rowindex * col_size + colindex) * Element_size`. 
+
+Then the same for three dimensions: 
+`Address = Base + (rowindex * col_size + colindex) * depth_size + depthindex) * element_size`. 
+
+#### Declaring Multidimensional Arrays
+An "m x n" array has `m * n` elements, and therefore requires `m * n * Element_Size` bytes of storage. 
+Here is where syntax starts to diverge. 
+In C, C++ etc. 
+`dataType arrayName [dim1][dim2]..[dimn];`
+
+`int threeDInts[4][2][8];`
+
+C# has some truly horrible syntax to define this. 
+
+##### Accessing Elements of a Multidimensional Array
+There are some costs tied to this. 
+
+`int threeDInts[4][2][8]`
+There is a lot of complexity behind this and associated costs that we don't really think about when accessing. 
+
+```
+Address = 
+	Base + 
+		((rowIndex * col_size + colindex) * depth_size + depthIndex) * 
+			Element_size	
+```
+
+This is really hidden from us. 
+
+```
+intmul( 2, i, ebx );     // EBX = 2 * i
+add( j, ebx );           // EBX = 2 * i + j 
+intmul( 8, ebx );        // EBX = (2 * i + j) * 8
+add( k, ebx );           // EBX = (2 * i + j) * 8 + k
+mov( n, eax ); 
+mov( eax, ThreeDInts[ebx*4] ); // ThreeDInts[i][j][k] = n 
+```
+
+Even here there is specialness, the sizes of what we are accessing are all nicely some square of 2. 
+The CPU can use shifts, instead of multiplication, `intmul`  being a little slower than shifting. 
+
+Shifts often being faster than multiplication, a decent C/C++ compiler will look something like this: 
+```
+mov( i, ebx );
+shl( 1, ebx ); // EBX = 2 * i
+add( j, ebx ); // EBX = 2 * i + j
+shl( 3, ebx ); // EBX = (2 * i + j) * 8, the 3 being 2^3 = 8
+add( k, ebx ); // EBX = (2 * i + j) * 8 + k
+mov( n, eax ); 
+mov( eax, ThreeDInts[ebx*4] ); // ThreeDInts[i][j][k] = n
+```
+
+It would be helpful to put all the dimensions to the power of 2, as this would be the most easiest. 
+Adding extra elements to make this work, we may be wasting space. 
+
+As the multidimensional arrays get bigger, this obviously gets much harder, if we have 100 elements and we want to use this idea, we would have to go to 128 in order to make that work, that's a lot of extra elements that are going to be wasted. 
+### Records/Structures
+C/C++ Structure "structure". 
+
+If arrays are homogenous, then structures/records are heterogenous -elements can have different types throughout. 
+
+Here we use the field's name, rather than some sort of indexing, however, we can do that with a `tuple`, and things gets more complicated here. 
+
+C:
+```
+typedef
+	struct
+	{ 
+		char Name[65]; // 64 Char /0 terminated string
+		short Major;   // 2 byte integer in C/C++
+		char SSN[12];  // 11 Char /0 terminated string
+		short Mid1;
+		short Mid2;
+		short Final;
+		short HomeWork;
+		short Projects;
+	} Student;
+```
+Lots of `short`s here. 
+
+
+We can tell C++ to compile a true C `struct` definition using the `extern "C"` block as follows: 
+```
+extern "C"
+{ 
+	struct
+	{ 
+		// all the same as before ... 
+	} Student;
+}
+```
+
