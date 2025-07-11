@@ -1289,4 +1289,379 @@ s.printOut()
 If we are going to be using classes that are mean to be used and extended by other developers, you will need to keep this in mind in order to avoid the unintentional overriding of your attributes. 
 
 ### The Property Decorator
-pg 239
+Imagine that you have an `age` attribute in `Person`, at some point, you want to make sure that when you change its value, we want to make sure that it's in a proper range. eg. `[18, 99]`. 
+
+We could write some getter and setter methods `get_age()` and `set_age()`. 
+`set_age()` will need to make sure it's in the range. 
+
+We achieve this with property decorators. 
+
+```
+class PersonWithAccessors: 
+	def __init__(self, age): 
+		self._age = age
+
+	def get_age(self): 
+		return self._age
+
+	def set_age(self, age): 
+		if 18 <= age <= 99:
+			self._age = age
+		else: 
+			raise ValueError("Age must be within [18,99]")
+
+def PersonPythonic: 
+	def __init__(self, age): 
+		self._age = age
+
+	@property
+	def age(self): 
+		return self._age
+
+	@age.setter
+	def age(self, age): 
+		if 18 <= age <= 99: 
+			self._age = age
+		else: 
+			raise ValueError("Age must be within [18,99]")
+
+person = PersonPythonic(39)
+print(person.age)  # 39
+person.age = 42
+print(person.age)  # 42
+person.age = 100   # ValueError : Age must be within [18,99]
+```
+Notice that we essentially called that function by using `person.age = 100` as that will be using the setter. 
+
+This does allow for read only data, by just not writing the setter counterpart. 
+
+The idea here, that the book doesn't talk about, is that behind the scenes, Python will turn these into these: 
+```
+class MyProp: 
+	def __get__(self, obj, objtype=None): 
+		print("Getting")
+
+	def __set__(self, obj, value): 
+		print(setting)
+
+class X: 
+	val = MyProp()
+	
+x = X()
+x.val       # triggers __get__
+x.val = 10  # triggers __set__
+```
+
+#### The `cached_property` Decorator
+Let's say that we want to get to a database (or to an API). 
+
+This might mean that we have to create client objects, that know how to talk to databases (or the API). 
+
+Using a property, might mean that we hide away the complexity to set the client up, and simply use it. 
+
+```
+class Client: 
+	def __init__(self): 
+		print("Setting up the client...")
+
+	def query(self, **kwargs): 
+		print("Performing query: {kwargs}") # I believe this is a dict here
+
+class Manager: 
+	@property
+	def client(self): 
+		return Client()
+
+	def perform_query(self, **kwargs): 
+		return self.client.query(**kwargs)
+```
+
+We have a dummy `Client`, which just prints a string. 
+With a pretend `query` function that prints a string as well. 
+
+`Manager`, `client` property that creates a new instance of `Client` every time it is called. 
+
+We would notice that every time we `perform_query()` ont he manager, we will see the `Setting up client...` being printed. 
+When this is expensive, as in making a `Client` is expensive, this code would be wasting resources. 
+Meaning that it might be better to cache that client. 
+
+```
+class ManualCacheManager: 
+	@property
+	def client(self): 
+		if not hasattr(self, "_client"): 
+			self._client = Client()
+		return self._client
+			
+	def perform_query(self, **kwargs): 
+		return self.client.query(**kwargs)
+```
+
+
+The `@property` here will make sure that `client()` is a read only attribute here. 
+
+Instead of calling the method. 
+```
+m = Manager()
+m.client() # this will raise an error
+
+# we do this
+m = Manager()
+client_instance = m.client # this works
+```
+
+Remember that we will be using `@property` when we want: 
+- Attribute-like syntax (`obj.name`)... 
+- ... but need method-like logic to compute or fetch the value. 
+
+This is such a needed thing, that Python 3.8, `functools` added the `cached_property` decorator. 
+If we need to refresh the client, we can delete the `client` property, and next time we call it, it will create a brand new `Client` for us. 
+```
+from functools import cached_property
+
+class CachedPropertyManager: 
+	@cached_property
+	def client(self): 
+		return Client() 
+
+	def perform_query(self, **kwargs): 
+		return self.client.query(**kwargs)
+
+manager = CachedPropertyManager()
+manager.perform_query(object_id=42)
+manager.perform_query(name_ilike="%Python%")
+
+del manager.client # This causes a new Client on next call
+manager.perform_query(age_gte=18)
+```
+
+
+
+
+
+
+##### A Little More on `@property`
+Imagine that we start with a normal class like this: 
+```
+class Dog: 
+	def get_name(self): 
+		return self._name
+
+	def set_name(self, value): 
+		self._name = value
+```
+
+Then using it: 
+```
+d = Dog(
+d.set_name("Fido")
+print(d.get_name()) # Fido
+```
+
+In the Python world, we want to make this real nice and simple, using attribute-style cases. 
+What we want: 
+```
+d.name = "Fido"
+print(d.name)
+```
+
+Therefore: 
+```
+class Dog: 
+	@property
+	def name(self):        # this is now the getter
+		return self._name
+
+	@name.setter
+	def name(self, value): # this is now the setter
+		self._name = value
+```
+
+Therefore: 
+```
+d = Dog()
+d.name = "Fido"  # Calls the setter method
+print(d.name)    # Calls the getter method
+```
+The `@property` - is to turn a method into something that looks like an attribute on access. 
+
+Then `@<property_name>.setter` tells python, when someone does `obj.name = value` to run this method. 
+##### Quick Note on `_` and `__`
+ - `_name` is the convention for private, which is not enforced by the compiler, but just a hint to other programmers
+ - `__name` This triggers name mangling - Python will rename `_ClassName__name` to avoid accidental overrides in subclasses. This will avoid name conflicts in inheritance. 
+
+### Other `@`'s that could be useful
+`@property` - recap - turning a method into a read-only attribute
+I think the reason that this is not `@x.getter`  - is because we are doing nothing special when we call `x.property_name`, it must return something.
+
+`@x.setter` - just defining the setter. 
+
+`@x.deleter` - Defining the logic when someone does `del obj.x`
+
+`@classmethod` - passes class `cls` instead of the instance (`self`)
+
+`@staticmethod` - NO passing of `cls` or `self`, like a member function. Belongs to the class, not just to an instance. 
+
+`@abstractmethod`  - from `abc`, requires subclasses to implement the method
+
+There is also the caching: 
+from `functools`
+
+`@lru_cache` - Caches function results (great for recursion)
+
+`@cache` (Python 3.9+) - Simpler alternative `lru_cache`
+
+`@wraps` - Preserves the metadata when writing your own decorators. 
+
+`@total_ordering` - Fills in comparison methods if you define `__eq__` and one other `<` - not sure about this one. 
+
+
+###### Quick Once Over About Decorators
+Remember: 
+```
+@decorator
+def my_function(): 
+	... 
+
+# is the same as
+my_function = decorator(my_function)
+
+
+# eg. logging decorator
+def log(func): 
+	def wrapper(*args, **kwargs): 
+		print(f"Calling {func.__name__}")
+		return func(*args, **kwargs)
+	return wrapper
+
+@log
+def greet(name): 
+	print(f"Hello, {name}!")
+```
+
+### Operator Overloading
+Giving a new meaning to an operator, according to the context that we are using it in. 
+
+When we use operators, Python calls special methods behind the scenes, I think this is exactly the same as C++. 
+
+Eg. when we do `a[k]`, on a dictionary, this roughly translates to `type(a).__getitem__(a, k)`. 
+Then we can just override these. 
+
+```
+class Weird: 
+	def __init__(self, s): 
+		self._s = s
+
+	def __len__(self): 
+		return len(self.s)
+
+	def __bool__(self): 
+		return "42" in self._s
+
+weird = Weird("Hello! I'm 100 years old")
+print(len(weird))  # length of the string given to Weird
+print(bool(weird)) # False
+```
+
+### Polymorphism - A brief overview
+A single interface for entities of different types. 
+
+Unlike C++, polymorphism is implicit, there is no need to implement interfaces or other patterns. 
+Think of it, like polymorphism is built in, you don't have to do anything in order for it to work. 
+eg. 
+```
+Class Dog: 
+	def speak(self): 
+		return "Woof"
+
+class Cat: 
+	def speak(self): 
+		return "Meow"
+
+def make_it_speak(animal): 
+	print(animal.speak())
+
+make_it_speak(Dog()) # Woof
+make_it_speak(Cat()) # Meow
+```
+
+
+IN C++: 
+```
+class Animal{  // we need to override, can't instantiate this
+public: 
+	virtual void speak() = 0; // pure virtual
+};
+
+class Dog : public Animal { 
+public: 
+	void speak() override { std::cout << "Woof\n"; }
+};
+
+void make_it_speak(const Animal& a)
+{ 
+	a.speak();
+}
+
+int main() {
+	Dog d;  // imagine
+	Cat c;  // imagine
+	make_it_speak(d); // woof
+	make_it_speak(c); // meow
+}
+```
+
+Remember that `virtual` - dynamic dispatch - run-time polymorphism
+Remember that if we don't have this `virtual`, it does not check what that type actually is, it will just run with `Animal`. 
+
+### Data Classes
+Intro'd in 3.7. 
+**Mutable named tuples with defaults**. 
+
+```
+from dataclass import dataclass 
+
+@dataclass
+class Body: 
+	"""Class to represent a physical body"""
+	name : str
+	mass : float = 0.0    # Kg
+	speed : float = 1.0   # m/s
+
+	def kinetic_energy(self) -> float: 
+		return (self.mass * self.speed**2) / 2
+```
+
+Note that we didn't have to write a `__init__` function. 
+
+Notice as well, the idea of type hinting : `name : str`. 
+
+### Writing a Custom Iterator
+Hopefully this will put a bunch of stuff together. 
+
+Remember: 
+**Iterable**: An object is said to be an iterable, if it can return its members one at a time. 
+Lists, tuples, strings, and dictionaries are all iterables. 
+Custom objects that define either of `__iter__()` or `__getitem__()`. 
+**Iterator**: if it represents a stream of data. 
+A custom iterator is required to provide an implementation of `__iter__()` that returns the method object itself, as well as the implementation of `__next__()` that returns the next item of the data stream, until it is exhausted, which returns `StopIteration` exception object. 
+
+```
+class OddEven: 
+	def __init__(self, data): 
+		self._data = data 
+		self.indexes = list(range(0, len(data), 2)) + list(range(1, (data), 2))
+
+	def __iter__(self): 
+		return self
+
+	def __next__(self): 
+		if self.indexes: 
+			return self._data[self.indexes.pop(0)]
+		raise StopIteration
+
+oddeven = OddEven("0123456789")
+print("".join(c for c in oddeven)) # 0246813579
+
+
+```
