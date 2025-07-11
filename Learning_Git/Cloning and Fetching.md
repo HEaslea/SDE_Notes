@@ -118,3 +118,51 @@ If our local branch is ahead, as it is here, then we might see something like th
 ![[Pasted image 20250704225312.png]]
 Here we see that our local repo is one ahead of the remote repo. 
 
+You can see that the first `git branch -vv` shows that the upstream branch set up for local `main`,  and the `origin/main` (`origin` being the shortname for the remote rep), we see that the **local is ahead by one commit**. 
+Although it does look like it's saying that `origin/main` is ahead 1, it's saying that the local branch is one ahead. 
+
+`git status` is showing us the same thing here. 
+![[Pasted image 20250704232759.png]]
+
+Notice that in the `rainbow` local repo, the remote-tracking branch still points to the yellow commit. 
+
+#### Incorporating Changes from the Remote Repo
+Remember that local repos do not automatically update, we have to be explicit in the updating. 
+First we need to fetch, then integrate those changes into the local branch in the local repo. 
+
+##### Fetching Changes from the Remote Repo
+In order to get data from the remote, we have to use the idea of **fetching**. 
+`git fetch` : **this downloads all the necessary commits to all the remote-tracking branches in the local repo, so that they reflect the state of the remote branches**. 
+When no remote repo shortname is provided as an argument to the `git fetch` command, the remote repo with shortname `origin` will be used, unless there is an upstream branch defined for the current branch. 
+
+`git fetch <shortname>` will download from remote repo by `<shortname>`. 
+`git fetch` - by default `origin` is used. 
+
+VERY IMPORTANT: This will only update the remote tracking branches. 
+This will not affect local branches. 
+We have not, so far, done anything to update the local branches, and integrate any of the data that we have in the remote tracking branches. 
+
+![[Pasted image 20250704235543.png]]
+![[Pasted image 20250704235713.png]]
+
+Here you can see that the remote tracking branches that we are using have updated, notice there is no change in `origin/feature`. 
+However, nothing has been done to the local branches, as they are still pointing to the yellow commit. 
+
+#### Integrating Changes into the Local Branch
+Once we have fetched the changes, we have updated the remote-tracking branches in the local repo, we are ready to update the local branch. 
+
+There is **merging** and **rebasing**. 
+
+There are two types of merging : fastforward and three way merges. 
+
+Here, we are going to merge the `origin/main` remote-tracking branch into the local `main` branch. 
+
+Look at the diagram above, this is going to be a fast-forward merge. 
+
+Remember that when we merge, we have to be on the destination, and then argue for the source. 
+
+This time the source will be the `origin/main` branch, which can be used like a normal branch here, which it is, as we have downloaded the commits. 
+
+resume at pg 136.
+
+
