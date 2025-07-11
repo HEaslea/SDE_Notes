@@ -838,3 +838,339 @@ extern "C"
 }
 ```
 
+#### Memory Storage of Records
+![[Pasted image 20250708144528.png]]~
+Say that we have a `Student` named `John`. 
+
+Most compilers, for optimization, will put different parts onto memory boundaries within memory. 
+The details here will be different per language, per compiler and per CPU. 
+
+ABI - Application Binary Interface - is the low-level contract between two binary program components: 
+- compiled code
+- the OS
+- different compiled modules/libraries in a program
+
+API - Application Program Interface - source level interface : functions, classes and headers used in code. 
+ABI - Application Binary Interface - compiled/binary level interface: calling conventions, data layout etc. 
+
+Very important concepts right here, so whenever you think API, then think about ABI for low level coding. 
+
+Most compilers will also look to set the length of the entire record to some power of 2. 
+This would suggest that when we get an array of these records, the compiler will make this incredibly easy for CPU to work it's way through. 
+
+The idea is that we have padding, in order to make things fit a certain way. 
+
+Adding padding manually, is a real chore. However, if we have incompatible compilers that need to share data, it's a trick worth knowing. 
+
+### Discriminant Unions
+AKA `union`, is very similar to a record. 
+
+In a record, each field, has a certain offset from the base address. 
+
+In a `union` - each field, has the same offset, in that only one field will be active at one point. 
+
+The size of the `union` will just be the largest element that can be found in it. 
+Changing the value of one field in this case, will change the value of all of them, and potentially how they are interpreted. However, they are mutually exclusive
+
+##### Unions in C/C++
+```
+typedef union
+{ 
+	 unsigned int    i;
+	 float           r;
+	 unsigned char   c[4];
+} unionType; 
+```
+
+All of these objects are 4 bytes. 
+
+There are some other examples in other languages on page 188. 
+
+Here is one in HLA: 
+```
+type
+	unionType: 
+		union
+			i : int32;
+			r : real32;
+			c : char[4];
+		endunion;
+```
+
+#### Memory Storage of Unions
+Consider this in HLA: 
+
+```
+type 
+	numeriRec:
+		record
+			i : int32;
+			u : uns32;
+			r : real64;
+		endrecord;
+	numericUnion: 
+		union
+			i : int32;
+			u : uns32;
+			r : real64;
+		endunion;
+```
+
+![[Pasted image 20250708153117.png]]
+#### Uses of Unions
+There is obviously the idea that we are conserving memory. 
+
+One way to think about it is as an **alias** - a second name for some memory object. 
+
+We might have to constantly use type coercion to refer to a particular object. 
+
+Consider: 
+```
+type
+	CharOrUns: 
+		union
+			c : char; 
+			u : uns32; 
+		endunion;
+
+static
+	v:CharOrUns;
+```
+
+
+Here we can use the `un32` and manipulate that. Then if we need to use the LO byte of this, we can access the `char` portion of it. 
+
+```
+mov( eax, v.u );
+stdout.put("v, as a char is ", v.c, nl);
+```
+
+We can also use to disassemble a larger object into its constituent bytes. 
+
+```
+typedef union 
+{ 
+	unsigned int u; 
+	unsigned char bytes[4];
+} asBytes;
+
+asBytes composite; 
+	. 
+	. 
+	.
+	composite.u = 1234567890;
+	printf
+	(
+		"HO byte of composite.u is %u, LO byte is %u\n", 
+		composite.u[3], 
+		composite.u[0]
+	);
+```
+
+Note that this is not portable - as the HO and LO bytes of a multibyte object appear at different addresses on big-endian and little-endian machines. 
+What we have written above works fine on little-endian machines, but fails on big-endian. 
+
+This will be the case any time we use `union`s to decompose larger objects. 
+
+## Classes
+They look like just simple extensions of `record`. 
+The layout is still the same, however, there is additional functionality. 
+Specifically member functions (functions declared inside a class), inheritance, polymorphism, all have a huge impact on how the compiler will make all of this work. 
+
+There will also be more memory overhead for all of this as well, as we will see. 
+
+```
+type 
+	student : record
+		sName     : char[65];
+		Major     : int16;
+		SSN       : char[12];
+		Midterm1  : int16;
+		Midterm2  : int16;
+		Final     : int16;
+		Homework  : int16;
+		Projects  : int16;
+	endrecord;
+
+	student2 : class
+		var
+			sName     : char[65];
+			Major     : int16;
+			SSN       : char[12];
+			Midterm1  : int16;
+			Midterm2  : int16;
+			Final     : int16;
+			Homework  : int16;
+			Projects  : int16;
+
+		method setName( source : string );
+		method getName( dest : string );
+			
+```
+HLA will allocate storage for all `var` fields in a class sequentially. 
+
+If the class only contains, `var` data fields, memory representation is identical to that of the record declaration. 
+
+![[Pasted image 20250710111225.png]]
+Notice the `VMT` pointer here. 
+**Virtual Method Table** : is a pointer to an array of pointers, to the methods. 
+It's a collection of pointers, to all the methods that are found in the classes. 
+
+Here, the VMT would point at a table containing two 32-bit pointers - one pointing at the `SetName()` method and one pointing at the `GetName()` in this class. 
+
+### Inheritance
+Obtaining the method address from the VMT is a lot of work. 
+
+**Just quick**: I love the difference in levels between the C++ High Performance book talking about a lot of work in implementation, and here talking about a lot of work to get the pointer. Of course these are relative to what is going on at both levels. That's something to remember throughout working with C++ and possibly with Python. 
+
+The reason that we even have VMT : **polymorphism** and **inheritance**. 
+
+```
+type 
+	student3 : class inherits( student2 )
+		var 
+			extraTime : int16; // Extra time allotted for exams
+			override method SetName;
+			override procedure create;
+	endclass
+```
+
+The `student3` inherits all the data fields and methods from the `student2` class, as shown by the keyword `inherits`. 
+
+We have two `override` methods here, that replaces the original `setName()`. 
+![[Pasted image 20250710120849.png]]
+
+In memory, `student2` `student3`, the extra 2 bytes at the end for the `extraTime`. 
+
+If we have objects of `student2`: say `John` and `Joan`, their `VMT`'s will point to the same table, therefore they will be identical, that is pointing to the `student2` VMT. 
+
+![[Pasted image 20250710121429.png]]
+Now think about a `student3`, let's call it `Jenny`. 
+Memory layout is going to be similar, however, the VMT field will contain a pointer to a different VMT table, `student3`. 
+
+![[Pasted image 20250710121555.png]]
+Just notice the different in the type of `setName()` that we are pointing to. 
+
+Say that we have:
+```
+struct Base
+{ 
+	int a; 
+};
+
+struct Dervied : public Base 
+{ 
+	int b; 
+};
+
+Derived d;
+```
+The mem layout will look similar to `[ a (from Base) ][ b (from Derived) ]`
+They are stored next to each other in memory. 
+
+###### Virtual Inheritance
+![[Pasted image 20250710122418.png]]
+Here, we can see that an object of `D` will have to copies of what is in `A`, one via `B` and one from `C`. 
+
+However, if we have `B` and `C` virtually inherit from class `A`. 
+This will mean that `D` will only contain one copy of `A`'s values. 
+
+This means that we are avoiding the diamond problem. 
+
+```
+struct Animal { 
+public:
+	virtual ~Animal() = default; // Show that the default class destructor will be made
+	virtual void Eat() {}
+};
+
+struct Mammal : Animal {
+	virtual void Breathe() {}
+};
+
+struct WingedAnimal : Animal { 
+	virtual void Flap() {}
+};
+
+struct Bat : Mammal, WingedAnimal {}; // some issue with Mammal::~Mammal see below
+```
+
+A call to `bat.Eat` would be ambiguous, there are two `Animal` (indirect) base classes in `Bat`, as there are two different base `Animal`, base class subobjects. 
+
+Before we even start, there is an issue with this code, meaning before we even get to the `bat.Eat`, we are going to struggle with the idea that we have multiple subobjects of `Animal` in `Bat`. We can't even get to the `Bat.Eat` idea before we fix this. 
+
+The only way to do it, is using virtual inheritance. 
+
+Here: 
+```
+struct Mammal : virtual Animal { ... };
+struct WingedAnimal : virtual Animal { ... };
+```
+
+Remembering, that `private` methods, in a base class, **does appear in the VMT** if it's a `virtual`, but remains inaccessible to the derived classes in source code. 
+
+
+```
+type
+	tBaseClass : class
+		var 
+			i:uns32;
+			j:uns32;
+			r:real32;
+		method mBase;
+	endclass; 
+
+	tChildClassA: class inherits( tBaseClass ) 
+		var 
+			c:char;
+			b:boolean;
+			w:word;
+		method mA; 
+	endclass; 
+
+	tChildClassB:class inherits( tBaseClass )
+		var 
+			d:dword;
+			c:char;
+			a:byte[3];
+	endclass;
+```
+
+both `tChildClassA` and `tChildClassB` inherit from `tBaseClass`, they will both include `i,j, r` fields as well as their own. 
+In order for this to work properly, `i` `j` `r` have to have the same offset in all child classes as they do in `tBaseClass`. 
+This way there is some consistency. 
+
+All classes, place the pointer to the VMT at the same offset within the object. 
+Here all the classes will have their own VMT's, yet they will be at the same offset as each other. 
+![[Pasted image 20250710131406.png]]
+![[Pasted image 20250710131452.png]]
+
+Whenever we inherit, there will be some inheritance in the VMT as well. 
+Here, `tBaseClass` contains only a single entry - a pointer to the method `tBaseClass.mBase()`. 
+The VMT for `tChildClassA` contains two entries : pointers to `tBaseClass.mBase()` and `tChildClassA.mA()`> 
+
+`tChildClassB` - with no new methods, the VMT will only contain a single entry, that is the same as the base class. 
+`tBaseClass.mBase()` method. 
+
+Although, the VMT of Base and B are the same, they have to be made distinct. 
+
+![[Pasted image 20250710131744.png]]
+
+### Class Constructor
+In order to make sure that the object is put in memory. 
+We also have to initialize this VMT pointer field in every class we create. 
+The compiler in HLL's will do this for us. 
+Then the default constructor will initialize the VMT pointer field. 
+
+HLA will not do this for you, it's not hidden behind HLL's. 
+
+Therefore we have to declare them for ourselves. 
+
+We can declare them as followed: 
+```
+readonly 
+	VMT( student2 );
+	VMT( student3 );
+```
+
+Then `student2._VMT_` and similar for 3, will be the first entry in VMT. 
