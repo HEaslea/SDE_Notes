@@ -57,7 +57,7 @@ Console.WriteLine(person1.Name);
 This is really cool, as C# subtracts that layer away by saying that it will assign value and reference types, and then gives us the ability to actually change the reference itself. 
 Remember that we cannot reassign or reseat references in C++, meaning that once it has been passed in somewhere, you can't change that. 
 
-However, in C#, we can rebind, as we didn't explicitly say that something is a reference, it was sort of forced upon us, therefore, we should be able to rebind it, fuck it. Not only that but we can rebind the reference that is outside of the scope of the function to something new inside the function, like changing a pointer to something new. 
+However, in C#, we can rebind, as we didn't explicitly say that something is a reference, it was sort of forced upon us, therefore, we should be able to rebind it, screw it. Not only that but we can rebind the reference that is outside of the scope of the function to something new inside the function, like changing a pointer to something new. 
 
 I kind of like this, however, the difference should be kept in mind. 
 

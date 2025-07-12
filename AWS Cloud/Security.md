@@ -158,7 +158,7 @@ AWS Artifact - gain access to compliance reports from third parties.
 
 AWS Compliance centre - documentation - risk and security white paper. 
 
-Shared responsibility - build your shit with compliance in mind. 
+Shared responsibility - build with compliance in mind. 
 
 ## AWS Artifact
 Provides on-demand access to AWS security and compliance reports and select online agreements. 

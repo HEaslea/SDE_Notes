@@ -273,7 +273,7 @@ hasY hy, hy2 = std::move(hy); // error as move constructor is deleted
 ```
 
 Compiler will be able to copy object of type Y, but won't be able to move them. 
-`hasY` has explicitly requested a move constructor  (by default), which the compiler says fuck no to, and doesn't do one for us. 
+`hasY` has explicitly requested a move constructor  (by default), which the compiler says no to, and doesn't do one for us. 
 Hence `hasY` will have a deleted move constructor. 
 Had `hasY` omitted the declaration of its move constructor, then the compiler would not synthesize `hasY` move constructor at all. 
 The move operations are not synthesized if they would otherwise be defined as deleted. 

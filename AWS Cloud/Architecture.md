@@ -82,7 +82,7 @@ There are the six main benefits:
 - Go global in minutes.
 
 **Trade upfront expense for variable expense**: 
-Physical servers cost a fucking lot. 
+Physical servers cost a lot. 
 Instead of our investment, let amazon do it, they know how to do it all as well. 
 Only pay for what we use, nothing more, nothing less :). 
 

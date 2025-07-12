@@ -116,7 +116,7 @@ Let's say that we have an array of those enums `{RIGHT, DOWN, LEFT, UP}`
 Perhaps then you can do an index of that, grad whichever it is, then we can do a wrap around. 
 You know how obvious that is `i % 4` -> 3 2 1 0 etc. 
 See the pink postit notes. 
-We have to think about how square matrices are different than rectangular. The idea with the squares is that we work with the outer, then we have another square in the inner part that we have to look at, what do we have here, some fucking badass recursion here: we take the spiral of the inner most square, then append to the front the spiral order of the square larger than that, then the square larger than that etc. etc. 
+We have to think about how square matrices are different than rectangular. The idea with the squares is that we work with the outer, then we have another square in the inner part that we have to look at, what do we have here, some badass recursion here: we take the spiral of the inner most square, then append to the front the spiral order of the square larger than that, then the square larger than that etc. etc. 
 
 ```
 vector<int> MatrixInSpiralOrder(const vector<vector<int>>& square)
@@ -130,7 +130,7 @@ vector<int> MatrixInSpiralOrder(const vector<vector<int>>& square)
 }
 ```
 
-Then there is this whole fucking loop right here: 
+Then there is this whole loop right here: 
 ```
 void MatrixLayerInClockwise(const vector<vector<int>>& square, 
 	int offset, vector<int>* spiral_ordering)

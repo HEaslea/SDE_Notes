@@ -521,11 +521,11 @@ public:
 int main{ 
 	Base* ptr = new Derived();
 	ptr->show(); // calls on dynamic type, so derived
-	delete ptr; // remember this shit
+	delete ptr; // remember this
 	return 0;
 }
 ```
-Really the use of virtual is so that we can have late binding, dynamic dispatch, dynamic binding, whatever the fuck you want to call it. 
+Really the use of virtual is so that we can have late binding, dynamic dispatch, dynamic binding, whatever you want to call it. 
 
 
 

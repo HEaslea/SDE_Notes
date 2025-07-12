@@ -64,7 +64,7 @@ For now, let's look at `GL_NEAREST` and `GL_LINEAR`.
 
 `GL_NEAREST` is the default, and we take texel that the center of our point (texture coordinate) is closest to. 
 ![[Pasted image 20240614232213.png]]
-Pretty fucking simple. 
+Pretty simple. 
 
 `GL_LINEAR` ((bi)linear filtering) takes an interpolated value from the texture coordinates neighbouring texels, approximating a colour between them. 
 The closer the point is to the centre, the more that texel will contribute. 
@@ -164,7 +164,7 @@ Then passing in the actual data.
 
 Now, we have the image data connected and bound up. 
 
-Generating Mipmaps, means that, thank fucking god, we don't have to do it ourselves. 
+Generating Mipmaps, means that, thank god, we don't have to do it ourselves. 
 
 Then it's a good idea from the `stbi_image` to then free the image, freeing the space in memory. 
 `stbi_image_free(data)`. 

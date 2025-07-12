@@ -56,7 +56,7 @@ Binding this to the address of `data1` and passing `data2` as the argument.
 Don't overload operators that do not preserve order of evaluation when they are overloaded. 
 Users are going to be weirded out when the usual guarantees they are accustomed to are not honoured for code that happens to use an overload version of one of these operators. 
 
-Obviously don't overload shit like `&`, it will just throw people off completely. 
+Obviously don't overload like `&`, it will just throw people off completely. 
 
 > So normally , the comma, address-of, logical `AND`, logical `OR`, should not be overloaded. 
 
@@ -73,7 +73,7 @@ Do we want to overload an operator (really?) we could just make it a function.
 #### Assignment and Compound Assignment Operators
 After the assignment, the values in the left hand and right hand operands should have the same value, and the operator should return a reference to its left hand operand. 
 
-Just follow somewhat to what each operation means, like `+` obviously means addition, so don't do some weird shit where `+` adds the object to a container, that could just be in some function. 
+Just follow somewhat to what each operation means, like `+` obviously means addition, so don't do some weird stuff where `+` adds the object to a container, that could just be in some function. 
 
 Abusing operators in this way, no one would use `operator+` in order to subtract, that would be insane. 
 Just don't make them ambiguous. 

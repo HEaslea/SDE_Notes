@@ -5,7 +5,7 @@ The `Path` environment variable specifies a set of directories where executable 
 `:e! $MYVIMRC`
 
 ### Reset VIM
-Delete everything in the VIMrc file, and then find the .vim file, which seems to be where all the plugins are going, and then delete those as well. KEEP THE FILES ALIVE, god knows what fucking happens if we break that. 
+Delete everything in the VIMrc file, and then find the .vim file, which seems to be where all the plugins are going, and then delete those as well. KEEP THE FILES ALIVE, god knows what happens if we break that. 
 Then we have returned to the very very beginning.
 #### Getting NeoVim
 `winget install neovim` or `choco install neovim`, then hit Y once of twice, then allow permissions. 
@@ -68,7 +68,7 @@ type in `:echo join(split($runtimepath, ','), "\n")`.
 What you're looking at is Vim's default configuration directories. When we install a plugin, you want to add that plugin's directory to your `runtimepath`. 
 
 Let's first, make a directory, where we'll be installing all these lovely plugins. 
-Back the fuck out of neovim or vim: 
+Back out of neovim or vim: 
 
 In command prompt/terminal write:
 `mkdir %VIMCONFIG%\pack\bundle\start`. 
@@ -88,7 +88,7 @@ They can hold:
 - Process Specific Information - `%PID%` The process ID of the current script of command
 - Network Configuration - `http_proxy`
 
-There are so many more holy shit
+There are so many more.
 
 With that out of the way, we are going to git clone into that file that we just made. 
  We want to go into that file: 
@@ -168,7 +168,7 @@ Then we can use `PackUpdate` etc. in order to call the more annoying to write.
 Everything in Vim is about customizing and making things easier. 
 
 ## Finding My Files
-There was NerdTree, but fuck me that was shit: 
+There was NerdTree, that wasn't great.
 ##### Using FZF
 Fuzzy Finder
 The basics are super easy, just add fzf and fzf.vim to plugins list. 

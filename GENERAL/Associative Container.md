@@ -265,7 +265,7 @@ map_it->first = "New Key"; // error as map key values are const
 
 Although the `set` types define both the `iterator` and `const_iterators` types, both types of iterators give us read-only access to the elements in a `set`. Elements of a `set` are immutable. 
 You can remember this, by thinking that the keys of a map are const, and everything in a set is a key, therefore, every element is `const`. 
-Sets in that case are read only: Same as in maths, we can't just go adding shit to a set and expect everything to math mathematically correctly. 
+Sets in that case are read only: Same as in maths, we can't just go adding to a set and expect everything to math mathematically correctly. 
 ```
 set<int> iset = {0,1,2,3,4,5,6,7,8,9};
 set<int>::iterator set_it = iset.begin();

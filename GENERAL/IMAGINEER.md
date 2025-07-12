@@ -1,1 +1,0 @@
-Horror on a horse farm, creepy as shit in the middle of nowhere. 

@@ -379,7 +379,7 @@ The `declval<T>()` produces an rvalue reference of T.
 Then `decltype(std::declval<T>().foo())` attempts to evaluate the expression `std::declval<T>().foo()`. 
 If `T` does have `foo()` then this is a valid method, and `decltype()` will successful deduce the return type. 
 Then the `void_t`, if what's in it is true, then the type returns to `void` and that's fine, and allows for `true_type` at the end. 
-If it is invalid, then the template fucks off, and we use the first one that inherits from `false_type`. 
+If it is invalid, then the template leaves, and we use the first one that inherits from `false_type`. 
 
 Check for a specific Signature of a Member Function
 ```

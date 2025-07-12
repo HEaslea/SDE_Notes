@@ -79,7 +79,7 @@ void setUpMesh()
 }
 ```
 
-This `offsetof` is fucking amazing. 
+This `offsetof` is amazing. 
 We access the representation: 
 ```
 Vertex vertex;

@@ -101,7 +101,7 @@ The providers will manage maintenance and updates.
 - Trade upfront expense for variable expense 
 	- Upfront expense : buying the software - hardware etc. before actually using them. 
 	- Variable expense : only paying for what we use, which will vary, based on usage. The tight cost on what we use is so much better than paying a huge amount, then we might not use all of what we have. 
-- Stop spending money to run our own data centres : There is actually more time spent on maintaining and managing infrastructure and servers, rather than just using the fuckers. If we use cloud computing, then we just focus less on the maintenance etc, and more time on our applications and customers. 
+- Stop spending money to run our own data centres : There is actually more time spent on maintaining and managing infrastructure and servers, rather than just using this. If we use cloud computing, then we just focus less on the maintenance etc, and more time on our applications and customers. 
 - Stop guessing on Capacity - you don't have to predict how much infrastructure capacity you will need before deploying an application. We can launch AWS EC2's when needed, only pay for what we used, and the compute time etc. We can scale in and scale out in response to demand. 
 - Benefit from massive economies of scale - achieving lower variable cost than we would on our own. AWS can achieve higher economies of scale (as the scale grows, the price per unit will typically drop for users). Bulk buying will be cheaper than buying one by one. Lower pay-as-you-go prices. 
 - Increase speed and agility - The flexibility allows for easier development and deploy applications. We can just innovate, all the server stuff is done for us. 

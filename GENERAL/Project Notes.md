@@ -14,7 +14,7 @@ WoW -> Feedback is possible prone to survivor bias -> in that a game so old is o
 
 
 
-FELLOWSHIP TOOK MY FUCKING IDEA
+FELLOWSHIP TOOK MY IDEA
 
 
 Remember that what they see is an aesthetic

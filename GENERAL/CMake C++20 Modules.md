@@ -75,7 +75,7 @@ else()
 endif()
 ```
 
-Meaning we just support experimental per every version, which is a pain, but still worth for these fucking modules baby. 
+Meaning we just support experimental per every version, which is a pain, but still worth for these modules baby. 
 
 ### Enabling for 3.28 and Above
 At the moment I am currently running 3.30 and that's without a recent update as far as I'm aware. 

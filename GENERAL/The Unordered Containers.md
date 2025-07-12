@@ -44,7 +44,7 @@ The container puts all of its elements with a given hash value into the same buc
 If the container multiple elements with the same given key, all the elements with the same key will be in the same bucket. 
 As a result, the performance of an unordered container depends on the quality of its hash function and on the number and size of its buckets. 
 
-The hash function (this shit is very cool) will always yield the same result for the same argument. 
+The hash function (this is very cool) will always yield the same result for the same argument. 
 Ideally, the has function also maps each particular value to a unique bucket. 
 However, a hash function is allowed to map elements with differing keys to the same bucket. 
 When a bucket holds several elements, those elements are searched sequentially to find the one we want. 

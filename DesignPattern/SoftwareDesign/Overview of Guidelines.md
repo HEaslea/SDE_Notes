@@ -107,7 +107,7 @@ But more often than not, we should be looking at what the function will do, and 
 There is black and gray box testing as well. 
 
 This is like testing every single aspect of the potion making process of an alchemist, however, we want to see what the potion does, if he changes the recipe, yet the potion still does the same thing, then that's fine. 
-If it doesn't, then we are kind of fucked. 
+If it doesn't, then we are kind of screwed. 
 We shouldn't be looking at every aspect of how the potion is made, or how it works, as that might change, however, let's look at what it does, if it does it well , then that's what we want overall, unless we are super specific into the tuning of that function. 
 
 Inheritance is rarely the answer. 

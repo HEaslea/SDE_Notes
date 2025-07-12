@@ -110,7 +110,7 @@ long checkHighest(const T& s)
 	return currSize;
 }
 ```
-Really fucking simple. 
+Really simple. 
 
 
 

@@ -122,7 +122,7 @@ So there is a string constructor, therefore we can do the whole
 `Entity a = "Cherno";` Otherwise this wouldn't work. 
 
 **Implicit Construction**  is a thing now. 
-You can use that however the fuck you want fella. 
+You can use that however you want fella. 
 
 The idea is that C++ thinks that it can convert the literals into an `Entity` in this case. 
 

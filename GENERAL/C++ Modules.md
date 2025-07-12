@@ -71,7 +71,7 @@ This is not erroneous, as they have internal linkage, they are not linked inbetw
 The issues with this is that 
 - Each translation unit gets its own copy of the `static` function, leading to multiple instances in the final binary. 
 - Unnecessarily increases the size of the file. 
-- Fucking awful at debugging, as there are so many of the same function. 
+- Awful at debugging, as there are so many of the same function. 
 
 An alternative is the unnamed namespace: however, we still have the same drawbacks. 
 

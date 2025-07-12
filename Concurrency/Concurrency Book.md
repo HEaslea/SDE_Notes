@@ -68,7 +68,7 @@ This is more difficult in processes, as they might not share the same memory add
 
 ![[Pasted image 20240719011629.png]]
 There, in these instances is less bookkeeping involved for the OS. 
-However, that means that are writing of code, can fuck this up immediately. 
+However, that means that are writing of code, can mess this up immediately. 
 This is where we get our critical races. 
 We have to make sure that the crucial data accessed. 
 There must be a great deal of thought, when thinking about how we get multiple threads to communicate, it's harder than processes. 

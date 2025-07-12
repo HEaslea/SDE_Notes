@@ -7,7 +7,7 @@ Remember that interface (think of the air fryer) would be the bridge between the
 If there is no room for the new element, the container can't just add a new element, somewhere else in memory, otherwise it would not be contiguous and we would not have fast random access. 
 The container must allocate new memory to hold the existing elements PLUS the new one, move the elements from the old to the new. 
 And then deallocate the old memory. 
-However, if we did this every time that we wanted to allocate, the performance would be so fucking slow. 
+However, if we did this every time that we wanted to allocate, the performance would be so slow. 
 To avoid this, we use allocation strategies to reduce the number of times the container is reallocated. 
 When they have to get new memory, the allocation will usually allocate capacity beyond what is immediately needed. 
 The container holds this storage in reserve and uses it to allocate new elements as they are added. 
@@ -67,7 +67,7 @@ void TestVect(vector<string>& nv){
 	cout << endl;
 }
 ```
-Really fucking simple
+Really simple
 
 We could even get an idea of how the implementation strategy works for vectors. 
 

@@ -176,7 +176,7 @@ Before we do any mathematics with any of this, we would need to extend or contra
 
 ![[Pasted image 20250319112550.png]]
 Zero-Extension converts smaller unsigned values to larger unsigned values. 
-This is super fucking easy right. 
+This is super easy right. 
 ![[Pasted image 20250319112622.png]]
 Many language compilers will automatically handle sign and zero extension. 
 

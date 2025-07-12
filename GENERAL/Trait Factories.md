@@ -85,7 +85,7 @@ int main()
 	std::cout << "5 * 4 = " << mutiply_by_5(4) << endl;
 }
 ```
-This is a really cool idea that we have a function that produced functions in order to reduce fuckery. 
+This is a really cool idea that we have a function that produced functions in order to reduce the mess. 
 
 Then there is passing a lambda to another lambda. 
 ```

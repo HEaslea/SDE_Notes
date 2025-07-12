@@ -26,7 +26,7 @@ int (*p2)[10] = &arr; // points to an array of ten ints
 If we want to define and return an pointer to an array, the dimension must follow the function's name. 
 
 The function has a parameter list, which also follows the name, and precedes the dimension. Therefore, the form of a function that returns a pointer to an array is: 
-`Type (* function (parameter_list))[dimension]` What in the actual fuck. 
+`Type (* function (parameter_list))[dimension]`. 
 
 It's almost as if the name of the function and it's parameter_list is just part of the declaration. 
 

@@ -206,7 +206,7 @@ We have to go backwards in order to not use a weight multiple times.
 ### Permutations to Subsets
 Imagine an elevator that only takes up certain weights. Minimize trips with a number of people, given their weights. 
 
-Now, the brute force approach is to use permutations, and go through every single one, however, that would be `n!` large which is fucking huge. 
+Now, the brute force approach is to use permutations, and go through every single one, however, that would be `n!` large which is huge. 
 
 The better approach is to use subsets, considering all groups of people, not all possible orderings from the get go, as a subset, without any consideration for the order, is essentially just a number of valid permutations. Number of subsets is $2^{n}$
 

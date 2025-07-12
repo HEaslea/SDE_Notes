@@ -8,21 +8,7 @@
         "type": "tabs",
         "children": [
           {
-            "id": "11d646d3a1d2caff",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "PythonCookBook/OOP, Decorators, and Iterators.md",
-                "mode": "source",
-                "source": false
-              },
-              "icon": "lucide-file",
-              "title": "OOP, Decorators, and Iterators"
-            }
-          },
-          {
-            "id": "8183ecdc46ce4e97",
+            "id": "dec0088a8a7d5fc4",
             "type": "leaf",
             "state": {
               "type": "markdown",
@@ -36,77 +22,21 @@
             }
           },
           {
-            "id": "f9168668142bd6e4",
+            "id": "74df9f0ea1f1b1dc",
             "type": "leaf",
             "state": {
               "type": "markdown",
               "state": {
-                "file": "GENERAL/Associative Ordered and Unordered Containers.md",
+                "file": "GENERAL/Quicksort.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "Associative Ordered and Unordered Containers"
-            }
-          },
-          {
-            "id": "030f8502f90dfe3d",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "STL_Containers/STL Array.md",
-                "mode": "source",
-                "source": false
-              },
-              "icon": "lucide-file",
-              "title": "STL Array"
-            }
-          },
-          {
-            "id": "59ac523c2074f5dc",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "STL_Containers/STL Vector.md",
-                "mode": "source",
-                "source": false
-              },
-              "icon": "lucide-file",
-              "title": "STL Vector"
-            }
-          },
-          {
-            "id": "dec0088a8a7d5fc4",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "GENERAL/Similarities of Lambda and Classes.md",
-                "mode": "source",
-                "source": false
-              },
-              "icon": "lucide-file",
-              "title": "Similarities of Lambda and Classes"
-            }
-          },
-          {
-            "id": "89e513b29bdb199c",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "UNDERSTAND_THE_MACHINE/Memory Organization and Access.md",
-                "mode": "source",
-                "source": false
-              },
-              "icon": "lucide-file",
-              "title": "Memory Organization and Access"
+              "title": "Quicksort"
             }
           }
         ],
-        "currentTab": 4
+        "currentTab": 1
       }
     ],
     "direction": "vertical"
@@ -138,7 +68,7 @@
             "state": {
               "type": "search",
               "state": {
-                "query": "untitled",
+                "query": "",
                 "matchingCase": false,
                 "explainSearch": false,
                 "collapseAll": false,
@@ -159,12 +89,12 @@
               "title": "Bookmarks"
             }
           }
-        ]
+        ],
+        "currentTab": 1
       }
     ],
     "direction": "horizontal",
-    "width": 238.5,
-    "collapsed": true
+    "width": 238.5
   },
   "right": {
     "id": "9a5bd91e964f5d11",
@@ -261,45 +191,45 @@
       "command-palette:Open command palette": false
     }
   },
-  "active": "59ac523c2074f5dc",
+  "active": "74df9f0ea1f1b1dc",
   "lastOpenFiles": [
-    "STL_Containers/STL Array.md",
-    "STL_Containers/STL Vector.md",
+    "GENERAL/What is Dependency.md",
+    "Topic 6 Transition Metals.md",
+    "GENERAL/Untitled 1.md",
+    "Untitled 2.md",
+    "GENERAL/UP and RUNNING VIM and NEOVIM.md",
+    "GENERAL/The Unordered Containers.md",
+    "GENERAL/The Kernel.md",
+    "Templates/Template Specializations.md",
+    "GENERAL/Template Metaprogramming.md",
+    "AWS Cloud/Security.md",
+    "GENERAL/Reversing through Containers.md",
+    "GENERAL/Move Constructors.md",
+    "GENERAL/Memory Order and Memory Barriers.md",
+    "AWS Cloud/Intro to EC2.md",
+    "GENERAL/Deque.md",
+    "GENERAL/IMAGINEER.md",
+    "GENERAL/CSharp Expression Bodied Syntax.md",
+    "GENERAL/Const Char Pointer.md",
+    "GENERAL/CMake Target Extra Info.md",
+    "GENERAL/CMake Managing Dependencies.md",
+    "GENERAL/CMake Compiling And More.md",
+    "Tools For Class Author/Classes That Manage Dynamic Memory.md",
+    "GENERAL/C++ Implicit Deduction Guides.md",
+    "Tools For Class Author/Overload and Conversions/Basic Overview of Overload Operations and Conversions.md",
+    "GENERAL/Associative Container.md",
+    "AWS Cloud/Amazon Elastic Block Store and Instance Stores.md",
     "PNGS/Pasted image 20250711142012.png",
     "PNGS/Pasted image 20250711142008.png",
     "STL_Containers",
-    "GENERAL/Associative Ordered and Unordered Containers.md",
     "PNGS/Pasted image 20250710195257.png",
     "PNGS/Pasted image 20250710194432.png",
-    "PythonCookBook/Exceptions and Context Managers.md",
     "PNGS/Pasted image 20250710141313.png",
-    "GENERAL/Smart Pointers and Exceptions.md",
-    "PythonCookBook/Python Print.md",
-    "GENERAL/Similarities of Lambda and Classes.md",
-    "UNDERSTAND_THE_MACHINE/Memory Organization and Access.md",
-    "PythonCookBook/OOP, Decorators, and Iterators.md",
     "PNGS/Pasted image 20250710131744.png",
     "PNGS/Pasted image 20250710131452.png",
     "PNGS/Pasted image 20250710131406.png",
     "PNGS/Pasted image 20250710122418.png",
     "PNGS/Pasted image 20250710121555.png",
-    "Learning_Git/Cloning and Fetching.md",
-    "GENERAL/Deque.md",
-    "PythonML/Vectors, Matrices, Arrays in NumPy.md",
-    "GENERAL/Loops that Change Containers.md",
-    "OOP/OOP Overview.md",
-    "GENERAL/Lambda Expressions.md",
-    "Pybind11.md",
-    "Untitled 1.md",
-    "Nested Comprehensions.md",
-    "Untitled 3.md",
-    "Learning_Git/Creating and Pushing to a Remote Repo.md",
-    "GENERAL/Quicksort.md",
-    "GENERAL/Heaps and Segment Trees.md",
-    "DSA/MinHeap and MaxHeap.md",
-    "GENERAL/Heapsort.md",
-    "GENERAL/Introsort.md",
-    "C++ Vector Algorithms.md",
     "PythonML",
     "GENERLA",
     "q",

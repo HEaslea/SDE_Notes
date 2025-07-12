@@ -416,7 +416,7 @@ if( eax > Date2 ) then // using the long packed date format
 	<< do something if Date1 > Date2 >> 
 endif; 
 ```
-Had we kept the different date fields in separate variables or organized the fields differently, you wouldn't have been able to compare `Date1` and `Date2` in such a straightforward way. WoW, that is really fucking cool. 
+Had we kept the different date fields in separate variables or organized the fields differently, you wouldn't have been able to compare `Date1` and `Date2` in such a straightforward way. WoW, that is really cool. 
 
 Some C : packed data: 
 

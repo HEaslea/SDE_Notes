@@ -20,11 +20,11 @@ There may be some cache misses, due to the fact that most fixed sized arrays mig
 ### Fit Me in the Cache
 The array size that they used are usually small enough to be able to fit inside the array. 
 And they are contiguous, meaning that they do really well when we want them to come into the cache. 
-Holy fuck this is beautiful, actually fucking beautiful. 
+Holy moly this is beautiful, actually beautiful. 
 
 However, they writing of it, is apparently not as efficient, however, you would have to test it as per usual. 
 
-A list has great insertion time, as you just change the pointers, however, adding in an array, in a particular point, well, that's rough, everything will have to be shifted, and then if we have to reallocate all that shit, then we run into a problem. 
+A list has great insertion time, as you just change the pointers, however, adding in an array, in a particular point, well, that's rough, everything will have to be shifted, and then if we have to reallocate all that, then we run into a problem. 
 
 ### Top Level `std::map`
 It's not an array of pointers, it's an `std::map`, often called just a **map** or a **blocking table**. 

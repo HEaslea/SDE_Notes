@@ -216,7 +216,7 @@ fi.Bar(); // using the specialization of
 
 Using, not with `<int>`, will instantiate whatever it is that we are arguing. 
 
-This is really basic level shit, just the syntax of accessing an specializing
+This is really basic level, just the syntax of accessing an specializing
 
 That's the whole thing apparently. lol
 

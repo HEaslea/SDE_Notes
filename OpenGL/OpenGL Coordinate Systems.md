@@ -131,7 +131,7 @@ Remember this, the positive x is usually to the right, +y is "up".
 Think of the centre, the origin, particularly in view space, as being in the centre of your screen. 
 Your thumb is the +x axis if you use the right hand pointing idea. 
 
-OpenGL will switch which hand we use when it comes to NDC, which is fucking annoying. 
+OpenGL will switch which hand we use when it comes to NDC, which is annoying. 
 
 All we need for the view matrix: 
 ```

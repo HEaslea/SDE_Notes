@@ -1,5 +1,5 @@
 Where can I put it: 
-1. Anywhere the fuck you like
+1. Anywhere you like
 
 Remember that the whole thing with SFINAE is that at any point in the class or function, then the whole thing will collapse, the substitution will fail, and we won't be able to use that template. 
 

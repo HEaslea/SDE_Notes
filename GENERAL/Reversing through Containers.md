@@ -21,7 +21,7 @@ int arr[] = {0,1,2,3,4,5,6};
     }
     cout << E;
 ```
-This is a very shit way of doing it lol, but you get the concept.
+This is a terrible way of doing it lol, but you get the concept.
 
 [Reverse Algorithm](https://en.cppreference.com/w/cpp/algorithm/reverse)
 Requires the `#include <algorithm>`

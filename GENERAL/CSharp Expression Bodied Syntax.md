@@ -47,7 +47,7 @@ public class Rectangle
 	private int _width;
 	private int height;
 
-	public Rectangle(int width, int height) => (_width, _height) = (widht, height); // this some next level shit
+	public Rectangle(int width, int height) => (_width, _height) = (width, height); // this some next level
 
 	public int GetArea() => _width * _height;
 }

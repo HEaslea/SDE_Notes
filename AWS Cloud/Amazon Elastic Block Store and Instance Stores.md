@@ -208,7 +208,7 @@ Also not every item has to have the same attributes:
 ![[Pasted image 20250130150336.png]]
 ## Amazon DynamoDB 
 Key value dbs. 
-Deliver in single-digit ms performance at any scale - that is nuts (that is some hashing shit right there). 
+Deliver in single-digit ms performance at any scale - that is nuts (that is some hashing right there). 
 Serverless - no provisioning, patch or management on our end. No need to install, maintain and operate software. 
 Auto-scaling - think about prime day - auto scaling
 

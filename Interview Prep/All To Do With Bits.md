@@ -69,7 +69,7 @@ The weight of an integer here, is said to be the the number of 1's in its binary
 The object here is to get the closest, same weight integer. We take in `x` and return `|y - x|` (ie. the smallest difference). ie. if `x = 6` you should return `x = 5`. 
 
 The brute force will look at `x - 1, x + 1, x - 2, x + 2`. Think about if we took in 8, then the only other ones are going to be the powers of 2, therefore 4 would be the closest. Here we are trying $2^{3-1} - 1$ numbers before we arrive at the one that we want. 
-Therefore if we were to look at $2^{30}$, we would have to look at $2^{29} - 1$, which is a shit ton of integers. 
+Therefore if we were to look at $2^{30}$, we would have to look at $2^{29} - 1$, which is a ton of integers. 
 
 Let's think about what constitutes a number that is closer to another, and we'll start smaller and try and find a rule that we can use for the larger numbers. 
 
@@ -329,7 +329,7 @@ Remember Always, that in order to represent a denary number in binary, to know t
 
 In order to get the most significant digit, here we have to divide the `integer` by the 10 ^ number of digits - 1.
 
-This is fucking beautiful, never need to convert to a string. we just move up the least significant bit and the most significant, we make the int smaller and smaller. 
+This is beautiful, never need to convert to a string. we just move up the least significant bit and the most significant, we make the int smaller and smaller. 
 
 ```
 bool IsPalindrome(int x)
@@ -357,7 +357,7 @@ bool IsPalindrome(int x)
 Here's a great question: *How would you mimic a three sided coin with a two sided coin*. You just flip it twice, you can ignore one, act like it doesn't exist and it doesn't and then we really have only three outcomes that are equally as likely. 
 
 The trick with this one is that if we want to have a random number between `upper_bound` and `lower_bound`, then we have `[lb, ub]`. One thing that you can do is simple get a random number between `[0, ub - lb]` and then add `lb`. 
-This is super fucking obvious when we see it like this `[lb , ub] = [0 , ub - lb] + lb`. 
+This is super obvious when we see it like this `[lb , ub] = [0 , ub - lb] + lb`. 
 Another thing to note is when we look at how many bits that we will require: 
 $floor(log_2(x)) + 1 $ will give us that idea, and then we know this: 
 $2^n - 1 < x \leq 2^{n+1}-1$. Where $n = floor(log_2(x))=<$

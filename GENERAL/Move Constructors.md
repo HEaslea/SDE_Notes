@@ -39,7 +39,7 @@ int main(){
 
 This is the simpler of the two. 
 The reason that we have move and rvalue references here, is so that every time we copy an object, we just move things over, rather than actually copying. 
-So really we just wanna move, this is case for larger heavier objects, it's really important so that we don't take up a shit ton of memory on the stack. 
+So really we just wanna move, this is case for larger heavier objects, it's really important so that we don't take up a ton of memory on the stack. 
 
 Remember that a main thing here is that I can say: 
 ```

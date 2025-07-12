@@ -10,7 +10,7 @@ CMake has to be able to do all these things in order:
 - Installing
 - Packaging
 - Producing documentation
-- Testing some more (whatever the fuck this means)
+- Testing some more (whatever this means)
 
 The idea that it is cross platform is amazing too. 
 

@@ -54,7 +54,7 @@ else()
 	// some error message
 endif()
 ```
-If you find that you are including a shit ton of files into one thing, then you are probably not using the structures correctly. 
+If you find that you are including a ton of files into one thing, then you are probably not using the structures correctly. 
 
 ### Include Files and Preprocessing
 The simple idea being that `#include` will just replace all the code at that point with the code in the file, simple as. 
@@ -111,7 +111,7 @@ however, not great unit testing and class if we have to make public something th
 
 
 #### Configuring the Header Files
-Remember that passing everything in using `-D` is quite tedious, and can be fucked over by the sheer number of defines. 
+Remember that passing everything in using `-D` is quite tedious, and can be screwed over by the sheer number of defines. 
 ```
 // config.h.in
 #ifndef CONFIG_H
@@ -390,7 +390,7 @@ Then we get a list of include header files that we should include guard for. If 
 ##### Providing Information for the Debugger
 The machine code will just be raw and bare. 
 
-Debuggers act as a bridge between the machine code, that is super fucking difficult to read, literally impossible, and source code (the code that we write). 
+Debuggers act as a bridge between the machine code, that is super difficult to read, literally impossible, and source code (the code that we write). 
 
 In the release build, machine code will be highly optimized: removing unnecessary instructions : it will remove variable and debug info to make the program faster and smaller. 
 

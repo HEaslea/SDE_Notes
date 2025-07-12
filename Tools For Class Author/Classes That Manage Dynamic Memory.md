@@ -301,8 +301,6 @@ auto f = arr[5];
 
 cout << f - s << endl; // outputs 5
 ```
-
-
-Shit I've just realised as well, that when we do copy assignment, we do need to destruct a lot on the left object, it might point to things that we need to get rid of before we give it new pointers to work with. 
+I've just realised as well, that when we do copy assignment, we do need to destruct a lot on the left object, it might point to things that we need to get rid of before we give it new pointers to work with. 
 
 [[Moving Objects]]

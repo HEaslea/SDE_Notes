@@ -86,7 +86,7 @@ If the operations on this shared counter were relaxed orderings, then we would b
 The only saving grace would be to lock the variable so that only one operation at once could access it, before another tried to do anything with, absolutely no double reads or writes in a row. 
 Then we the book talks about `acquire - release` on pg 185. 
 Essentially, any operations before the atomic operation will be made before the atomic operation, and any after will only be made visible after the atomic operation. 
-The best way to think about it, is that CPU's are so fucking fast, that they are working on their timelines, and shit just gets jumbled around a fair amount. 
+The best way to think about it, is that CPU's are so fast, that they are working on their timelines, and that just gets jumbled around a fair amount. 
 
 **What we really mean when we talk about operations becoming visible, is that their results will become observable to other CPUs**
 
@@ -103,7 +103,7 @@ This is the memory barrier.
 
 The trick with this is to see what we need to guarantee, and what we don't. For instance, if some of the operations, do not depend at all  on another thread, then really, do they have to wait for the atomic operation, and be behind that barrier, well no, not at all. 
 There is no harm in that level of correction, having more guarantees than what is needed, not a problem really. 
-Remember that compilers and hardware can both reorder what we have written, and to us, that means it can look like an arbitrary order, but it's not even fucking visible to us, until there is a bug, sometimes we can get lucky and not even see it until it goes live etc, than that really is an issue. 
+Remember that compilers and hardware can both reorder what we have written, and to us, that means it can look like an arbitrary order, but it's not even visible to us, until there is a bug, sometimes we can get lucky and not even see it until it goes live etc, than that really is an issue. 
 
 [CPPRef Memory Order](https://en.cppreference.com/w/cpp/atomic/memory_order)
 

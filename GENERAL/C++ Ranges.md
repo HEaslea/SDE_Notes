@@ -31,7 +31,7 @@ for(int n : even_doubles)
 }
 ```
  These are pretty amazing things: 
- Without using them we end up with this fucking salad of words: 
+ Without using them we end up with this salad of words: 
  ```
 std::vector<int> numbers = {1, 2, 3, 4, 5...};
 std::vector<int> evens; 

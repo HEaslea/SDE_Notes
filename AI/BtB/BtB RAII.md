@@ -114,7 +114,7 @@ There are more:
 RAII classes might provide a way to get direct access to the enclosed resource. 
 Some might provide a way to get the resource completely out of the class. 
 
-We shouldn't really be messing with the resource on our own, just hand it off to some RAII class, in order to make sure that we don't fuck up completely lol.
+We shouldn't really be messing with the resource on our own, just hand it off to some RAII class, in order to make sure that we don't up completely lol.
 
 #### RAII is not a Panacea
 ie. it's not a solution to everything

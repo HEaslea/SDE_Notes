@@ -60,3 +60,112 @@ This was when we gave the function `0`.
 Following this Traceback allows us to see where the error landed. 
 
 ### Handling Exceptions
+In order to handle, we use `try`, one this `try` block, Python will look for one or more types of exceptions.
+If exceptions are raised, it allows you to react. 
+
+Then we have the `except`, which is the same as the `catch` clause in C++. 
+
+Then we also have the `else`: which runs if there are no exceptions thrown. 
+
+`finally`, which will always happen, regardless of what goes on above it
+
+This `finally` is used when we have to clean up resources. 
+
+`except` and `else` can be omitted. 
+
+The idea being that we have `try, except, else, finally`. 
+
+It might look something like this: 
+```
+try: 
+	# code that might raise an exception
+	risky_operation()
+	
+except SomeException: 
+	# will run if there is an exception thrown
+	handle_error()
+
+else: 
+	# this runs if no exception occurred
+	run_if_no_error()
+
+finally: 
+	# this run no matter what (error or not)
+	cleanup() # as this is usually used in clean up. 
+```
+
+Think about it like this: try some risky code, then run some if there are errors thrown, run code if there aren't any exceptions, then run some code no matter what happens. 
+
+```
+def try_syntax(numerator, denominator): 
+	try: 
+		print(f"IN the try block: {numerator}/{denominator}")
+		result = numerator / denominator
+	except ZeroDivisionError as zde: 
+		print(zde)
+	else: 
+		print("The result is: ", result)
+		return result
+	finally: 
+		print("Exiting")
+```
+
+We can catch a couple of errors at one point: 
+`except (ZeroDivisionError, TypeError) as e:`
+
+Or we can separate them out, if we have to do different things per exception: 
+```
+try: 
+	q, r = divmode(*values)
+except ZeroDivisionError: 
+	print("...")
+except TypeError as e: 
+	print(e)
+```
+
+ They will go in order, and only do the first exception that is caught, therefore, put the most specific at the top, and the most generic at the bottom, so that the generic doesn't catch and mess up the rest of them. 
+ 
+We can do a catch-all, by using `BaseException`. 
+
+You can also raise exceptions from within an `except` clause. 
+
+Creating custom exceptions is very common, especially if you are writing your own libs. 
+
+A very minimal example from stack overflow, where we just teal code and pretend :):
+```
+class SomeError(Exception): 
+	def __init__(self, message, errors): 
+		# call the base class constructor with the parameters it needs
+		super().__init__(message)
+
+		# custom code
+		self.errors = errors
+```
+
+Even something more simple: 
+```
+class MyException(Exception): 
+	pass
+
+raise MyException("")
+```
+
+Raises will work similar to `throw` in C++. 
+As in we go through the functions: 
+```
+def low_level(): 
+	raise ValueError("Something went wrong")
+
+def mid_level(): 
+	low_level() # no try/except here
+
+def high_level(): 
+	try: 
+		mid_level()
+	except ValueError as e: 
+		print("Caught exception:", e)
+```
+
+**Some core points**: 
+- Keep the `try` clause as small as possible, just to the code that might be risky. 
+- Make the `except` blocks as specific as you can at the top, then as general as you can as you go down. If you do too general, you have to imagine that you are going to capture exceptions that you did not actually intend to catch. 

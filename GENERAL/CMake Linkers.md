@@ -283,7 +283,7 @@ THE GENERAL IDEA:
 - LTR : Relocates absolute virtual addresses in the library to align with the process's address space. 
 
 ## Solving Problems with ODR
-"There are two hard things in computer science : cache invalidation and naming things" - some fucker at some point. 
+"There are two hard things in computer science : cache invalidation and naming things" - some dude at some point. 
 
 Symbols must only be defined once. 
 Declared and defined are different things, multiple declarations are fine. 
@@ -385,7 +385,7 @@ Local symbols will take precedence over the DLL's.
 
 Take care when using shared libs and conflicting names, they will crop up sooner rather than later. 
 
-The real thing, just fucking use NameSpaces: 
+The real thing, just use NameSpaces: 
 ### Use Namespaces - Don't Count on the Linker
 ODR is more easily dealt with. 
 Just use a namespace after the lib if you want. 
@@ -395,7 +395,7 @@ We might find a link, where one lib links to another and another etc.
 Symbols will remain in their own namespaces throughout the chain. 
 
 ### The Order of Linking and Unresolved Symbols
-This is a massive reason why novice programmers do not build anything from the get go, so fucking complicated. 
+This is a massive reason why novice programmers do not build anything from the get go, so complicated. 
 Then we open pandora's box and have to have a go when we want to build something proper. 
 
 Imagine that we have some chained libs, our exe relies on a, that relies on a nested b. 

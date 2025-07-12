@@ -205,7 +205,7 @@ If we are at the bottom, then we must go right, if we are at the right, then we 
 This means that there will be a overlapping of some paths. 
 We would have to pass away two parameters, the `i` and `j` that are relevant to the row and the column that we are in, then we are returning the path with the minimum. 
 In terms of thinking about the subproblem here: 
-I was so close to solving that immediately, which was fucking dope: 
+I was so close to solving that immediately, which was dope: 
 I really like the idea of having a wrapper as well. 
 At every number there is the rough possibility that we can go right, or we can go down: however, if we are at the edge, or beyond it, then we cannot go that way anymore.
 ```

@@ -249,7 +249,7 @@ target_link_libraries(my_target OpenGL::GL)
 
 Then we use the idea of transitive usage requirements in order to pass whatever we need to other targets, aka the propagated properties: 
 `target_link_libraries(main PRIVATE protobuf::libprotobuf)`
-Just use the online documentation for all the find module bullshit. 
+Just use the online documentation for all the find module. 
 
 Remember that the main idea is that we utilise the `<PKG_NAME>_FOUND` in order to make sure that the user knows that the lib could not be found, and will install it if they can. 
 Or, later we'll see how to install the package automatically: 
@@ -547,7 +547,7 @@ The main idea here though is that we shouldn't really be putting so much into so
 ### Using Dependencies When They Are Not Present On The System
 
 The `FetchContent` module is the one for us. 
-This is a user friendly module over the `ExternalProject` module, which is a little more fucked. 
+This is a user friendly module over the `ExternalProject` module, which is a little more screwed up. 
 `FetchContent` brings in dependencies during the **Configuration** stage;
 `ExternalProject` brings in dependencies during the **Build** stage;
 
@@ -691,7 +691,7 @@ You can download without extracting.
 Remember TLS - transport security layer - CMake will also  check that for us if we ask really nicely. 
 
 **GitHub**
-Most of the time, we are just going to use GitHub, we love that shit: 
+Most of the time, we are just going to use GitHub, we love that: 
 
 We must ensure that we have Git version 1.6.5 on the host system: 
 ```
@@ -730,7 +730,7 @@ The `.git` dir is the hidden dir in a git repo, containing all the data Git need
 Data about: commits, branches, configuration, and more. 
 
 **Subversion and Mercurial**: 
-Basically the same shit: 
+Basically the same: 
 ```
 FetchContent_Declare( depedency-id 
 	SVN_REPOSITORY <url>

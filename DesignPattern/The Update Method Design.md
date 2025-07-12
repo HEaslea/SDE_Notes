@@ -13,7 +13,7 @@ The order of the update is really important, for most objects (?).
 
 Sequentially updating can be really useful, however, keep in mind that one might update and one behind it can see, but the ones before won't be able to see until the next frame. 
 
-A really really good idea, is to cache the number of objects in the list before iterating over it, means that new objects added to the list in that frame, will not act within that frame, and possibly fuck things up. 
+A really really good idea, is to cache the number of objects in the list before iterating over it, means that new objects added to the list in that frame, will not act within that frame, and possibly screw things up. 
 
 ```
 int numObjectsThisTurn = numObjects_;

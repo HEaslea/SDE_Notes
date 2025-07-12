@@ -1,5 +1,5 @@
 They are automatically generated deduction guides, by the compiler, in certain situations, to help with template argument deduction. 
-Along with CTAD, class template argument deduction, together, with the implicit deduction guides, allows the compiler to basically do whatever the fuck it wants and deduce based on constructor arguments.
+Along with CTAD, class template argument deduction, together, with the implicit deduction guides, allows the compiler to basically do whatever the it wants and deduce based on constructor arguments.
 
 When we create a class template and provide constructors, the compiler can generate implicit deduction guides based on those constructors that we have. 
 The guides help the compiler deduce the template parameters based on the types of the arguments passed to the constructor. 
@@ -69,6 +69,6 @@ int main()
 #### Key To Remember
 When we are writing our own libraries, we might query whether we want to allow the fact that we can use just constructors to deduce the template types. 
 We might have to consider, for each constructor, whether we want to offer it as a source for implicit deduction guides. 
-Otherwise you have to do some weird shit in order to avoid it. 
+Otherwise you have to do some weird stuff in order to avoid it. 
 Beware of silent productions of misbehaving instantiations. 
 #### Injected Class Names

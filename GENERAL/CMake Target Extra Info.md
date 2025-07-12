@@ -33,7 +33,7 @@ extern "C" __declspec(dllexport) void hello()
 The `extern "C"` prevents C++ name mangling, making the function usable by other languages or compilers. 
 `__declspec(dllexport)` marks the function for export in the DLL . 
 
-Then compile that shit: 
+Then compile that: 
 `g++ -shared -o myLib.dll myLib.cpp`
 
 There is more code there: 

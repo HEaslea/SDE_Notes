@@ -3,7 +3,7 @@ From the OReilly C++ Software Design Book:
 The general idea is that: 
 > **A Dependency:** is when there is a relationship between two components, where one component relies on the other to work properly. 
 
-Say if we have a component that depends on a library in order to query a database, then clearly the component will be depending on the library. This is fine as long as the library is stable, it's interface doesn't change, and we can continue to use it the same way for as long as possible, however, if that library changes in any significant manner, then we run into a shit ton of trouble. 
+Say if we have a component that depends on a library in order to query a database, then clearly the component will be depending on the library. This is fine as long as the library is stable, it's interface doesn't change, and we can continue to use it the same way for as long as possible, however, if that library changes in any significant manner, then we run into a ton of trouble. 
 
 #### How we might form Dependencies
 Say we have an abstract class, it will be forming the interface, that we will later implement. Say that this class is that class that will be using the library that will query a database. Now, does the library depend on the class, no, not at all, we might see, or not see, that it doesn't mention the our class in any way. Our class, will certainly have to mention the library at some point, in order to use it, therefore we have a dependency on the library. At some point the class will mention this library. 

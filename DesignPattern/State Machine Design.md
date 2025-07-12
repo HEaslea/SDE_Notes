@@ -207,7 +207,7 @@ Entity nE("Hugo", 50);
 enum Input{ PRESS_A, PRESS_B };
 
 class Entity;
-class DuckingState; class StandingState; class JumpingState; // fucking hate this shit
+class DuckingState; class StandingState; class JumpingState; // hate this
 
 // see below for Entity, that points to an EntityState
 

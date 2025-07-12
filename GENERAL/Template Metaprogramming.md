@@ -130,7 +130,7 @@ void Log(const T& obj)
 }
 ```
 
-So for `ToString`, there is the option to function overload, boring, not useful, not extensible, bullshit, you wanna write all that?: 
+So for `ToString`, there is the option to function overload, boring, not useful, not extensible, you wanna write all that?: 
 It works, but it's bs. 
 
 ```

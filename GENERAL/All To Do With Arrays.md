@@ -159,7 +159,7 @@ In general `quicksort` has large run times and deep function call stacks on arra
 One general idea: the precondition of quicksort is nada, doesn't require anything, however, what if we impose the precondition that we somewhat organise values. 
 I would call it a **Flexible Precondition**: isn't mandatory, however, would speed up run time of a specific implementation that we have. 
 The **Flexible Precondition**: is that we should probably have a pivot, and then arrange, all < before, = in the middle, and > after that. See page 51, and that will create the Dutch national flag lol. 
-We have an idea of the pivot before hand, then we are handing quicksort a beautifully wired array that it can fucking blast through. Why not not use a quick sort? Fuck you, that's why. 
+We have an idea of the pivot before hand, then we are handing quicksort a beautifully wired array that it can blast through. Why not not use a quick sort? 
 The = is really applicable if we have an array of very similar numbers. 
 eg. `A = <0,1,2,0,2,1,1>`
 The pivot index here will be 3 (0). 
@@ -739,7 +739,7 @@ There's a thing to remember, that in order to divide a still receive a whole num
 There is something to be said for taking a map of primes, or an array of primes, and just going through those. 
 However, seeing as the result is, either prime or not, we can have a boolean array for this. 
 
-Oh shit i see this pattern that the book is using, essentially, in order to generate primes, we only need 0-10. 
+Oh, i see this pattern that the book is using, essentially, in order to generate primes, we only need 0-10. 
 We know that 0 and 1 are not primes. 
 Then we look at two, ok two is a prime, however, we know that everything that is divisible by two, is not going to be a prime. 
 Therefore we take away all numbers that are divisible by two. 
@@ -1184,7 +1184,7 @@ The idea being that the numbers don't matter themselves, however, that we are pi
 To note, that if all the probabilities are the same, then we just make a call to a random number generator, for i between 0 and the size of the set of numbers, then return the number that is found at that index. 
 
 The way that I felt was really obvious, was to create  range for each probability, say a probability is 1/19, then the range here is that we create a number between [0, 1) then we see if the generated number is between that range or not. 1/19 is 0.0526, so anything between [0, 0.0526) will give us that number. 
-Say the next number will be 5/19 then we say that the generated number will have to be between [1/ 19, 6/19), this is just fairly0 fucking obvious, makes us look really cool. Then the last will be whatever the sum of the others is, to one, [n/19, 1]. where n/19 signifies a summation of all the other probabilities up until the last. 
+Say the next number will be 5/19 then we say that the generated number will have to be between [1/ 19, 6/19), this is just fairly obvious, makes us look really cool. Then the last will be whatever the sum of the others is, to one, [n/19, 1]. where n/19 signifies a summation of all the other probabilities up until the last. 
 Note that whenever we search something, for instance, searching an array of n disjoint intervals, takes `O(n)`, however, are they going to be ordered, well yes of course, therefore we can do it in `O(log n)` , the time complexity of searching using a binary tree. 
 
 ```

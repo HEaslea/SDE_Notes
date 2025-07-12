@@ -494,7 +494,7 @@ The single point of contact, for our Auto Scaling group.
 ![[Pasted image 20250126234656.png]]![[Pasted image 20250126234708.png
 
 # Messaging and Queueing
-Imagine back in the coffee shop, in order to get the message from the cashier to the barista, without having a shit ton of talking, we need some form of message. Imagine that the barista goes on break, then the cashier will have to queue up those messages, until he is back. 
+Imagine back in the coffee shop, in order to get the message from the cashier to the barista, without having to do a ton of talking, we need some form of message. Imagine that the barista goes on break, then the cashier will have to queue up those messages, until he is back. 
 Therefore we need a buffer, obviously a queue. 
 Then applications, or even subsystems can send messages to each other. 
 The idea of this, going through another system is a great sense of decoupling. 

@@ -3,7 +3,7 @@ If we want to do any rendering, then we need to learn about the vertex and fragm
 #shaderlanguage
 To write a shader, we need to write in shader language `GLSL` (OpenGL Shading Language), and then compile this shader so we can use it in our application. 
 
-It is very similar to C, according to clever people, so for me, this is going to be fucking ridiculous. 
+It is very similar to C, according to clever people, so for me, this is going to be ridiculous. 
 
 "Simple Version": 
 ```

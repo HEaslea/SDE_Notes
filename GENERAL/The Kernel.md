@@ -1,4 +1,4 @@
-OS's have to handle a shit ton of tasks. The Kernel is there to handle the lowest level operations, those that need to be the safest, most changing to the core of the PC, they have to be monitored. 
+OS's have to handle a ton of tasks. The Kernel is there to handle the lowest level operations, those that need to be the safest, most changing to the core of the PC, they have to be monitored. 
 
 The rest of the operating system, and all the user programs, are built atop the services provided by the kernel. 
 
@@ -9,7 +9,7 @@ You have the cpu, memory and devices on the bottom level, then the kernel and th
 ### Kernel Mode vs User Mode
 The kernel and its device drivers run in a special mode called **protected mode**, **privileged mode** or **protected mode**. All other operations are in **user mode**. 
 When running in privileged mode, software has full access to all of the hardware in the computer, whereas user mode will have a lot of restrictions on what it can do. 
-In order for restricted software to get to the core of things, we have to ask the kernel, making a kernel call. This means that a user software will not inadvertently fuck over the entire system. 
+In order for restricted software to get to the core of things, we have to ask the kernel, making a kernel call. This means that a user software will not inadvertently screw over the entire system. 
 
 #### Kernel Mode Privileges
 The inner ring (ring 0) has access to all the machine language instructions defined by the CPU's ISA. This includes the privileged instructions. These instructions may allow for certain registers to be changed, that are usually off limits, or accessing certain limited areas of memory etc. 
