@@ -169,3 +169,82 @@ def high_level():
 **Some core points**: 
 - Keep the `try` clause as small as possible, just to the code that might be risky. 
 - Make the `except` blocks as specific as you can at the top, then as general as you can as you go down. If you do too general, you have to imagine that you are going to capture exceptions that you did not actually intend to catch. 
+
+### Not only for Errors
+
+```
+n = 100
+found = False
+for a in range(n): 
+	if found: 
+		break
+	for b in range(n):
+		if found: 
+			break
+		for c in range(n): 
+			if 42 * a + 17 * b + c == 5096: 
+				found = True
+				print(a, b, c) # 79 99 95
+				break
+```
+
+Here, we have to use `found` in order to break out of the three loops. 
+
+Here is the alternative approach: 
+```
+class ExitLoopException(Exception): 
+	pass
+
+
+try: 
+	n = 100
+	for a in range(n):
+		for b in range(n):
+			for c in range(n):
+				if 42 * a + 17 * b + c == 5096: 
+					raise ExitLoopException(a, b, c)
+except ExitLoopException as ele: 
+	print(ele.args) # 79 99 95
+```
+
+Notice the use of the `args` here in order to get the numbers. 
+
+### Context Managers
+When working with external resources, we sometimes need some cleanup steps, when we are done. 
+Say, after writing to a file, we need to close the file. 
+Failing to clean up properly can sometimes result in a manner of bugs. 
+
+In order to make sure this happens when an exception occurs, we might have to use `try/finally`, this is not always convenient, and could result in a lot of repetition, this is not always as obvious, especially if we are using a lot of the same resources over and over again. 
+
+They create an execution context in which we can work with a resource and automatically perform any necessary cleanup when we leave that context, even if an exception was raised. 
+
+Another use case, is to make temporary changes to the global state of our program. 
+Say we want to change the level of precision, of an app just for a moment, but the default needs to stay the same. 
+
+```
+from decimal import Context, Decimal, getcontexxt, setcontext
+
+one = Decimal("1")
+three = Decimal("3")
+
+orig_ctx = getcontext()
+ctx = Context(prec=5)
+
+setcontext(ctx)
+
+print(f"{ctx}\n")
+print("Custom decimal context: ", one / three)
+
+setcontext(orig_ctx)
+print("Original decimal context: ", one / three)
+```
+
+
+```
+Context(prec=5, rounding=ROUND_HALF_EVEN, Emin=-999999, Emax=999999, capitals=1, clamp=0, flags=[], traps=[InvalidOperation, DivisionByZero, Overflow])
+
+Custom decimal context:  0.33333
+Original Decimal Context 0.3333333333333333333333333333
+```
+
+

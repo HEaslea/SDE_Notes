@@ -35,8 +35,7 @@
               "title": "Quicksort"
             }
           }
-        ],
-        "currentTab": 1
+        ]
       }
     ],
     "direction": "vertical"
@@ -94,7 +93,8 @@
       }
     ],
     "direction": "horizontal",
-    "width": 238.5
+    "width": 238.5,
+    "collapsed": true
   },
   "right": {
     "id": "9a5bd91e964f5d11",
@@ -191,8 +191,9 @@
       "command-palette:Open command palette": false
     }
   },
-  "active": "74df9f0ea1f1b1dc",
+  "active": "dec0088a8a7d5fc4",
   "lastOpenFiles": [
+    "GENERAL/Quicksort.md",
     "GENERAL/What is Dependency.md",
     "Topic 6 Transition Metals.md",
     "GENERAL/Untitled 1.md",
@@ -218,7 +219,6 @@
     "GENERAL/C++ Implicit Deduction Guides.md",
     "Tools For Class Author/Overload and Conversions/Basic Overview of Overload Operations and Conversions.md",
     "GENERAL/Associative Container.md",
-    "AWS Cloud/Amazon Elastic Block Store and Instance Stores.md",
     "PNGS/Pasted image 20250711142012.png",
     "PNGS/Pasted image 20250711142008.png",
     "STL_Containers",
