@@ -9,7 +9,7 @@ C# will automatically handle whether a type is a reference or a value type based
 In C#, types are implicitly (it is inherent to the type it seems) that some types are value types and some are reference types: 
 - **Value Types** : `int, struct, float, enum` etc. which are of course copied when assigned or passed to methods. They are typically just stored on the stack. 
 - **Reference Types** : `classes, arrays, strings, delegates, interfaces` etc. 
- We lose a level of control over how memory is managed, however, think of all the retards that really need that, especially when they just wanna make another to do list. 
+ We lose a level of control over how memory is managed, however, think of all the people that really need that, especially when they just wanna make another to do list. 
 
 Remember that in C++, the default behaviour is pass-by-value, C# wants to manage this for you, by allowing references to be implicit to the type itself. 
 

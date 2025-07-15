@@ -13,12 +13,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "PythonCookBook/Exceptions and Context Managers.md",
+                "file": "GENERAL/CSharp ValueTypes and RefTypes.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "Exceptions and Context Managers"
+              "title": "CSharp ValueTypes and RefTypes"
             }
           },
           {
@@ -67,7 +67,7 @@
             "state": {
               "type": "search",
               "state": {
-                "query": "",
+                "query": "retard",
                 "matchingCase": false,
                 "explainSearch": false,
                 "collapseAll": false,
@@ -93,8 +93,7 @@
       }
     ],
     "direction": "horizontal",
-    "width": 238.5,
-    "collapsed": true
+    "width": 238.5
   },
   "right": {
     "id": "9a5bd91e964f5d11",
@@ -193,6 +192,7 @@
   },
   "active": "dec0088a8a7d5fc4",
   "lastOpenFiles": [
+    "PythonCookBook/Exceptions and Context Managers.md",
     "GENERAL/Quicksort.md",
     "GENERAL/What is Dependency.md",
     "Topic 6 Transition Metals.md",
@@ -218,7 +218,6 @@
     "Tools For Class Author/Classes That Manage Dynamic Memory.md",
     "GENERAL/C++ Implicit Deduction Guides.md",
     "Tools For Class Author/Overload and Conversions/Basic Overview of Overload Operations and Conversions.md",
-    "GENERAL/Associative Container.md",
     "PNGS/Pasted image 20250711142012.png",
     "PNGS/Pasted image 20250711142008.png",
     "STL_Containers",
