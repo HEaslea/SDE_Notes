@@ -27,7 +27,7 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "Python Virtual Environments.md",
+                "file": "JobPrep/Python Virtual Environments.md",
                 "mode": "source",
                 "source": false
               },
@@ -41,16 +41,16 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "Untitled.md",
+                "file": "Learning_Git/Three-Way Merges.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "Untitled"
+              "title": "Three-Way Merges"
             }
           }
         ],
-        "currentTab": 1
+        "currentTab": 2
       }
     ],
     "direction": "vertical"
@@ -205,16 +205,16 @@
       "command-palette:Open command palette": false
     }
   },
-  "active": "e9b5791461728570",
+  "active": "acddd3bdf19b4373",
   "lastOpenFiles": [
-    "JobPrep/PIP.md",
-    "Python Virtual Environments.md",
+    "Learning_Git/Merge Conflicts.md",
     "Untitled.md",
-    "PNGS/Pasted image 20250719194816.png",
     "JobPrep/APT.md",
+    "JobPrep/Python Virtual Environments.md",
+    "JobPrep/PIP.md",
+    "PNGS/Pasted image 20250719194816.png",
     "JobPrep",
     "GENERAL/Quicksort.md",
-    "Merge Conflicts.md",
     "PNGS/Pasted image 20250718134712.png",
     "PNGS/Pasted image 20250718134635.png",
     "PNGS/Pasted image 20250718134257.png",
@@ -224,7 +224,7 @@
     "PNGS/Pasted image 20250718133701.png",
     "PNGS/Pasted image 20250718132632.png",
     "PNGS/Pasted image 20250718132359.png",
-    "Three-Way Merges.md",
+    "Learning_Git/Three-Way Merges.md",
     "Learning_Git/Cloning and Fetching.md",
     "Views String_View and Span.md",
     "PythonCookBook/Files and Data Persistence.md",
