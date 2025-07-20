@@ -8,34 +8,49 @@
         "type": "tabs",
         "children": [
           {
-            "id": "dec0088a8a7d5fc4",
+            "id": "43d7320b0b681c55",
             "type": "leaf",
             "state": {
               "type": "markdown",
               "state": {
-                "file": "GENERAL/CSharp ValueTypes and RefTypes.md",
+                "file": "JobPrep/APT.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "CSharp ValueTypes and RefTypes"
+              "title": "APT"
             }
           },
           {
-            "id": "74df9f0ea1f1b1dc",
+            "id": "e9b5791461728570",
             "type": "leaf",
             "state": {
               "type": "markdown",
               "state": {
-                "file": "GENERAL/Quicksort.md",
+                "file": "Python Virtual Environments.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "Quicksort"
+              "title": "Python Virtual Environments"
+            }
+          },
+          {
+            "id": "acddd3bdf19b4373",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "Untitled.md",
+                "mode": "source",
+                "source": false
+              },
+              "icon": "lucide-file",
+              "title": "Untitled"
             }
           }
-        ]
+        ],
+        "currentTab": 1
       }
     ],
     "direction": "vertical"
@@ -67,7 +82,7 @@
             "state": {
               "type": "search",
               "state": {
-                "query": "retard",
+                "query": "",
                 "matchingCase": false,
                 "explainSearch": false,
                 "collapseAll": false,
@@ -88,12 +103,12 @@
               "title": "Bookmarks"
             }
           }
-        ],
-        "currentTab": 1
+        ]
       }
     ],
     "direction": "horizontal",
-    "width": 238.5
+    "width": 238.5,
+    "collapsed": true
   },
   "right": {
     "id": "9a5bd91e964f5d11",
@@ -190,10 +205,32 @@
       "command-palette:Open command palette": false
     }
   },
-  "active": "dec0088a8a7d5fc4",
+  "active": "e9b5791461728570",
   "lastOpenFiles": [
-    "PythonCookBook/Exceptions and Context Managers.md",
+    "JobPrep/PIP.md",
+    "Python Virtual Environments.md",
+    "Untitled.md",
+    "PNGS/Pasted image 20250719194816.png",
+    "JobPrep/APT.md",
+    "JobPrep",
     "GENERAL/Quicksort.md",
+    "Merge Conflicts.md",
+    "PNGS/Pasted image 20250718134712.png",
+    "PNGS/Pasted image 20250718134635.png",
+    "PNGS/Pasted image 20250718134257.png",
+    "PNGS/Pasted image 20250718134245.png",
+    "PNGS/Pasted image 20250718134029.png",
+    "PNGS/Pasted image 20250718133801.png",
+    "PNGS/Pasted image 20250718133701.png",
+    "PNGS/Pasted image 20250718132632.png",
+    "PNGS/Pasted image 20250718132359.png",
+    "Three-Way Merges.md",
+    "Learning_Git/Cloning and Fetching.md",
+    "Views String_View and Span.md",
+    "PythonCookBook/Files and Data Persistence.md",
+    "PythonCookBook/Exceptions and Context Managers.md",
+    "GENERAL/Exceptions And Throwing Them.md",
+    "GENERAL/CSharp ValueTypes and RefTypes.md",
     "GENERAL/What is Dependency.md",
     "Topic 6 Transition Metals.md",
     "GENERAL/Untitled 1.md",
@@ -207,28 +244,7 @@
     "GENERAL/Reversing through Containers.md",
     "GENERAL/Move Constructors.md",
     "GENERAL/Memory Order and Memory Barriers.md",
-    "AWS Cloud/Intro to EC2.md",
-    "GENERAL/Deque.md",
-    "GENERAL/IMAGINEER.md",
-    "GENERAL/CSharp Expression Bodied Syntax.md",
-    "GENERAL/Const Char Pointer.md",
-    "GENERAL/CMake Target Extra Info.md",
-    "GENERAL/CMake Managing Dependencies.md",
-    "GENERAL/CMake Compiling And More.md",
-    "Tools For Class Author/Classes That Manage Dynamic Memory.md",
-    "GENERAL/C++ Implicit Deduction Guides.md",
-    "Tools For Class Author/Overload and Conversions/Basic Overview of Overload Operations and Conversions.md",
-    "PNGS/Pasted image 20250711142012.png",
-    "PNGS/Pasted image 20250711142008.png",
     "STL_Containers",
-    "PNGS/Pasted image 20250710195257.png",
-    "PNGS/Pasted image 20250710194432.png",
-    "PNGS/Pasted image 20250710141313.png",
-    "PNGS/Pasted image 20250710131744.png",
-    "PNGS/Pasted image 20250710131452.png",
-    "PNGS/Pasted image 20250710131406.png",
-    "PNGS/Pasted image 20250710122418.png",
-    "PNGS/Pasted image 20250710121555.png",
     "PythonML",
     "GENERLA",
     "q",
@@ -237,7 +253,6 @@
     "NETWORKING/NETWORK_INFRASTRUCTURE",
     "NETWORKING/NETWORK_INFRASTRUCTURE",
     "NETWORKING",
-    "gits",
     "Untitled.canvas"
   ]
 }

@@ -163,6 +163,16 @@ Remember that when we merge, we have to be on the destination, and then argue fo
 
 This time the source will be the `origin/main` branch, which can be used like a normal branch here, which it is, as we have downloaded the commits. 
 
-resume at pg 136.
+### Deleting Branches (Continued)
+Remember that in order to delete branches, we used `git push <shortname> -d <branch_name>`, to delete the  remote `feature` branch and the `origin/feature`. 
+This was in the friend's repo, therefore in order to get it done on the other local repo. 
+We just need to `git fetch -p` that will update the remote-tracking branches. 
+The `-p` is for prune. 
 
+Therefore: `git fetch -p`, Remove remote tracking branches that correspond to the deleted remote branches and download data from the remote repo. 
 
+Then in order to delete the local feature, we use `git branch -d feature`. 
+
+![[Pasted image 20250718013315.png]]![[Pasted image 20250718013343.png]]
+
+Th
