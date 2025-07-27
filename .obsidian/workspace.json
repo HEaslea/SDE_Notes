@@ -8,49 +8,105 @@
         "type": "tabs",
         "children": [
           {
-            "id": "43d7320b0b681c55",
+            "id": "079e4664ae44209d",
             "type": "leaf",
             "state": {
               "type": "markdown",
               "state": {
-                "file": "JobPrep/APT.md",
+                "file": "PythonCookBook/Files and Data Persistence.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "APT"
+              "title": "Files and Data Persistence"
             }
           },
           {
-            "id": "e9b5791461728570",
+            "id": "bd957fe7fa3a0200",
             "type": "leaf",
             "state": {
               "type": "markdown",
               "state": {
-                "file": "JobPrep/Python Virtual Environments.md",
+                "file": "PythonCookBook/Cryptography and Tokens.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "Python Virtual Environments"
+              "title": "Cryptography and Tokens"
             }
           },
           {
-            "id": "acddd3bdf19b4373",
+            "id": "1df5f1761fec741c",
             "type": "leaf",
             "state": {
               "type": "markdown",
               "state": {
-                "file": "Learning_Git/Three-Way Merges.md",
+                "file": "PythonDesignPatterns/Foundational Design Principles.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "Three-Way Merges"
+              "title": "Foundational Design Principles"
+            }
+          },
+          {
+            "id": "568d68e1d3e1b70a",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "Learning_Git/Merge Conflicts.md",
+                "mode": "source",
+                "source": false
+              },
+              "icon": "lucide-file",
+              "title": "Merge Conflicts"
+            }
+          },
+          {
+            "id": "48f25d600d0ced52",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "GENERAL/Ranges and Views in C++.md",
+                "mode": "source",
+                "source": false
+              },
+              "icon": "lucide-file",
+              "title": "Ranges and Views in C++"
+            }
+          },
+          {
+            "id": "b23fd10f3d36948b",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "TEST/New Test File.md",
+                "mode": "source",
+                "source": false
+              },
+              "icon": "lucide-file",
+              "title": "New Test File"
+            }
+          },
+          {
+            "id": "69e99726d2f7bebe",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "Viewing Deduced Types.md",
+                "mode": "source",
+                "source": false
+              },
+              "icon": "lucide-file",
+              "title": "Viewing Deduced Types"
             }
           }
         ],
-        "currentTab": 2
+        "currentTab": 4
       }
     ],
     "direction": "vertical"
@@ -205,54 +261,53 @@
       "command-palette:Open command palette": false
     }
   },
-  "active": "acddd3bdf19b4373",
+  "active": "48f25d600d0ced52",
   "lastOpenFiles": [
+    "Learning_Git/Rebasing.md",
+    "GENERAL/_.swp",
+    "GENERAL/4913",
+    "GENERAL/Ranges and Views in C++.md",
+    "TEST/New Test File.md",
+    "TEST",
+    "PNGS/Pasted image 20250725132720.png",
+    "PNGS/Pasted image 20250725131146.png",
+    "PNGS/Pasted image 20250725131106.png",
+    "PNGS/Pasted image 20250725131050.png",
+    "PNGS/Pasted image 20250725130729.png",
+    "PNGS/Pasted image 20250725125812.png",
+    "PNGS/Pasted image 20250725021421.png",
+    "PNGS/Pasted image 20250725021300.png",
+    "PNGS/Pasted image 20250725020942.png",
+    "PNGS/Pasted image 20250725020703.png",
+    "Untitled 1.md",
     "Learning_Git/Merge Conflicts.md",
-    "Untitled.md",
+    "SOLID Principles.md",
+    "PythonCookBook/Cryptography and Tokens.md",
+    "PythonCookBook/Files and Data Persistence.md",
+    "ELCL/Combining Commands.md",
+    "PythonDesignPatterns/Foundational Design Principles.md",
+    "Viewing Deduced Types.md",
+    "PythonDesignPatterns",
+    "Introducing the Shell.md",
+    "GENERAL/Command Pattern.md",
+    "Mounting Data Storage.md",
     "JobPrep/APT.md",
     "JobPrep/Python Virtual Environments.md",
+    "persistan.md",
+    "ELCL",
+    "Learning_Git/Three-Way Merges.md",
+    "Untitled.md",
     "JobPrep/PIP.md",
-    "PNGS/Pasted image 20250719194816.png",
     "JobPrep",
     "GENERAL/Quicksort.md",
-    "PNGS/Pasted image 20250718134712.png",
-    "PNGS/Pasted image 20250718134635.png",
-    "PNGS/Pasted image 20250718134257.png",
-    "PNGS/Pasted image 20250718134245.png",
-    "PNGS/Pasted image 20250718134029.png",
-    "PNGS/Pasted image 20250718133801.png",
-    "PNGS/Pasted image 20250718133701.png",
-    "PNGS/Pasted image 20250718132632.png",
-    "PNGS/Pasted image 20250718132359.png",
-    "Learning_Git/Three-Way Merges.md",
     "Learning_Git/Cloning and Fetching.md",
     "Views String_View and Span.md",
-    "PythonCookBook/Files and Data Persistence.md",
     "PythonCookBook/Exceptions and Context Managers.md",
     "GENERAL/Exceptions And Throwing Them.md",
-    "GENERAL/CSharp ValueTypes and RefTypes.md",
-    "GENERAL/What is Dependency.md",
-    "Topic 6 Transition Metals.md",
-    "GENERAL/Untitled 1.md",
-    "Untitled 2.md",
-    "GENERAL/UP and RUNNING VIM and NEOVIM.md",
-    "GENERAL/The Unordered Containers.md",
-    "GENERAL/The Kernel.md",
-    "Templates/Template Specializations.md",
-    "GENERAL/Template Metaprogramming.md",
-    "AWS Cloud/Security.md",
-    "GENERAL/Reversing through Containers.md",
-    "GENERAL/Move Constructors.md",
-    "GENERAL/Memory Order and Memory Barriers.md",
     "STL_Containers",
     "PythonML",
     "GENERLA",
     "q",
-    "ChemRevision",
-    "Chemistry",
-    "NETWORKING/NETWORK_INFRASTRUCTURE",
-    "NETWORKING/NETWORK_INFRASTRUCTURE",
-    "NETWORKING",
     "Untitled.canvas"
   ]
 }
