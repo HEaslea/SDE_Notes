@@ -110,6 +110,60 @@ I think this will be incredibly clear when we actually come across this.
 It should be really clear that the `friend` repo is ahead here. 
 
 ### Staying Up to Date with a Remote Repository
-The idea that we have to carry forward here is that whenever we make a new branch, we should 
+The general idea is that whenever we create a new branch, we use the most up-to-date commit. 
 
-210 at the top
+When working with someone on a branch, we must always make sure that we are fetching and merging, and updating etc.
+
+Quickly, the workflow here is: 
+`git checkout feature-x` make sure that we are on the right branch.
+
+Then you can either do `pull`, which is going to do both a `fetch` and a `merge`: remember `git pull = git fetch + git merge (or rebase)`
+
+then we might do `git fetch origin # fetch the latest changes`
+
+```
+git checkout main
+git merge feature # remember that we have to be on the target, and we argue for the source
+```
+
+```
+git checkout feature-x 
+
+git fetch origin
+
+git log HEAD..origin/feature-x --online # check whatever has changed
+
+git merge origin/feature-x # this is what has been updated with fetch
+
+# remember that origin here is the shortname for the remote repo
+
+git rebase origin/feature-x # or rebase if that is preferred, that's the next chapter i believe
+```
+
+### Syncing the Repos 
+We need to push the new commits on their local `main` branch, in the `rainbow` repo. 
+
+Remember that setting an upstream branch, so that we can just use `git push`. 
+
+Creating a new local branch: 
+`git checkout -b feature-x`
+
+If we try to `git push` without an `upstream branch`. 
+Then we will see the error of: 
+`fatal: The current branch feature-x has no upstream branch`
+
+Using the upstream explicitly: 
+`git push -u origin feature-x` this will set the upstream as well. 
+
+Without it, and not setting the upstream up, then we use: `git push origin feature-x`
+
+Then we can set the upstream later on: 
+`git branch --set-upstream-to=origin/feature-x`
+
+It's very simple to set up upstream : `git push -u origin feature-x` `-u` this will set it up. 
+
+After doing some `git push` and `git pull`, all the three repos are synced up. 
+![[Pasted image 20250725002542.png]]
+
+Notice that `origin/main` - that is just the tracking branch, that is updated by `git fetch`, then we have to `merge/rebase`. 
+
