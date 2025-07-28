@@ -27,16 +27,58 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "GENERAL/Views String_View and Span.md",
+                "file": "CompProgramming/Generating Subsets.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "Views String_View and Span"
+              "title": "Generating Subsets"
+            }
+          },
+          {
+            "id": "ddffbd427878f97f",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "CompProgramming/Generating Permutations.md",
+                "mode": "source",
+                "source": false
+              },
+              "icon": "lucide-file",
+              "title": "Generating Permutations"
+            }
+          },
+          {
+            "id": "9eff1e9970c85300",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "Learning_Git/Rebasing.md",
+                "mode": "source",
+                "source": false
+              },
+              "icon": "lucide-file",
+              "title": "Rebasing"
+            }
+          },
+          {
+            "id": "d277a2bcc0092b0f",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "Learning_Git/Merge Pull Requests.md",
+                "mode": "source",
+                "source": false
+              },
+              "icon": "lucide-file",
+              "title": "Merge Pull Requests"
             }
           }
         ],
-        "currentTab": 1
+        "currentTab": 4
       }
     ],
     "direction": "vertical"
@@ -93,7 +135,8 @@
       }
     ],
     "direction": "horizontal",
-    "width": 238.5
+    "width": 238.5,
+    "collapsed": true
   },
   "right": {
     "id": "9a5bd91e964f5d11",
@@ -190,10 +233,27 @@
       "command-palette:Open command palette": false
     }
   },
-  "active": "876b6c3e774771c6",
+  "active": "d277a2bcc0092b0f",
   "lastOpenFiles": [
-    "move file.md",
+    "PNGS/Pasted image 20250728145350.png",
+    "PNGS/Pasted image 20250728145335.png",
+    "PNGS/Pasted image 20250728144738.png",
+    "PNGS/Pasted image 20250728144419.png",
+    "PNGS/Pasted image 20250728143258.png",
+    "PNGS/Pasted image 20250728143017.png",
+    "PNGS/Pasted image 20250728143015.png",
+    "PNGS/Pasted image 20250728141647.png",
+    "PNGS/Pasted image 20250728134621.png",
+    "PNGS/Pasted image 20250728131622.png",
+    "Learning_Git/Rebasing.md",
+    "Learning_Git/Merge Pull Requests.md",
+    "PNGS/Pasted image 20250728131302.png",
+    "GENERAL/Function Attribute Macros.md",
+    "CompProgramming/Generating Permutations.md",
+    "CompProgramming/Generating Subsets.md",
+    "Generate Combinations.md",
     "GENERAL/Views String_View and Span.md",
+    "move file.md",
     "PythonDesignPatterns/SOLID Principles.md",
     "GENERAL/Mounting Data Storage.md",
     "GENERAL/Viewing Deduced Types.md",
@@ -201,7 +261,6 @@
     "persistan.md",
     "Untitled 2.md",
     "Untitled 1.md",
-    "CompProgramming/Generating Subsets.md",
     "TEST/New Test File.md",
     "GENERAL/Ranges and Views in C++.md",
     "Learning_Git/Merge Conflicts.md",
@@ -209,31 +268,15 @@
     "PythonCookBook/Cryptography and Tokens.md",
     "PythonCookBook/Files and Data Persistence.md",
     "enerati.md",
-    "Learning_Git/Rebasing.md",
     "GENERAL/_.swp",
     "GENERAL/4913",
     "TEST",
-    "PNGS/Pasted image 20250725132720.png",
-    "PNGS/Pasted image 20250725131146.png",
-    "PNGS/Pasted image 20250725131106.png",
-    "PNGS/Pasted image 20250725131050.png",
-    "PNGS/Pasted image 20250725130729.png",
-    "PNGS/Pasted image 20250725125812.png",
-    "PNGS/Pasted image 20250725021421.png",
-    "PNGS/Pasted image 20250725021300.png",
-    "PNGS/Pasted image 20250725020942.png",
-    "PNGS/Pasted image 20250725020703.png",
     "ELCL/Combining Commands.md",
     "PythonDesignPatterns",
     "GENERAL/Command Pattern.md",
     "JobPrep/APT.md",
-    "JobPrep/Python Virtual Environments.md",
     "ELCL",
-    "Learning_Git/Three-Way Merges.md",
-    "Untitled.md",
-    "JobPrep/PIP.md",
     "JobPrep",
-    "GENERAL/Quicksort.md",
     "STL_Containers",
     "PythonML",
     "GENERLA",
