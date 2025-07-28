@@ -117,3 +117,62 @@ or `101` is `[1, 3]`
 
 This represents the idea that bitmasking is just, if it's `1`, we keep it, if it's `0` then we don't, then it becomes very clear as to what is going on here. 
 
+For every time we iterate, it's clear that we are getting one subset here. 
+We are clearly creating that subset straight into `subset` using list comprehension. 
+
+Then we are just appending, so most of the interesting bit is in the list comprehension. 
+
+We are getting `num[j]`, `j` is the index, we grab the numbers of those indexed by `j`. 
+`n` is the len of `nums`, therefore, with no restrictions, `j` would grab the entirety of `nums`. 
+
+Now the key is that `i` is going through the numbers that correlate to the number of combinations that there are. 
+If there are three numbers in the list, then there are 8 combinations, then `i` will go through them all. 
+
+Take a look at this table: 
+```
+|Binary|Subset|
+|---|---|
+|000|[]|
+|001|[3]|
+|010|[2]|
+|011|[2, 3]|
+|100|[1]|
+|101|[1, 3]|
+|110|[1, 2]|
+|111|[1, 2, 3]|
+```
+
+The condition we have is the next bit. 
+`if i & (1 << j)`
+
+`i` being the current number of the subset that we are on. 
+`0` at the beginning, `0 & x`, `x` can be anything and we still get `0`. 
+
+ Take the left column up there, that is `i`. 
+ We are iterating through `nums` using `j` as the index. 
+
+When `i` = 1, then `0000_0001`. 
+`1 << j` is going to be `1` `10`, `100`, `1000`. 
+
+We will only insert, when the two `1`'s overlap. 
+
+In effect, we are using the `1`'s and `0`'s that are found. 
+Therefore, we are moving through `nums` with `j`, we are asking whether that number has the index that is a `1` in `i`. 
+
+The overall here is that we are generating a number with `i`, and that number will correlate to the the number of the subset that we are adding. 
+
+As we move through `j`, which will just go up for every num in `nums`. Then for every `j` we are moving the 1 up one, if it matches the number that we have in `i`, then we add it in. 
+
+The key here is that we are noticing that all the subsets correlate to the binary. 
+We only need the first three bits of the number, as we cover every possibility for the subset of size 3. 
+
+
+The Key to remember is that the subsets and the numbers in them, correlates to the binary found within the first `n` (`n` size input). When we go through the numbers, we ask, is there a 1 or a 0, in the number that correlates to the number of this subset going into the list of subsets. 
+
+Outer : the number of subsets that we need (when we generate all subsets). 
+
+Inner : every time, go through from `j .. n`   , if there's a 1 in that bit in the outer number, then we add that one number. 
+
+We do this with `1 << innerNumber`, which is basically saying "the bit found at the same index of the number we are looking at". 
+
+
