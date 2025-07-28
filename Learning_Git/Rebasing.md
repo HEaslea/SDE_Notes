@@ -237,3 +237,38 @@ Here's another look.
 ![[Pasted image 20250725132720.png]]
 
 Now imagine that `chapter_five` has been pushed to the remote branch. 
+
+Then we push the `D` to the remote, and update my `main` branch on `book`. 
+
+![[Pasted image 20250728124125.png]]
+Then we are weirdly looking to rebase `chapter_five` onto main. 
+
+![[Pasted image 20250728124550.png]]
+Now, let's say that my friend `coauthor-book` has seen the updates and pulls from the remote in this current state. 
+They `pull`,  so and then commit E and F onto `chapter_five`. 
+
+![[Pasted image 20250728130403.png]]
+
+Then, when we, on `book` try to push to the remote, we get the following error. 
+![[Pasted image 20250728130454.png]]
+The obvious being that the commit histories of `chapter_five` are now, no longer the same. 
+
+The remote `chapter_five` has the commit history of, A B D E F, while the local has only A B C D'. 
+
+There really is no easy way to resolve all of this. 
+
+There will then have to be "out of git" communications, which is fine, but it was just unnecessary, as we could have just processed all this using the golden rule of rebasing. 
+
+You can safely rebranch, by the reverse of the golden rule of rebasing if: 
+- Local branch that has neve been pushed to the remote repo
+- You have a local branch that you've pushed to a remote, that you're 100% sure nobody has based work on or contributed to. 
+### Syncing the Repositories
+Essentially, `push`ing and `pull`ing. 
+![[Pasted image 20250728131302.png]]
+
+Now we are all up to date.
+
+And that's that. 
+
+Just remember with all of this, we are rewriting the commit histories. 
+
