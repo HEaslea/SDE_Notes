@@ -1174,3 +1174,329 @@ readonly
 ```
 
 Then `student2._VMT_` and similar for 3, will be the first entry in VMT. 
+
+`student2.create()` and other numbers, are class procedures, static class methods or functions in some languages. 
+
+Remember that VMT - virtual method table
+
+When we have `student2._VMT_` -> corresponds to the first address of the `student2` VMT. 
+
+This VMT needs to be initialized. 
+
+219 at the top to get some pretty gnarly code here. 
+
+If we have 2 objects that of the same type, then we we have the `_pVMT_`, pointer to the VMT, they will point to the same place. Therefore if we have an instance of an object, the `object._pVMT_` -> that will just point to the VMT of t he class (almost like a `static`) idea here. 
+
+
+### Polymorphism
+Say that we have a HLA `student2` variable (that is a variable, that contains a pointer to a `student2` object in memory). 
+
+This is a variable that contains a pointer to an object in memory. 
+Say that we call the `setname` method for that object: 
+```
+John.setName("John");
+Joan.setName("Joan");
+```
+These are examples of high level activity taking place. 
+
+The code for these is pretty complicated actually. 
+
+```
+mov( John, esi );
+mov( (type student2 [esi])._pVMT_, edi);
+call( [edi + 0] ); // Note the offset fo the setName method in the VMT is 0. 
+```
+
+Going through, the first line copies the address held in the `John` pointer into the ESI register. 
+This is because the indirect access here, at least on the 80x86 take place in a register, not in memory variables. 
+
+Remember that when we have a variable name like this: 
+`John` -> that is direct access, we use the value stored at the address of `John` 
+
+Remember that there is immediate, where we write the address in itself. 
+Then indirect, where we use `[someVar]`access the value at the address stored in `ebx`. 
+
+Then there is indexed as well, with some form of offset: `[array + ebx]` so address stored at array, with some offset. 
+
+The VMT pointer is a field in the `student2` object structure. 
+We need that pointer, and ultimately the `setName()` method found in the VMT, with some form of offset. 
+
+We put this pointer to the VMT in the EDI register. 
+
+The EDI now points to the VMT, contains two entries. 
+The Entry at offset 0, and an offset of 4 is the `getName()` method. 
+Therefore we use the `[edi+0]` meaning that we are using the address held in the EDI register, with an offset of 0. 
+
+This is quite a bit more work than just calling the function, which is just one line of code, however, we do all this extra work for polymorphism. 
+
+`var student : poitner to student2;`
+When we do the `setName()` here, then the same earlier happens, and we get the pointer. 
+
+### Abstract Methods and Abstract Base Classes
+**Abstract Base Classes** exists solely to supply a set of common fields to its derived classes. s
+You cannot and should never try to declare variables who type is that of an abstract base. 
+
+You always use one the derived classes, see Gang of Four design patterns, this idea is used throughout that book, literally in every design. 
+
+They are templates for creating other classes, nothing more. 
+
+There has to be at least one abstract method. 
+
+These are special methods that do not have any implementation, and the derived classes (pure virtual) have to implement it. 
+
+Say we have a set of classes to hold numeric values. 
+One will represent unsigned integers, another could represent signed integers, another for BCD, and another for `real64`. 
+We could make 4 separate classes that all run independently. However, doing so is actually more inconvenient to us. 
+
+In HLA:
+```
+type 
+	uint: class
+		var 
+			TheValue :dword; // var in the class
+		method put;
+		<< other methods for this class >>
+	endclass;
+
+	sint: class
+		var
+			TheValue: dword; // var in the class
+		method put; 
+		<< other methods for this class >>
+	endclass;
+
+	r64: class
+		var
+			TheValue: real64;
+		method put;
+		<< other methods for this class >>
+	endclass;
+```
+
+The issue when writing this out was just the fact that I had to write it all out like this, just a lot of repetitive code. 
+Mainly, having to write `TheValue` here is redundant. 
+
+See here that the `put` method has to be declared in every single class. 
+
+The main issue here is that we cannot create a generic pointer, as in a generic pointer to a `numeric` object. 
+
+The way to do this is to set some derived classes up. 
+Here is an easier way to do this: 
+```
+type 
+	numeric: class
+		method put; 
+		<< Other common methods shared by all the classes>> 
+	endclass; 
+
+	uint : class inherits( numeric )
+		var
+			TheValue : dword;
+		override method put; 
+		<< Other methods for this class >> 
+	endclass; 
+
+	sint : class inherits( numeric )
+		var 
+			TheValue: dword
+		override method put: 
+		<< other methods for this class >> 
+	endclass; 
+
+	r64: class inherits( numeric )
+		var
+			TheValue : real64; 
+		override method put; 
+		<< Other methods for this class >>
+	endclass;
+```
+
+Making sure that we derive and have to override the `put` means, all the methods have to be `put`, there are no exceptions here, therefore, this will be easier to maintain. 
+
+Then, there is the idea that we can use a generic pointer, as a `numeric` type, and then load that pointer with the address of `uint, sint, r64`. 
+
+The pointer can then invoke the methods found in the `numeric` class, to do functions like addition, subtraction, or numeric output. 
+The application that uses the pointer, does not need to know the exact data type, it deals with numeric values only in a generic fashion, using the same functions, even if the underlying types are different. 
+
+The implementation should only really be in the derived classes. If we don't write that implementation, in this setting, where it's not an abstract class, then we might get a rather nasty error message. 
+Rather, we should set it as an abstract method. 
+
+There are various ways to do that in other languages. 
+
+In HLA, for the demonstration, we use the `abstract` method. 
+
+When following the method declaration for the class, means that all derived classes are responsible for providing a concrete implementations. 
+HLA will raise a different kind of error message if you try to call an abstract method, compared to if we don't implement a method. 
+
+The idea is to cement in usage and implementation the idea of deriving etc. 
+
+```
+type
+	numeric : class 
+		method put; abstract; 
+		<< Other commond methods shared by all the classes >>
+	endclass; 
+```
+
+In order to become an abstract base class, there must be one abstract method, in C++ that is a pure virtual method
+
+
+Remember that in C++, that we have to have a pure virtual function, then we cannot create an instance of that class: 
+
+```
+class Shape
+{ 
+public: 
+	virtual void draw() = 0;  // pure virtual function
+	virtual ~Sahep() {}
+};
+
+class Circle : public Shape { 
+public: 
+	void draw() override { 
+	
+	}
+};
+```
+Then in Python, the equivalent here is: 
+```
+from abc import ABC, abstractmethod
+
+class Shape(ABC): 
+	@abstractmethod
+	def draw(self): 
+		pass        //  just passing is equiv to  = 0
+
+class Circle(shape): 
+	def draw(self): 
+		print("Drawing)
+```
+
+
+The abstracts in Python seem a little gimmicky. 
+
+Not all the methods in the abstract base class have to be abstract, it's fine to declare some legal standard methods, and then also put the implementation as well. 
+
+The idea is really simple, that we are creating methods that have to be implemented, which doesn't seem that important, but whenever we enforce in design is very important. 
+
+### Classes in C++
+So far we have used HLA, now let's have a look at some C++. 
+```
+class student2
+{ 
+	private: 
+		char    Name[65];
+		short   Major; 
+		char    SSN[12];
+		short   Midterm1;
+		short   Midterm2;
+		short   Final;
+		short   Homework;
+		short   Projects;
+
+	protected: 
+		virtual void clearGrades();
+		
+	public: 
+		student2(); 
+		~student2(); // destructor
+
+		virtual void getname(char* name_p, int maxLen);
+		virtual void setname(const char* name_p);
+};
+```
+
+The first difference: `private, protected, poublic` keywords. 
+
+Then with inheritance: 
+```
+class student3 : public student 2
+{ 
+public: 
+	short extraTime; 
+	virtual void setName(char* name_p, int maxLen);
+	student3();
+	~student3();
+};
+```
+
+Structures and classes are almost identical in C++. 
+The default visibility of classes are `private` and `struct` is `public`. 
+
+##### Abstract Member Functions and Classes in C++
+The book says that this is a weird way of doing it, but I don't think so. 
+
+```
+struct absClass
+{ 
+	int someDataField; 
+	virtual void absFunc( void ) = 0;
+};
+```
+
+##### Inheritance in C++
+Now this seems weird to me, but C++ is one of the few languages that support multiple inheritance. 
+Meaning that one class can inherit from multiple classes at once. 
+
+```
+class a
+{ 
+	public: 
+		int i; 
+		virtual void setI(int i){ this-> i = i;}
+};
+
+class b 
+{ 
+	public: 
+		int j; 
+		virtual void setJ(int j){ this->j = j;}
+};
+
+class c : public a, public b
+{ 
+	public: 
+		int k; 
+		virtual vodi setK(int k){ this->k = k;}
+};
+```
+
+![[Pasted image 20250804141036.png]]
+It's clear that all the information from `a, b` and put it into `c`. 
+
+The VMT pointer entry points at a typical VMT containing the address of the `setI()` and `setJ()` and `setK()`. 
+Upon entry into `setI()` the system believes that we are pointing at an object of type `a`, by `this`. 
+The `VMT`field, that points at the VMT whose first (and, as far as type `a` is concerned, only) entry is the address of the `setI()` method. 
+At offset `this + 4`, we fill find the `i` data value. 
+Still, as far as the method is concerned, `this` is still pointing to a class type `a` object (even though we may be pointing to a `c` object). 
+
+![[Pasted image 20250804141947.png]]When we call `setK()` method, the system also passes the base address of the `c` object. 
+`setK()` is expecting a type `c` object and `this` is pointing at at type `c` object. 
+
+A problem will occur when the program calls the `setJ()` method. 
+As `setJ()` belongs to class `b`, that's what it will expect, it will also expect to see `j` at a certain offset. 
+If we were to do this with the `c` object, then the `this + 4`, that would be the `i` given that we would be starting from the beginning, in the way that the `c` would do. 
+
+Then we have the issue of recursively calling, where the `this` would be wrong. 
+In order to correct this, C++ will add an extra VMT to point into `c` into where `b` begins. 
+When calling a method in the `b` class, the compiler will emit code that initializes the `this` pointer with the address of this second VMT pointer. Now when we enter a class `b` method - such as `setJ()` - `this` will point to a legitimate VMT pointer for class `b`, and the `j` data field will appear at the offset `this + 4` which is exactly what we need, and what class `b` methods expect. 
+
+Then there is a few chapters on Java and Swift, which I couldn't care less about. 
+
+This is the thing to remember:  say that we have a `Base` and `Derived`, each object has a hidden Vptr (virtual pointer), pointing to a class's vtable. 
+`VMT` - Virtual Method Table
+
+If there is no `virtual` used, then there will be no VMT. 
+
+### Protocols and Interfaces
+Always, the example against multiple inheritance is that of the diamond lattice. 
+I believe the way to get around that is through virtual inheritance: 
+```
+class A {public: int x; };
+class B : public A{ };
+class C : public A{ };
+public D: public B, public C { }; // the issue is that we are going to have two lots of A
+```
+
+Therefore, the two classes that have to inherit virtually is going to be `C` and `B`. 
+
