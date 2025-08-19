@@ -13,12 +13,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "PythonCookBook/Advanced Class Design Python.md",
+                "file": "noteman/File Paths.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "Advanced Class Design Python"
+              "title": "File Paths"
             }
           },
           {
@@ -27,7 +27,7 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "GENERAL/Mounting Storage.md",
+                "file": "Linux/Mounting Storage.md",
                 "mode": "source",
                 "source": false
               },
@@ -41,12 +41,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "LEARNING MODERN LINUX PDF.md",
+                "file": "Linux/Archiving.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "LEARNING MODERN LINUX PDF"
+              "title": "Archiving"
             }
           },
           {
@@ -55,7 +55,7 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "Intro To Linux.md",
+                "file": "Linux/Intro To Linux.md",
                 "mode": "source",
                 "source": false
               },
@@ -64,7 +64,7 @@
             }
           }
         ],
-        "currentTab": 3
+        "currentTab": 2
       }
     ],
     "direction": "vertical"
@@ -121,8 +121,7 @@
       }
     ],
     "direction": "horizontal",
-    "width": 238.5,
-    "collapsed": true
+    "width": 238.5
   },
   "right": {
     "id": "9a5bd91e964f5d11",
@@ -220,16 +219,19 @@
       "command-palette:Open command palette": false
     }
   },
-  "active": "100874148bdb11cf",
+  "active": "1549870b022e28c7",
   "lastOpenFiles": [
-    "LEARNING MODERN LINUX PDF.md",
-    "Intro To Linux.md",
-    "GENERAL/Mounting Storage.md",
-    "Linux",
+    "PythonCookBook/Mixins.md",
+    "noteman/FZF Output Representation.md",
+    "Linux/LEARNING MODERN LINUX PDF.md",
+    "Linux/Intro To Linux.md",
+    "noteman/File Paths.md",
+    "noteman/CPP Logger.md",
     "PythonCookBook/Advanced Class Design Python.md",
+    "Linux/Mounting Storage.md",
+    "noteman",
+    "Linux",
     "Untitled.md",
-    "Mixins.md",
-    "FZF Output Representation.md",
     "GENERAL/Ghost Errors.md",
     "Problems Do Not Leave Source.md",
     "PNGS/Pasted image 20250818010956.png",
@@ -238,17 +240,15 @@
     "PNGS/Pasted image 20250818005914.png",
     "PNGS/Pasted image 20250818001327.png",
     "PNGS/Pasted image 20250818000948.png",
-    "CPP Logger.md",
     "CPlusPlus Object Model.md",
     "CompProgramming/Bisection Finding Optimal Values.md",
     "New Text Document.txt",
-    "Archiving.md",
+    "Linux/Archiving.md",
     "PNGS/Pasted image 20250814182609.png",
     "PNGS/Pasted image 20250814173513.png",
     "PNGS/Pasted image 20250814173412.png",
     "PNGS/Pasted image 20250814172222.png",
     "PythonCookBook/Basics of Classes and Objects.md",
-    "File Paths.md",
     "GENERAL/Virtual Memory and Addressing.md",
     "CompProgramming/FZF Style Fuzzy Finding.md",
     "CompProgramming/Search Pruning.md",
@@ -259,7 +259,6 @@
     "UNDERSTAND_THE_MACHINE/Memory Organization and Access.md",
     "GENERAL/Language Server Protocols.md",
     "CompProgramming/Spiral Matrix.md",
-    "PythonCookBook/Mem Usage of Lists and Dicts in Python.md",
     "GENERAL/_.swp",
     "GENERAL/4913",
     "TEST",
@@ -267,7 +266,6 @@
     "ELCL",
     "JobPrep",
     "STL_Containers",
-    "PythonML",
     "Untitled.canvas"
   ]
 }
