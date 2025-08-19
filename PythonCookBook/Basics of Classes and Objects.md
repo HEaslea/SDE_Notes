@@ -1,5 +1,6 @@
 This is from the new book. 
 
+
 At the top is 286. 
 
 Classes encapsulate data and processing.
@@ -627,6 +628,604 @@ These python metaclasses are dynamic/reflective. C++ templates are static/generi
 
 Think of it as thought metaclasses are like class factories, and templates are blueprints/molds, that generate many versions. 
 
+#### Using More Sophisticated Collections
+The idea of what we are doing with the data, how we are going to gather it.
+- `deque` - double ended queue - mutable sequence, optimized for pushing and popping from each end. The class name starting with a lowercase letter, that is atypical for Python, and the book noted that. 
+- `defaultdict`, a mapping that can provide a default value for a missing key, as in, default for missing key dict. Again with the lowercase.
+- `Counter` : count the number of occurrences of distinct keys, sometimes called a multiset or a bag. 
+- `ChainMap` : A mapping that combines several dictionaries into a single mapping, essentially combine several dictionaries into one. 
+
+`heapq` module includes a priority queue implementation. 
+
+`bisect` - methods for searching a sorted list. 
+
+`OrderedDict` in the `collections` module, where the keys are kept in an order. 
+
+###### What are the questions that we need to ask? 
+1. Does the structure act as a buffer between the producer and the consumer? Does one part produce and another one consume. 
+	- FIFO Queue, inserted at one end and consumed at the other, oldest added will be processed first. `list.append()` in order to mimic that, and `list.pop(0)`, however, `collections.deque` will be more efficient than that, as we are removing from the front of the list and will have to move `n - 1` elements to the left. `deque.append()` and `deque.popleft()`
+	- LIFO Stack, Items are inserted and consumed from the same end. You could use `list.append()` and `list.pop()`, however, again, just use `collections.deque()` will still be more efficient, `deque.append()` and `deque.pop()`. 
+	- Priority queue (heap queue) keeps the queue sorted in some order, distinct from the arrival order. We can try and simulate this by using `list.append()` again and `list.sort(key=lambda x : x.priority)` and `list.pop(-1)` operations to keep the items in priority order. Performing a sort after each insertion would be super inefficient. `heapq` module will always be more efficient. Super specialized for this. 
+
+2. How are we going to deal with missing keys from a dictionary? 
+	- Raise an exception: This is what the built in `dict` class works. 
+	- Create a default item. `collections.defaultdict` works like this. We provide a function that returns the default value. eg. `defaultdict(int)` and `defaultdict(float)`, to use a default value 0, or 0.0, or even `defaultdict(list)` and `defaultdict(set)` to create dictionary-of-list of dictionary-of-set. 
+	- `defaultdict(int)` used to create a dictionary for counting items is so common that `collections.Counter` class does exactly this. 
+3. How do we handle the order of the keys in a dictionary? Generally, Python > 3.6 keeps the keys in insertion order. 
+4. How will be build the dictionary? 
+	- We have a simple alg to create items. A built-in `dict` object may be sufficient. 
+	- We have multiple dictionaries that will need to be merged, this can happen when reading configuration files. `ChainMap` collection is the one here to combine them all together
+
+The two constraints to keep an eye on: 
+1. Time 
+2. Storage
+
+The book goes through alg time complexity here. 
+Looking at searching a web log file for a particular sequence of events. 
+There are two overall design strategies: 
+- Read all of the events into a list structure with something like `file.read().splitlines()`, then using a `for` statement to iterate through the list looking for a combination of events. The initial read may take some time, the search will be fast, as the log is all in memory.
+- Read and process each individual event from a log file. When a log entry is part of the searched-for pattern, it makes sense to save only this event in a subset of the log. We can use `defaultdict` with a session ID or client IP address as the key and a list of the events as the value. Takes longer to read logs, the structure will be much smaller. 
+There, the tradeoff between time and storage. 
+
+Imagine on a huge data web server, the first option is not going to work, as logs might be 100's of GB's long. 
+
+The second approach, working through a log as we read it in, not reading it all in and then working through it, has a few different ways of thinking about it: 
+- Single Process : The general idea here is that Python is going to be run as an app as a single process. 
+- Multiple Processes : using `multiprocessing` or `concurrent.futures` packages. These packages allow us to create groups of processes, each can process their own subset, of the available data and return the results to a consumer that combines the results. 
+- Multiple Hosts :  Extreme cases requiring multiple servers, each of which will handle a subset of data. Much more coordination here. Using a framework like **Dask** or **Spark** for this kind of processing. `multiprocessing` is quite sophisticated, tools like **Dask** are even more suitable for large-scale computation. 
+
+Chapter 4 has some good notions in how to choose a data structure for a task. 
+
+#### Extending a built-in Collection
+Using the example of a list that does statistics. 
+Remember that we should be separating the algorithms and the data structure from each other, they should be SRP. 
+
+So let's just extend some collections to incorporate an algorithm that we are writing. 
+
+Creating a sophisticated list class where the list can compute sums and averages of the items in the list. 
+Therefore, we can only put in numbers to the list, or there will be a `ValueError` exceptions raised. 
+
+We are going to use generator expressions, remember those. 
+
+```
+sum(v for v in self)
+sum(m(v) for v in self)
+sum(v for v in self if f(v))
+```
+
+`m(v)` is a mapping function, that is applied to each item, or the `f(v)` that is a filter function. 
+
+In order to do this: We pick a name for this type of list that we are writing for. Define the class as an extension to the built-in list class: 
+```
+class StatsList(list[float]): 
+```
+We could just use `list` however, as we are just taking in numbers, then `list[float]` is what we are going to use. 
+
+`mypy` treats `float` type as a superclass for both `float` and `int`, saving us from having to define an explicit `Union[float, int]`. 
+Ie. we can just use `float` to insinuate `int` as well. 
+
+Define more methods. `self` will be an object that has inherited all of the attributes and methods from the superclass, which here is `list[float]` 
+```
+def sum(self)  -> float: 
+	return sum(v for v in self)
+```
+
+Getting the size is interesting as we can do it this way: 
+```
+def size(self) -> float: 
+	return sum(1 for v in self) # remember that self is a list here
+```
+
+```
+def mean(self) -> float: 
+	return self.sum() / self.size() # using the two before, remember `self.method()`
+```
+
+Even further: 
+```
+def sum2(self) -> float: 
+	return sum(v ** 2 for v in self)
+	
+def variance(self) -> float: 
+	return ( 
+		(self.sum2() - self.sum() ** 2 / self.size()) / (self.size() - 1)
+	)
+
+def stddev(self) -> float: 
+	return math.sqrt(self.variance())
+```
+
+We are literally extending through inheritance, nothing new. 
+
+Here we are creating a subclass with some bonus features. 
+
+There are some different ideas between two strategies: 
+- **Extending** - we extend a class to add features. They are then entrenched in that class, and therefore not easily used for different kinds of sequences.
+- **Wrapping**- Designing classes with lots of processing, we kept the processing separate from the collections, however, we get two different objects that we have to juggle. 
+
+Wrapping adheres slightly more to the SOLID principles. 
+
+Abstract classes are incomplete, meaning that it requires a subclass to extend it and provide the missing implementation.  
+
+```
+from collections.abs import MutableMapping
+
+class MyFancyMapping(MutableMapping[int, int]): 
+	... #etc 
+```
+
+In order to finish this up, we should add some special methods: 
+```
+__getitem__()
+__setitem__()
+__delitem__()
+__iter__()
+__len__()
+```
+
+#### Properties for Lazy Attributes
+There was the idea of **lazy** processing, waiting until we need the data in order to process. 
+And **eager** processing as soon as we can. 
+
+What if we have values that are used rarely used, and very expensive to compute? 
+What if we just work with the summary information contained in something like a `Counter` object. 
+
+We maintain the idea of extending and/or wrapping. 
+
+Using the `Counter` object: extend or wrap. 
+
+A common variation on wrapping creates a statistical computation object separate from the data collection object. This can often lead to elegant solutions. 
+
+Eager : computing as soon as possible. 
+Lazy : Only computer when we have a method that requires the information, otherwise we leave it as is. 
+
+```
+class LazyCounterStatistics: 
+	def __init__(self, raw_Counter : Counter[int]) -> None: 
+		self.raw_counter = raw_counter
+
+	@property # the getter, as in object.sum
+	def sum(self) -> float: 
+		return sum( 
+			f * v for v, f in self.raw_counter.items()
+		)
+
+	@property # getter
+	def variance(self)-> float: 
+		return ( 
+			(self.sum2 -self.sume ** 2 / self.count) / 
+			(self.count - 1)
+		)
+
+	@property 
+	def stddev(self) -> float: 
+		return math.sqrt(self.variance)
+
+```
+
+The idea of a lazy calculation, where we use the value rarely, and if we are going to use then more regularly, then we can just cache them. 
+
+Remember that `@property` will make a method look like a normal attribute. 
+
+If we know that we are going use to a value, we might want to do an eager computation, where a lazy one only really works if we are not 100% sure if we are going to use it. 
+And then we can cache it if we want. 
+
+Caching the results, save from computing them a second time. 
+
+```
+from typing import cast
+
+class CachingLazyCounterStatistics: 
+	def __init__(self, raw_counter : Counter[int]) -> None: 
+		self.raw_counter = raw_counter
+		self._sum : float | None = None
+		self._count : float | None = None
+	
+	@property
+	def sum(self) -> flaot: 
+		if self._sum is None: 
+			self._sum = sum( # do the computatoin
+				f*v 
+				for v, f in self.raw_counter.items()
+			)
+		return self._sum # otherwise we just return the cache
+```
+
+`None` is a singleton object of `NoneType`, there is only one `None`. 
+This means that when we do `obj.attr = None`, we are just assigning a reference to that singleton in the attribute's slot in the `__dict__` of the obj, or `__slots__` if that is used. 
+
+Remember that `__slots__` will change how Python creates that object. 
+Remember that we can assign dynamically, we can add things to this `__dict__`. 
+
+However, when we have `__slots__` that means that we are not going to add anything to that object, just like in C++. 
+
+The thing to remember is that when we update the underlying data, we are going to have to update these rather than just using the cached values. 
+
+## Creating Contexts and Context Managers
+
+`with something() as s:`
+
+Some objects do this, most visibly we have file objects that do this. 
+
+Chapter 2, the *managing a context using the `with` statement*. 
+
+```
+with Distance(r=NM) as nm_dist: 
+	# do some ... 
+```
+
+The `Distance(r=NM)` constructor provides the definition of the context, creating a new object, `nm_dist`, that is configured to perform the required calculation in nautical miles, in this case. 
+
+```
+class Distance: 
+	def __init__(self, r : float) -> None: 
+		self.r = r
+```
+
+Then in order to make this a context manager, we need the `__enter__()` method. 
+
+This is called when the `with` statement block beings. 
+The statement `with Distance(r=NM) as nm_dist`  does two things. 
+It creates the instance of the `Distance` class, then, after that, it calls the `__enter__()` method, this will start the context. 
+
+The return value from the `__enter__()` method is assigned to a local variable via the `as` clause. 
+
+For simpler cases, the context manager often returns itself. 
+
+There is the idea here that we are giving a type hint of the class, while working on the class itself. This means that the class is not defined yet, therefore the type hint will not work. 
+
+If ever we reference a class before it's defined, then we run into an error: 
+```
+class MyClass 
+	def make_new(self) -> MyClass: # error
+		return MyClass()
+```
+
+In order to do this we have to use strings : So remember, that whenever we are using type hinting for an object that isn't fully defined by the type hint
+
+
+```
+class MyClass: 
+	def make_new(self) -> "MyClass": # works and is resolved later
+```
+
+Or we can use `Callable` from `typing` . 
+```
+from typing import Callable
+
+class MyClass:  # like a decorator here
+	def get_creator(self) -> Callable[[], "MyClass]: 
+		def creator(): 
+			return MyClass()
+		return creator
+```
+
+```
+from typing import Callable
+
+class Greeter: 
+	def greeter_factory(self) -> Callable[[str], "Greeter"]: 
+		def make_greeter(name : str) -> "Greeter": 
+			g = Greeter() 
+			g.name = name 
+			return g
+		return make_greeter
+```
+
+Then we can do: 
+`factory = Greeter().greeter_factory()`
+`g = factory("Alice")`
+
+`print(g.name) # Alice`
+
+The string aspect of this is known as `Quotes` and they are to name the note yet defined problem. 
+`Callable` describes function-like things, with arg types in one list, and the return type in another. 
+
+There are even newer ways of doing this in order to make this work better apparently. 
+
+Looking closer at Callable: 
+```
+# Callable just says that we are returning a function-like, with args and return type
+def __enter__(self) -> Callable[[Point, Point], float]: 
+	return self.distance
+```
+
+Then we define the `__exit__()` method. 
+This is called when the method is invoked. 
+Releasing and cleaning up. 
+There is some thing about exceptions here. 
+
+We can allow the exception to propagate here. 
+`__exit__()` takes in more args than `__enter__()`. 
+
+```
+def __exit__(
+	self, 
+	exc_type : type[Exception] | None, 
+	exc_val  : Exception | None, 
+	exc_tb   : TraceBackType | None
+) -> bool | None: 
+	return None. 
+	
+```
+
+
+##### Type Hinting Piping
+
+`def f() -> bool | None | float` - meaning that we could return any of these. 
+
+More traditionally, we use `typing.Union`, which will also work in older Python versions as well. 
+```
+from typing import Union
+def f() -> Union[bool, None, float]: 
+```
+
+Then we can define the methods that works within the context. 
+
+eg. 
+```
+def distance (self, p1 : Point, p2 : Point) -> float: 
+	return haversine ( 
+		p1.lat, p1.lon, p2.lat, p2.lon, R=self.r
+	)
+```
+
+Looking at this code a little closer: 
+```
+p1 = Point(...,...) # some random numbers in here for both
+p2 = Point(...,...)
+
+nm_distance = Distance(r=NM) # looking at the nautical mile distance between them
+
+with nm_distance as nm_calc: 
+	print(f"{nm_calc(p1, p2)=:.2f}")
+```
+
+Here `r=NM` gives us calcs that we can do in Nautical Miles. 
+
+The `Distance` instance is assigned `nm_distance` variable. 
+
+The `with` statement starts execution. 
+The context manager obj is notified by having the `__enter__()` method. 
+In this case, the return is a function, with the type `Callable[[Point, Point], float]`. 
+Just meaning that the function that we are returning, takes two Point's and returns a float ( the distance between them , presumably in Nautical Miles ). 
+
+The `as`clause, just assigns, this function object is assigned to the `nm_calc` name. 
+
+Then at the end `__exit__()`, this will executed. 
+This could be more complicated, here it's just a pass. 
+AKA there is nothing that needs to be done to clean up the context here. 
+
+`__exit__()` is very important when it comes to making the best use of context managers. 
+
+We might have this, which is a little more complicated: 
+```
+class Distance_2: 
+	def __init__(self, r : float) -> None: 
+		self.r = r
+		
+	def __enter__(self) -> Callable[[Point, Point], float]: 
+		return self.distance
+
+	def __exit__(
+		self, 
+		exc_type : type[Exception] | None, 
+		exc_val  : Exception | None, 
+		exc_tb   : TracebackType | None
+	) -> bool | None: 
+		if exc_type is TypeError: # if exception type from within context is TypeError
+			# we change it to ValueEArror
+			raise ValueError(f"Invalid r={self.r!r}")
+		return None # or if the error is not that, then just return None
+
+	def distance(self, p1 : Point, p2 : Point) -> float: 
+		# just regard this as doing something worthwhile
+		return haversine(p1.lat, p1.lon, p2.lat, p2.long, R=self.r)
+		
+```
+The `self.r!r` means to format the `self.r` using `repr()` instead of `str()`.
+
+
+### Multiple Context Managers
+If we have three files open at once for instance, would that require three nested with statements? 
+What's the best way to go about this. 
+
+
+Say we are making a plan for a journey with multiple legs, say we are going through multiple places. 
+
+Imagine that we are going to 4 places, therefore, there are three trips. 
+`| ---- | ------ | -- |` the journeys might be of different lengths and computational difficulties. 
+
+Say that we have latitude and longitude here: 
+```
+@datalcass(frozen=True)
+class Point: 
+	lat : flaot
+	lon : flaot
+```
+Then we just use `p = Point(..., ...)` with two numbers in there that are denoted by `lon` `lat`. 
+
+A leg is a pair of points: 
+```
+@dataclass
+class Leg: 
+	start    : Point
+	end      : Point 
+	distance : float = field(init=False)
+```
+
+This is a mutable object. 
+`distance` will be defined by the `dataclass.field()` function. 
+
+Remember that `@dataclass` will generate most of the boring magic methods. 
+
+Instead of writing the whole `def __init__` etc. we can just do `@dataclass`. 
+
+By default, `dataclass` will make every attribute a parameter in `__init__`. But with `field(init=False)` will say don't make `distance` a parameter, when creating the object, it will be computed elsewhere later. 
+
+This means that when we do `Leg(start, end, distance=5.0)` this just won't work. 
+This forces us to  know `distnace` will be computed later on. 
+
+A general usage, that the book won't really go into is the idea of a `__post_init__` method that will run after the `__init__` or we could do it lazily and do it whenever we need it. 
+
+Making a context manager to create `Leg` objects from `Point` instances. 
+
+```
+from types import TraceBackType
+
+class LegMaker: 
+	def __init__(sefl, r : float=NM) -> None: 
+		self.last_point : Point | None = None
+		self.last_leg : Leg | None = None
+		self.r = r
+
+	def __enter__(sefl) -> "LegMaker":  # the quotes idea here as the class is not fully defined here
+		return self # we are returning this
+
+	def __exit__(
+		self, 
+		exc_type : type[Exception] | None, 
+		exc_val  : Exception | None, 
+		exc_tb   : TracebackType | None
+	) -> bool | None: 
+		return None
+```
+
+This is an important method `waypoint()`, accepts a waypoint and creates a leg object. 
+
+The very first, that starting point for the voyage will return `None`. 
+
+All subsequent after that will return a `Leg` object. 
+
+```
+def waypoint(self, next_point : Point) -> Leg | None: 
+	leg : Leg | None
+	if self.last_point is None: # starts as None as an attribute
+		# Special case for the first leg
+		self.last_point = next_point
+		leg = None
+	else: 
+		leg = Leg(self.last_point, next_point)
+		d = haversine(
+			leg.start.lat, leg.start.lon, 
+			leg.end.lat, leg.end.lon, 
+			R=self.r
+		)
+		leg.distance = round(d)
+		self.last_point = next_point # move foward one
+	return leg
+```
+
+Imagine now that we want to put these legs into a CSV format, then we will need two context managers: 
+one to create `Leg`s and one to manage the file. 
+Let's put this into a single function that can do all this. 
+
+We need some `csv` and `pathlib` modules in order to get us going. 
+`Iterable` type hint used as well, `asdict` function from the `dataclasses` module. 
+
+```
+from collections.abc import Iterable 
+import csv
+from dataclasses import asdict
+fromt pathlib import Path 
+
+
+# we need the headers for the CSV file. 
+
+HEADERS = ["start_lat", "start_lon", "end_lat", "end_lon", "distance"]
+
+# we need a function that transform complex objects into a dictionary that is suitable for writing each individual row
+
+def flat_dict(leg : Leg) -> dict[str, float]: 
+	struct = asdict
+	return dict ( 
+		start_lat=struct["start"]["lat"], 
+		start_lon=struct["start"]["lon"], 
+		end_lat=struct["end"]["lat"], 
+		end_long=struct["end"]["lon"], 
+		distance=struct["distance"],
+	)
+
+# 
+
+def make_route_file(
+	points : Iterable[Point], target : Path
+) -> None: 
+	# with can have multiple contexts provided at once
+	with(
+		LegMaker(r=NM) as legger, 
+		target.open('w', newline='') as csv_file
+	): 
+		writer = csv.DictWriter(csv_file, HEADERS)
+		writer.writeheader()
+		for point in points: 
+			leg = legger.waypoint(point)
+			if leg is not None: 
+				writer.writerow(flat_dict(leg))
+```
+
+All managers have their own `__enter__()` method, used to start processing, and optionally return an object used within the context. 
+`with a() as a`, the return object from `a()` will be assigned to `a`. 
+
+`with a() as b` :  call `a()`, this can return an `obj`, then we do `obj.__enter__()`. Then whatever `__enter__()` returns gets assigned to `b`. 
+Run whatever is in `with` and then `obj.__exit__()`. 
+
+The `Path.open()` method turns a `TextIO` object. 
+
+The thing with the variable from the `with` is that it lives on after the the `__exit__()`method, unless we do something about it in the `__exit__()` method. 
+
+Take this code I have here: 
+```
+class TestContext: 
+	def __enter__(self): 
+			return 42 # this will be assigned to the variable at the end of the with
+			
+	def __exit__(
+		self,
+		exc_type, 
+		exc_val, 
+		exc_tb
+	): 
+		print("Exiting")
+
+with TestContext() as b:  
+	print(b) # will print 42
+
+# then "Exiting" will be printed
+
+print(b) # will print 42, again
+```
+
+The main job of the context manager is to isolate details of resource management. 
+
+The most common that need to be looked at are files and network connections. 
+
+When working with very large datasets, it's often common to use compression. 
+
+This can create a different kind of context around the processing. 
+The built in `open()`, is generally assigned to the `io.open()` function in the `io` module. 
+
+```
+import bz2
+
+def make_route_bz2(points : Iterable[Point], target : Path) -> None: 
+	with(
+		LegMaker(r=NM) as legger, 
+		bz2.open(target, "wt") as archive
+	): 
+		writer = csv.DictWriter(archive, HEADERS)
+		writer.writerheader()
+		for point in points: 
+			leg = legger.waypoint(point)
+			if leg is not None: 
+				writer.writerow(flat_dict(leg))
+	print(f"Finished Creating{target}")
+```
+
+Bearing in mind, this is the **basic** class design. 
+
+
+END
 
 ------
 #### Quick Note on Decorators
@@ -758,3 +1357,4 @@ p = Person("Alice", 30)
 
 Here  we are actually changing the `__init__` of the class. 
 The key part here is that without even using `p = Person("Alice", 30)`, we will still get the `"Decorating class Person"`, then as we have changed the `__init__`, when we make a `Person` object, that's when we get
+
