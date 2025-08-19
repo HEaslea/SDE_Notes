@@ -1,3 +1,4 @@
+
 When we compile a program, the compiler stores the final `.exe` in some hard drive / some disk. 
 In order to run, its instructions are loaded into the RAM, then executed. 
 This does not mean that all the program is in RAM. 
